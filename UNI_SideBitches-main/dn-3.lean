@@ -140,14 +140,27 @@ def elementi' : {A : Type} → Drevo A → List A :=
 theorem zrcali_zrcali :
   {A : Type} → (t : Drevo A) →
   zrcali (zrcali t) = t := by
-  sorry
+  intros A t
+  induction t with
+    | prazno => simp [zrcali]
+    | sestavljeno l x d ihl ihd =>
+      simp [zrcali]
+      constructor
+      rw [ihl]
+      rw [ihd]
 
 theorem visina_zrcali :
   {A : Type} → (t : Drevo A) →
   visina (zrcali t) = visina t := by
-  sorry
+  intros A t
+  induction t with
+    | prazno => simp [zrcali, visina]
+    | sestavljeno l x d ihl ihd =>
+      simp [zrcali, visina]
+      rw [ihl, ihd]
+      simp [Nat.max_comm]
 
 theorem elementi_elementi' :
   {A : Type} → (t : Drevo A) →
   elementi t = elementi' t := by
-  sorry
+    sorry
