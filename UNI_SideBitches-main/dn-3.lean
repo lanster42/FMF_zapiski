@@ -82,11 +82,18 @@ def rep : {A : Type} → {n : Nat} → Vektor A n → Option (Vektor A (n-1)) :=
 
 theorem forall_implies : {A : Type} → {P Q : A → Prop} →
   (∀ x, (P x → Q x)) → (∀ x, P x) → (∀ x, Q x) := by
-  sorry
+  intros A P Q h1 h2 x
+  exact h1 x (h2 x)
+
 
 theorem forall_implies' : {A : Type} → {P : Prop} → {Q : A → Prop} →
   (∀ x, (P → Q x)) ↔ (P → ∀ x, Q x) := by
-  sorry
+  intros A P Q
+  apply Iff.intro
+  { intro h1 h2 x
+    exact h1 x h2 }
+  { intros h1 x h2
+    exact h1 h2 x }
 
 theorem paradoks_pivca :
   {G : Type} → {P : G → Prop} →
