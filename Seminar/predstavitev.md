@@ -19,7 +19,16 @@ Kot očitno lahko predvidevate, če ste prebrali naslov predstavitve, se bomo mi
 Naj vam najprej predstavim Erica Harshbargerja. Kar nekaj let se je preživljal s sestavljanjem originalnih Legic :)
 Kar pa nas zanima, je njegovo zanimanje za iskanje permutacijsko poštenih naborov kock. 
 
-<ins> razlog zakaj so premajhne kocke problematične (dokaz)</ins>
+S prijateljem sta se se posvetila iskanju kock, pri katerih:
+- ne bi prišlo do neodločenega reultata
+- vsak igralec ima enako možnost zmage
+- iste kocke zadoščajo prvima dvema pogojema tudi če igra manj igralcev (tj če imamo kocke za 10 igralcev, ki imajo vsak 1/10 možnosti za zmago, potem bo z istimi kockami 7 igralcev imalo 1/7 možnosti za zmago)
+
+Najprej sta probala z običajno 6 stranimi kockami, a sta hitro ugotovila, da že za recimo 5 igralcev to ni mogoče. Dokaz je precej preprost:
+- če 5 igralcev meče 6 strane kocke, je 6^5 možnih izidov. Teh 6^5 različnih izidov pa mora biti deljivo s številom igralcev. Ampak 5 je praštevilo in 2^5 * 3^5 ni deljivo s 5.
 
 
 
+
+
+kasneje: Michael Purcell je prejšnjo opombo posplošiu (mislm da ne bom dejansko povedou te ker je prevec teoretična)
