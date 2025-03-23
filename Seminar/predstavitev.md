@@ -12,7 +12,9 @@ Najprej si poglejmo različne definicije poštenosti:
 - poštenost prvega: vsi igralco imajo enako možnost biti prvi
 - poštenost mesta: vsi igralci imajo enako možnost biti na katerem koli mestu
 - permutacijska poštenost: ko vržemo vse kocke in jih razporedimo po velikosti, bodo vse različne razporeditve kock enako možne.
+
 Dodatno lahko opazimo, da če uporabimo permutacijsko poštene kocke za 4 igralce, lahko z istimi kockami igrajo tudi 3 ali 2 igralca, pa je nabor kock še vedno permutacijsko pošten.
+
 
 Kot očitno lahko predvidevate, če ste prebrali naslov predstavitve, se bomo mi osredotočili na zadnjo. 
 *!slide!*
@@ -22,13 +24,23 @@ Kar pa nas zanima, je njegovo zanimanje za iskanje permutacijsko poštenih nabor
 S prijateljem sta se se posvetila iskanju kock, pri katerih:
 - ne bi prišlo do neodločenega reultata
 - vsak igralec ima enako možnost zmage
-- iste kocke zadoščajo prvima dvema pogojema tudi če igra manj igralcev (tj če imamo kocke za 10 igralcev, ki imajo vsak 1/10 možnosti za zmago, potem bo z istimi kockami 7 igralcev imalo 1/7 možnosti za zmago)
+- vsaka podmnožica množice kock bi zadoščala prvima dvema pogojema.
+Razlaga: če imamo recimo kocke za 10 igralcev, ki imajo vsak 1/10 možnosti za zmago, potem bo z istimi kockami 7 igralcev imalo 1/7 možnosti za zmago
 
-Najprej sta probala z običajno 6 stranimi kockami, a sta hitro ugotovila, da že za recimo 5 igralcev to ni mogoče. Dokaz je precej preprost:
-- če 5 igralcev meče 6 strane kocke, je 6^5 možnih izidov. Teh 6^5 različnih izidov pa mora biti deljivo s številom igralcev. Ampak 5 je praštevilo in 2^5 * 3^5 ni deljivo s 5.
+Najprej sta probala z običajnimi 6-stranimi kockami, a sta hitro ugotovila, da že za recimo 5 igralcev to ni mogoče. Dokaz je precej preprost:
+- če 5 igralcev meče 6-strane kocke, je 6^5 možnih izidov. Teh 6^5 različnih izidov pa mora biti deljivo s številom igralcev. Ampak 5 je praštevilo in 2^5 * 3^5 ni deljivo s 5.
+
+To pomeni, da sta raziskovalca morala opustiti željo, da bodo običajne kocke zadostovale.Harshbargerjev prijatelj je z metodo "bruteforce" našel primer 4d12 permutacijsko pošten nabor kock *!slide s tabelo in sliko kock!*  torej imamo 4 12-strane kocke, ki so permutacijsko poštene.
+Za dva igralca lahko uporabimo kovanec, ki je seveda permutacijsko pošten, za 3 igralce pa 3 običajne 6-strane kocke. Kaj pa permutacijsko pravičen nabor kock za 5 igralcev? Ali pa 6? Izkaže se, da brez metod konstrukcije ne bomo prišli daleč z "bruteforce"-om, saj je preveč možnosti.
+
+Najprej se prepričajmo, da za vsako n iz N obstaja tak nabor:
 
 
 
+## Unsorted and notes
+Nujno notri vkljuci: 
 
 
 kasneje: Michael Purcell je prejšnjo opombo posplošiu (mislm da ne bom dejansko povedou te ker je prevec teoretična)
+
+cisto na koncu: raziskovanje lahko razširimo tudi na kocke, ki nimajo vse enako število strani, a so še vedno permutacijsko poštene. To bi lahko tudi pomenilo, da vsak igralec ne vrže natanko 1 kocke. PRIMER HARSHBERGERJA in PRIMER IZ BEST VIDEA NA 7:45
