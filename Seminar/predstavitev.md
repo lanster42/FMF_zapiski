@@ -39,6 +39,12 @@ Najprej se prepričajmo, da za vsako n iz N obstaja tak nabor:
 
 ## Unsorted and notes
 Nujno notri vkljuci: 
+- zacetek konstrukcij: konstrukcija za 2,3,4
+- konstrukcija za 5
+- za poljuben n obstaja nabor kock s permutacijsko poštenostjo video [2]
+- ce imamo 3/n permutacijsko postene kocke imamo tudi 4/n perm. postene kocke  (theorem 6)
+- indukcija: iz n/n perm post -> (n+1)/(n+1) perm postene kocke
+- dejansko iskanje nabore kock: najprej metoda iz [2] (prehod iz 3/n v 4/n potrebuje faktor n!), nato Purcell: analiticna (ugotovi kako iz 1/n perm poštenih konstruira 2/n ter kako iz 3/n konstruira 4/n ---> ta prehod potrebuje le faktor 2 WHY??--ideja dokaza) in numerična tehnika(numerično le omeni)
 
 
 kasneje: Michael Purcell je prejšnjo opombo posplošiu (mislm da ne bom dejansko povedou te ker je prevec teoretična)
