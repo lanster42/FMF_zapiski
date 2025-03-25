@@ -33,8 +33,31 @@ To pomeni, da sta raziskovalca morala opustiti željo, da bodo običajne kocke z
 
 Verjetno pa ni najboljša izbira, da vzamemo kar 12-strane kocke za manj igralcev. Za dva igralca lahko najlažje uporabimo kovanec, ki je seveda permutacijsko pošten, za 3 igralce pa 3 običajne 6-strane kocke. Kaj pa permutacijsko pravičen nabor kock za 5 igralcev? Ali pa 6? Izkaže se, da brez metod konstrukcije ne bomo prišli daleč z "bruteforce"-om, saj je preveč možnosti.
 
-Najprej se prepričajmo, da za vsako n iz N obstaja tak nabor kock. Dokaz oziroma konstrukcijo bomo naredili na primeru treh igralcev in nato posplošili za vsa naravna števila: VIDEO [2] TO BO MOJ GLAVNI IZREK - concatenation construction oziroma ZDRUŽITVENA KONSTRUKCIJA. V videu naredimo konstrukcijo, tako da v enem izreku dokažemo, da se za vsako naravno št to da narediti in tudi kako jih naredimo.
+## IZREK
+Mi pa bomo zdaj dokazali, da za vsako n iz N obstaja tak nabor kock in osnovno konstrukcijo tega nabora. Konstrukcijo bomo naredili na primeru treh igralcev in nato posplošili za vsa naravna števila.
 
+DOKAZ: Vzemimo take kocke: *!slide s tabelo!* veliko lažje si jih bomo predstavljali, če jih zapišemo v niz. Kar hočem povedati je, da razvrstimo številke v vrsto in namesto števil napišemo osebo, kateri kocka pripada. Torej pri tem naboru bi bil niz torej: *!na tablo!*
+ABCBCACABCBAACBBAC.
+Niz je permutacijsko pošten, če je število vsake trojice enako. Torej če preštejemo vse ABC, ACB, BAC, BCA, CAB IN CBA v tem nizu in je število njih enako, potem je naš nabor permutacijsko pošten.
+Če smo pozorni na naš niz (na tabli), lahko opazimo, da ga lahko razdelimo v trojice (barvaste črte med trojicami). Vidimo, da so to ravno vse različne permutacije ABC.
+Poskusimo zamenjati vrstni red teh trojic in jih ponovno zlepiti. Če ponovno preštejemo število vsake trojice, bomo ugotovili, da nov niz ni permutacijsko pošten. Torej tako ne moremo konstruirati poljubnega permutacijsko poštenega nabora. Ampak. Preštejmo število vsakega para v tem novem nizu. Izkaže se, da je vseh parov enako. To pa zato, ker so vse trojice le permutirane verzije osnovnega niza ABC. Ko štejemo število recimo AB, lahko iz vsake trojice vzamemo eno črko, teh je: (torej najprej vzamemo A iz tukaj in B iz tukaj (show), ali pa... ) 15. Lahko pa se AB pojavita v isti trojici. Očitno je, da za vsak par s tem postopkom dobimo 18 pojavitev.
+Ugotovili smo torej, da je število parov v tem nizu enako. Zdaj pa zapišimo ta niz še 6 krat (3!). V tem nizu nato permutiramo črke in vse nize zlepimo v en dolg niz. Če preštejemo zdaj število vseh trojic, bomo videli, da jih je enako.
+Zakaj?: število pojavitev niza ABC lahko podobno kot prej preštejemo glede na to, iz kje prihajajo črke A, B in C:
+- lahko pridejo iz vsakega niza dolžine 18 posebaj
+- lahko sta AB skupaj in C v svojem
+- lahko sta BC skupaj in A v svojem
+- lahko je cel niz ABC v enem
+
+Če gledamo niz BAC velja enako. V prvi točki se ujemata, ker je število vseh črk v nizih dolžine 18 enako. V 2. in 3. se ujemata zaradi argumenta iz prej, ko smo gledali pare. Cel niz pa se pojavi enakokrat vse skupaj, saj so nizi dolžine 18 samo permutirana verzija osnovnega niza z dolžino 18, v katerem smo permutirali črke.
+
+
+### Povzetek
+Na hitro bomo povzel konstrukcijo in jo hkrati razširili na 4 igralce.
+
+Vzamemo niz ABCD, ker imamo 4 igralce, in ga permutiramo na vse možne načine. Torej imamo 24 različnih nizov dolžine 4. Te nize zlepimo skupej, da dobimo en niz dolžine (4*(4!)). V tem nizu je število parov enako. Nato ta niz skopiramo 4! krat in permutiramo črke. Ta niz spet zlepimo skupaj, da dobimo niz dolžine 4*(4!)^2, v katerem je število trojic enako. Ta proces spet ponovimo in dobimo niz dolžine 4*(4!)^3, ki je permutacijsko pošten. Obrazov v tem nizu je (4!)^3.
+Iz konstrukcije je jasno, da jo lahko posplošimo na vsa naravna števila.
+
+## Dodatek
 Michael Purcell je to metodo, ki smo jo ravnokar obravnavali, izboljšal. Dokazal je, da je na primer za 5 igralcev dovolj 120 strana kocka. Mogoče se ne sliši malo ampak dajmo se spomniti koliko strano kocko bi dobili z našo konstrukcijo: (5!)^(5-1) = 207,360,000 strane kocke. Torej zdi se mi da je kar velik napredek.
 
 Konstrukcijo, ki smo jo naredili, je izboljšal tako, da je vpeljal m/n permutacijsko poštenost.
@@ -48,17 +71,4 @@ Nove nabore kock je konstruiral tako, da je dokazal, da če zlepimo skupaj točn
 Če se malo vrnemo na našo konstrukcijo. Za konstrukcijo 4/4 permutacijsko pravičnih kock smo potrebovali 4!   3/4 permutacijsko pravičnih kock. Purcell pa je za ta isti prehod potreboval le 2. (tu je 4 namesto n ampak n je pravilna).
 Če vas zanimajo trditve, s katerimi je Purcell to dokazal, si lahko več preberete v mojem članku.
 
-Čisto za na koncu pa želim še omeniti, da: Raziskovanje lahko razširimo tudi na kocke, ki nimajo vse enakega števila strani, a so še vedno permutacijsko poštene. To bi lahko tudi pomenilo, da vsak igralec ne vrže natanko 1 kocke. PRIMER HARSHBERGERJA in PRIMER IZ BEST VIDEA NA 7:45 Za konstrukcijo takih kock se lahko obrnete na moj članek ali pa na video iz katerega je bil tudi zadnji primer izvzet: https://www.youtube.com/watch?v=L3d0YIW7wHU&t=1s 
-
-
-## Unsorted and notes
-<ins> underlining </ins>
-
-
-Notri vkljuci: 
-- zacetek konstrukcij: konstrukcija za 2,3,4
-- konstrukcija za 5
-- za poljuben n obstaja nabor kock s permutacijsko poštenostjo video [2]
-- ce imamo 3/n permutacijsko postene kocke imamo tudi 4/n perm postene kocke  (theorem 6)
-- indukcija: iz n/n perm post -> (n+1)/(n+1) perm postene kocke
-- dejansko iskanje nabore kock: najprej metoda iz [2] (prehod iz 3/n v 4/n potrebuje faktor n!), nato Purcell: analiticna (ugotovi kako iz 1/n perm poštenih konstruira 2/n ter kako iz 3/n konstruira 4/n ---> ta prehod potrebuje le faktor 2 WHY??--ideja dokaza) in numerična tehnika(numerično le omeni)
+Čisto na koncu pa želim še omeniti, da: Raziskovanje lahko razširimo tudi na kocke, ki nimajo vse enakega števila strani, a so še vedno permutacijsko poštene. To bi lahko tudi pomenilo, da vsak igralec ne vrže natanko 1 kocke. PRIMER HARSHBERGERJA in PRIMER IZ BEST VIDEA NA 7:45 Za konstrukcijo takih kock se lahko obrnete na moj članek ali pa na video iz katerega je bil tudi zadnji primer izvzet: https://www.youtube.com/watch?v=L3d0YIW7wHU&t=1s 
