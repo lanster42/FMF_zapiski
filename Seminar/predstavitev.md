@@ -1,4 +1,4 @@
-# Permutacijsko pošteni nabori kock
+# Permutacijsko-pošteni nabori kock
 
 ## UVOD
 Najprej vs prosim, da ignorirate tablo za mano in se osredotočite name.
