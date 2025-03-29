@@ -6,3 +6,7 @@ recimo za A naj bodo pozitivna stevila, za B pa vse pozitivne integerje
 I guess
 
 fnOnce je dobra zato, ker bo prevzela ownership najvec enkrat (fnonce se lahko poklice enkrat ali nickrat)
+
+## Priprava na izpit
+Funkcije po navadi nočejo prevzeti lastništva nad spremenljivkamai, saj so po izvedeni funkciji spremenljivke neuporabne.
+Zato najdeš drug pristop: ali daš &mut sprem ali pa &sprem in nato kloniraš ali pa v kasnejši definiciji, kaj se s sprem zgodi ponovno vzameš &sprem.
