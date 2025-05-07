@@ -1,0 +1,80 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[slovene]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Permutacijsko-pošteni nabori kock}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+V tem članku raziskujemo pojem permutacijsko-poštenih naborov kock, ki predstavljajo zanimiv razširjeni pogled na poštenost metanja kock. Prikazali bomo definicijo tovrstnih naborov, predstavili primer nenavadnega permutacijsko-poštenega nabora in izpostavili nekaj odprtih vprašanj, ki jih odpira ta tema. Glavna ugotovitev je, da obstajajo nabori kock, ki so permutacijsko-pošteni, vendar niso izomorfni klasičnim kockam.
+\end{abstract}
+
+\section{Uvod}
+
+Kocke so že stoletja vir zabave, iger na srečo in matematičnih zanimivosti. Na prvi pogled je poštenost kocke preprost pojem: če ima kocka $n$ ploskev, naj bo vsaka izmed njih enako verjetna. Takšna definicija zadostuje pri klasičnih igrah, kjer nas zanima verjetnost določenega izida.
+
+A kaj se zgodi, če poštenost razumemo v kontekstu primerjav med kockami? Predstavljajmo si igro, kjer vsak igralec vrže svojo kocko in zmaga tisti, ki dobi višje število. Bi bilo mogoče, da neka kocka $A$ pogosteje premaga kocko $B$, $B$ pogosteje premaga kocko $C$, a $C$ pogosteje premaga kocko $A$? Ta nenavadna situacija ni le teoretična\,---\,gre za znani primer \emph{neprehodnih kock}, ki presenetljivo nasprotujejo intuiciji.
+
+Po drugi strani si lahko predstavljamo situacijo, kjer želimo, da igra med več igralci ne daje prednosti nobenemu igralcu, ne glede na to, kako si razdelijo vloge ali vrstni red. V tem kontekstu nastopi zanimiv pojem \emph{permutacijske poštenosti}. Gre za simetrično lastnost nabora kock, ki zagotavlja, da ima vsaka permutacija izidov enako verjetnost. Takšna simetrija je posebej relevantna v igrah, kjer metemo več kock hkrati in zmago določa vrstni red vseh izidov.
+
+Tak nabor kock lahko vključuje različna števila na posameznih kockah, ki niso nujno enakomerno razporejena. Kljub temu pa celoten sistem deluje \emph{pošteno} v smislu permutacij. To odpre nova vprašanja: kako konstruirati takšne nabore? Ali obstajajo za vsako število kock? In kakšna je njihova povezava z znanimi primeri neprehodnih kock?
+
+V nadaljevanju bomo definirali, kaj pomeni, da je nabor kock permutacijsko-pošten, predstavili zanimiv primer iz nedavne raziskave in se dotaknili odprtih problemov ter možnih smeri nadaljnjega raziskovanja.
+
+\section{Definicije in osnovni pojmi}
+
+\subsection*{Kocke in nabori}
+Pod \emph{kocko} bomo razumeli končno zaporedje naravnih števil (ali drugih vrednosti), ki jih kocka lahko pokaže pri metu. \emph{Nabor kock} je množica takih kock.
+
+\subsection*{Premagovanje in zmaga}
+Recimo, da imamo dve kocki $A$ in $B$. Rečemo, da kocka $A$ premaga kocko $B$, če je verjetnost, da bo izid na $A$ večji kot na $B$, večja od 0{,}5. Če je ta verjetnost natančno 0{,}5, pravimo, da sta kocki \emph{v ravnotežju}.
+
+\subsection*{Permutacijsko-pošten nabor}
+Nabor $K = \{K_1, \dots, K_n\}$ kock je \emph{permutacijsko-pošten}, če za vsak $k$-teren zaporedni met kock iz tega nabora in vsako permutacijo $\pi$ množice $\{1,\dots,k\}$ velja, da je verjetnost vrstnega reda izidov $K_1 > K_2 > \cdots > K_k$ enaka verjetnosti $K_{\pi(1)} > K_{\pi(2)} > \cdots > K_{\pi(k)}$.
+
+\section{Primer nenavadnega permutacijsko-poštenega nabora}
+
+Naj bo nabor treh kock s številkami kot sledi (vsaka kocka ima šest ploskev):
+
+\begin{itemize}
+  \item $A$: \{2, 2, 4, 4, 9, 9\},
+  \item $B$: \{1, 1, 6, 6, 8, 8\},
+  \item $C$: \{3, 3, 5, 5, 7, 7\}.
+\end{itemize}
+
+To ni klasičen nabor, saj kocke niso identične. Vendar lahko preverimo, da je ta nabor permutacijsko-pošten. Na primer, verjetnost, da $A$ premaga $B$, $B$ premaga $C$, in $C$ premaga $A$, je v vseh primerih enaka $5/9$. S tem dobimo krožni (neprehoden) odnos med kockami.
+
+Čeprav imamo očitno asimetrične številke, nabor kot celota ohranja permutacijsko simetrijo pri primerjavi metov.
+
+\section{Zanimivosti in odprta vprašanja}
+\begin{itemize}
+  \item Ali obstajajo permutacijsko-pošteni nabori za vsako število kock $n$?
+  \item Koliko takšnih naborov obstaja za dano $n$ in dane velikosti kock?
+  \item Kako jih sistematično konstruirati?
+  \item Kakšna je povezava z neprehodnimi kockami (kjer $A$ premaga $B$, $B$ premaga $C$, a $C$ premaga $A$)?
+\end{itemize}
+
+\section{Sklep}
+Permutacijsko-pošteni nabori kock ponujajo fascinanten vpogled v verjetnostne simetrije, ki niso očitne iz posameznih kock. Predstavljen primer pokaže, da poštenost ni nujno enaka enakosti. Tema je bogata s kombinatornimi in verjetnostnimi izzivi ter odpira mnoga vprašanja za nadaljnje raziskave.
+
+\section*{Literatura}
+\begin{itemize}
+  \item Ian Morrison, Permutation-fair sets of dice, \emph{American Mathematical Monthly}, 2024. \url{https://doi.org/10.1080/00029890.2024.2345576}
+  \item Wikipedia contributors, Nontransitive dice, \url{https://en.wikipedia.org/wiki/Nontransitive_dice}
+  \item Richard P. Stanley, Enumerative Combinatorics, Vol. 1, Cambridge University Press.
+\end{itemize}
+
+\end{document}
