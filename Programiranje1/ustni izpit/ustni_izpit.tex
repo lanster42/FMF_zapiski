@@ -21,14 +21,15 @@
         \item Kako delujejo skoki, pogojni skoki in klici funkcij?\\
         Skok spremeni vrednost kazalca za ukaz. S tem se spremeni kateri ukaz pride naslednji
         \item Katere osnovne in sestavljene vgrajene tipe poznamo in kdaj uporabljamo katerega?\\
-        Primeri osnovnih tipov: cela števila (int), nizi (string), števila s plavajočo vejico (float), logične vrednosti (bool), enotski tip (unit), znaki (char)\\
-        primeri sestavljenih tipov: seznami (list), nabori, morebitne vrednosti (option)?
+        Primeri osnovnih tipov: cela števila - int (+, -, *, /), nizi - string (stikanje z \^. Obstaja standardna knjiznica za delanje s stringi: String, ki ima ogromno vgrajenih funkcij), števila s plavajočo vejico - float (zraven operacij moras pisati piko), logične vrednosti (bool), enotski tip - unit (to je zato, da lahko recimo: ne damo nic argumentov v funkcijo (recimo Random.bool()) oziroma ce funkcije "nic" ne vracajo, vracajo unit), znaki (char)\\
+        primeri sestavljenih tipov: seznami - list (recimo int list), nabori (imajo tocno doloceno dolzino, recimo za datum. Ni nujno, da so vsa polja istega tipa. Do prostora je najlazje dostopati tako, da jih razstavimo z (x, y, z)), delne vrednosti - option (lahko je None ali pa Some(a), kjer je Some(a) tipa "a option")
         \item Kaj so funkcije višjega reda?\\
-        add
+        To so funkcije, ki za argument vzamejo neko drugo funkcijo.
         \item Kaj so anonimne funkcije in kje jih uporabljamo?\\
-        add
+        Funkcije, ki jih nakratko zapisemo?? \underline{ADD}
         \item Kaj so polimorfne funkcije in katere ste najpogosteje uporabljali?\\
-        add
+        Funkcije, katerim tip ni točno določen: Za poljuben tip 'a lahko vzame recimo 'a list in še en 'a list in naredi 'a list (int list)
+        Najpogostejše: @,  
         \item Kaj so Curryjrane funkcije in v kakšnem odnosu so z običajnimi funkcijami, ki sprejmejo nabor več argumentov?\\
         add
         \item Kako so gnezdimo funkcijske tipe pri funkcijah več argumentov?\\
@@ -103,6 +104,11 @@
     \begin{enumerate}
         \item Osnovna arhitektura in assembly
         Assembly vzame nekaj, kar je podobno človeškemu jeziku in to pretvori v strijno kodo (prijazno za procesor)
+        \item OCaml
+        V terminalu moras za zakljucek funkcije uporabiti\\
+        pretvorba int v float: float\_of\_int\\
+        funkcije imajo svoj tip (funkcijski tip), ki je vedno zgrajen iz vec tipov (vhodni in izhodni):  Poleg unkcij, ki jih sami definirajo, so nekatere že vgrajene, recimo: int\_of\_string, float\_of\_int, ...\\
+        najbolj osnoven tip: 'a 
     \end{enumerate}
 
 \end{document}
