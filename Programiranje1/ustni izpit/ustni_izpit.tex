@@ -6,17 +6,23 @@
 \date{}
 \begin{document}
 \maketitle
+\section*{Vprašanja}
     \begin{enumerate}
         \item Kakšna je razlika med registrom in RAM-om?\\
-        dasdamdpam
+        Procesor je sestavljen iz več stvari. Notri je tudi več registrov in RAM. Registri so majhni in hitri, RAM je počasen, a zelo velik.(kot špajza in kuhinjska miza). Procesor lahko dela s stvarmi v registrih, potem pa si bo informacije shranil v RAM.
         \item Kakšne registre poznamo in kakšen je njihov namen?\\
-        add
+        Naši računalniki imajo približno 30 registrov. V assemblyju:\\
+         4 Splošni registri A, B, C, D; v njih so kratkoročno shranjene vrednosti. Najpomembnejši je register A, saj se le na njem lahko izvajajo težje operacije (multiply), saj je težko implementirati za vse registre\\
+         2 posebna registra: IP - Instruction pointer (kaže na naslednjo mesto v pomnilniku aka kaj se trenutno dogaja) in SP - Stack pointer (kaže na vrh sklada)\\
+         3 zastavice: Z, P, F: zastavice nosijo le 1 bit, ki določa true/false, zato da ne porabimo 8 bit prostora na splošnem registerju. Z zastavicami ne operiramo neposredno
         \item Kako in zakaj uporabljamo sklad?\\
-        add
-        \item Katere osnovne in sestavljene vgrajene tipe poznamo in kdaj uporabljamo katerega?\\
-        add
+        Sklad se začne čisto na koncu pomnilnika.
+        Na sklad si shranjujemo začasne vrednosti: S push A bomo na vrh sklada naložili vrednost, ki je trenutno na registru A, potem pa s POP vzememo s sklada vrhno vrednost s sklada.
         \item Kako delujejo skoki, pogojni skoki in klici funkcij?\\
-        add
+        Skok spremeni vrednost kazalca za ukaz. S tem se spremeni kateri ukaz pride naslednji
+        \item Katere osnovne in sestavljene vgrajene tipe poznamo in kdaj uporabljamo katerega?\\
+        Primeri osnovnih tipov: cela števila (int), nizi (string), števila s plavajočo vejico (float), logične vrednosti (bool), enotski tip (unit), znaki (char)\\
+        primeri sestavljenih tipov: seznami (list), nabori, morebitne vrednosti (option)?
         \item Kaj so funkcije višjega reda?\\
         add
         \item Kaj so anonimne funkcije in kje jih uporabljamo?\\
@@ -93,5 +99,10 @@
         add
     \end{enumerate}
 
+\section*{Dodatne informacije}
+    \begin{enumerate}
+        \item Osnovna arhitektura in assembly
+        Assembly vzame nekaj, kar je podobno človeškemu jeziku in to pretvori v strijno kodo (prijazno za procesor)
+    \end{enumerate}
 
 \end{document}
