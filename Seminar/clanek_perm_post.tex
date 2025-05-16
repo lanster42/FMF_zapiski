@@ -1,5 +1,7 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[a4paper, 12pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage[slovene]{babel}
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{graphicx}
@@ -8,19 +10,32 @@
 \usepackage{float}
 \usepackage{caption}
 \usepackage{geometry}
-\geometry{margin=2.5cm}
 
-\title{Permutacijsko-pošteni nabori kock}
-\author{}
-\date{}
+
+\def\N{\mathbb{N}} % mnozica naravnih stevil
+\def\Z{\mathbb{Z}} % mnozica celih stevil
+\def\Q{\mathbb{Q}} % mnozica racionalnih stevil
+\def\R{\mathbb{R}} % mnozica realnih stevil
+\def\C{\mathbb{C}} % mnozica kompleksnih stevil
+
+\newtheorem{izrek}{Izrek}
+\newtheorem{trditev}{Trditev}
+\newtheorem{posledica}{Posledica}
+\newtheorem{lema}{Lema}
+\newtheorem{opomba}{Opomba}
+\newtheorem{definicija}{Definicija}
+\newtheorem{zgled}{Zgled}
+
+
+\title{Permutacijsko-pošteni\\ nabori kock}
+\author{Lan Stare\v sek \\
+Fakulteta za matematiko in fiziko \\
+Oddelek za matematiko}
+\date{11.\ maj 2025}
 
 \begin{document}
 
 \maketitle
-
-\begin{abstract}
-V tem članku raziskujemo pojem permutacijsko-poštenih naborov kock, ki predstavljajo zanimiv razširjeni pogled na poštenost metanja kock. Prikazali bomo definicijo tovrstnih naborov, predstavili primer nenavadnega permutacijsko-poštenega nabora in izpostavili nekaj odprtih vprašanj, ki jih odpira ta tema. Glavna ugotovitev je, da obstajajo nabori kock, ki so permutacijsko-pošteni, vendar niso izomorfni klasičnim kockam.
-\end{abstract}
 
 \section{Uvod}
 
