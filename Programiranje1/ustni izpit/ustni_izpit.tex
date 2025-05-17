@@ -29,9 +29,11 @@
         Funkcije, ki jih nakratko zapisemo?? \underline{ADD}
         \item Kaj so polimorfne funkcije in katere ste najpogosteje uporabljali?\\
         Funkcije, katerim tip ni točno določen: Za poljuben tip 'a lahko vzame recimo 'a list in še en 'a list in naredi 'a list (int list)
-        Najpogostejše: @,  
+        Najpogostejše: @, 
         \item Kaj so Curryjrane funkcije in v kakšnem odnosu so z običajnimi funkcijami, ki sprejmejo nabor več argumentov?\\
-        add
+        So funkcije več argumentov, recimo če imamo funkcije dveh argumentov pravzaprav vsamemo funkcijo prvega argumenta in vrne funkcijo drugega argumenta. Razlika s funkcijami več argumentov:\\
+        Funkcije več spremenljivk: f x y je kot f (x, y)\\
+        Curryirane funkcije: f x y je kot (f x) y\\
         \item Kako so gnezdimo funkcijske tipe pri funkcijah več argumentov?\\
         add
         \item Kakšna je razlika med statičnimi in dinamičnimi tipi?\\
@@ -108,7 +110,16 @@
         V terminalu moras za zakljucek funkcije uporabiti\\
         pretvorba int v float: float\_of\_int\\
         funkcije imajo svoj tip (funkcijski tip), ki je vedno zgrajen iz vec tipov (vhodni in izhodni):  Poleg unkcij, ki jih sami definirajo, so nekatere že vgrajene, recimo: int\_of\_string, float\_of\_int, ...\\
-        najbolj osnoven tip: 'a 
+        najbolj osnoven tip: 'a\\
+        Za rekurzivne funkcije moraš spredaj napisati rec\\
+        Najboljše je rekurzivne funkcije zamenjati z match, primer: match n with |0 |1 |2->0 |\_->n\\
+        namesto match lahko napises tudi funkction\\
+        pogoje se pise pred puscico z when :)\\
+        poleg spremenljivk lahko z match razstavljamo sezname (glava in rep hihi)\\
+        Seznami si lahko predstavljamo kot: prazen ali pa gl::rep, kjer je glav vrednost iz seznama, rep pa je spet seznam.\\
+        Zlepljanje seznamov: @\\
+        Zakaj imamo raje fold\_left? Razlaga z repnimi funkcijami(I think)\\
+        Da ni stach overflow, definiramo pomozno funkcijo z akumulatorjem (acc), da se zacasne vrednosti tja shranjujeno
     \end{enumerate}
 
 \end{document}
