@@ -10,50 +10,80 @@
     \begin{enumerate}
         \item Kakšna je razlika med registrom in RAM-om?\\
         Procesor je sestavljen iz več stvari. Notri je tudi več registrov in RAM. Registri so majhni in hitri, RAM je počasen, a zelo velik.(kot špajza in kuhinjska miza). Procesor lahko dela s stvarmi v registrih, potem pa si bo informacije shranil v RAM.
+    
         \item Kakšne registre poznamo in kakšen je njihov namen?\\
         Naši računalniki imajo približno 30 registrov. V assemblyju:\\
          4 Splošni registri A, B, C, D; v njih so kratkoročno shranjene vrednosti. Najpomembnejši je register A, saj se le na njem lahko izvajajo težje operacije (multiply), saj je težko implementirati za vse registre\\
          2 posebna registra: IP - Instruction pointer (kaže na naslednjo mesto v pomnilniku aka kaj se trenutno dogaja) in SP - Stack pointer (kaže na vrh sklada)\\
          3 zastavice: Z, P, F: zastavice nosijo le 1 bit, ki določa true/false, zato da ne porabimo 8 bit prostora na splošnem registerju. Z zastavicami ne operiramo neposredno
+        
         \item Kako in zakaj uporabljamo sklad?\\
         Sklad se začne čisto na koncu pomnilnika.
         Na sklad si shranjujemo začasne vrednosti: S push A bomo na vrh sklada naložili vrednost, ki je trenutno na registru A, potem pa s POP vzememo s sklada vrhno vrednost s sklada.
+    
         \item Kako delujejo skoki, pogojni skoki in klici funkcij?\\
         Skok spremeni vrednost kazalca za ukaz. S tem se spremeni kateri ukaz pride naslednji
+    
         \item Katere osnovne in sestavljene vgrajene tipe poznamo in kdaj uporabljamo katerega?\\
         Primeri osnovnih tipov: cela števila - int (+, -, *, /), nizi - string (stikanje z \^. Obstaja standardna knjiznica za delanje s stringi: String, ki ima ogromno vgrajenih funkcij), števila s plavajočo vejico - float (zraven operacij moras pisati piko), logične vrednosti (bool), enotski tip - unit (to je zato, da lahko recimo: ne damo nic argumentov v funkcijo (recimo Random.bool()) oziroma ce funkcije "nic" ne vracajo, vracajo unit), znaki (char)\\
         primeri sestavljenih tipov: seznami - list (recimo int list), nabori (imajo tocno doloceno dolzino, recimo za datum. Ni nujno, da so vsa polja istega tipa. Do prostora je najlazje dostopati tako, da jih razstavimo z (x, y, z)), delne vrednosti - option (lahko je None ali pa Some(a), kjer je Some(a) tipa "a option")
+    
         \item Kaj so funkcije višjega reda?\\
-        To so funkcije, ki za argument vzamejo neko drugo funkcijo.
+        To so funkcije, ki za argument vzamejo neko drugo funkcijo.  matematiki imamo na primer odvor ali integral, ki sprejmeta funkcijo in vrneta novo funkcijo.\\
+        V OCamlu je treba biti pazljiv, saj se zapis f g x prebere kot f (g, x), ne pa f(g(x)), kar ni funkcija višjega reda. Primer: map, filter, fold\_left,... recimo: List.map (fun x -"> x + 1) [1;2;3]
+    
         \item Kaj so anonimne funkcije in kje jih uporabljamo?\\
-        Funkcije, ki jih nakratko zapisemo?? \underline{ADD}
+        Funkcije, ki jim ne damo imena, ker bi bila koda zato manj pregledna. Največkrat jih uporabljamo v funkcijah višjega reda, kot recimo List.map ali pa: (fun n -"> if n mod 2 = 0 then True else False)
+    
         \item Kaj so polimorfne funkcije in katere ste najpogosteje uporabljali?\\
-        Funkcije, katerim tip ni točno določen: Za poljuben tip 'a lahko vzame recimo 'a list in še en 'a list in naredi 'a list (int list)
+        Funkcije, katerim tip ni točno določen: Za poljuben tip 'a lahko vzame recimo 'a list in še en 'a list in naredi 'a list (int list). Pogosti primeri so seznami (List.rev ali List.lenght), kjer funkcija deluje na enak način ne glede na tip argumenta.
         Najpogostejše: @, 
+    
         \item Kaj so Curryjrane funkcije in v kakšnem odnosu so z običajnimi funkcijami, ki sprejmejo nabor več argumentov?\\
-        So funkcije več argumentov, recimo če imamo funkcije dveh argumentov pravzaprav vsamemo funkcijo prvega argumenta in vrne funkcijo drugega argumenta. Razlika s funkcijami več argumentov:\\
-        Funkcije več spremenljivk: f x y je kot f (x, y)\\
-        Curryirane funkcije: f x y je kot (f x) y\\
-        \item Kako so gnezdimo funkcijske tipe pri funkcijah več argumentov?\\
-        add
+        So funkcije več argumentov, recimo če imamo funkcije dveh argumentov pravzaprav vzame funkcijo prvega argumenta in vrne funkcijo drugega argumenta. Razlika s funkcijami več argumentov:\\
+        Prednost Curryjrana funkcij je ta, da lahko v OCamlu funkcijo delno uporabimo na prvem argumentu ter ne dobimo type-errorja, med tem ko bi za ne-currjrano funkcijo uporaba le enega argumenta sprožila type-error.
+        Funkcije več spremenljivk so desno asociativne: f x y je kot f (x, y)\\
+        Curryirane funkcije so levo asociativne: f x y je kot (f x) y oziroma: fun x -"> fun y -"> vrnitev\\
+        Curryirane in funkcije več argumentov so si izomorfne, saj lahko vsako funkcijo več argumentov pretvorimo v curryjrano funkcijo in obratno:\\ let curry f = fun x y -"> f (x, y) je obicajna funkcija -"> curry, saj je to njen tip: val curry : ('a * 'b -"> 'c) -"> 'a -"> 'b -"> 'c = "<fun">
+    
+        \item Kako gnezdimo funkcijske tipe pri funkcijah več argumentov?\\
+        Postavimo oklepaje okoli tipa argumenta. Na primer 'a -"> 'b -"> 'c je funkcija z dvema argumentoma, ('a -"> 'b) -"> 'c pa je funkcija ki sprejme funkcijo za argument.
+    
         \item Kakšna je razlika med statičnimi in dinamičnimi tipi?\\
-        add
+        Razlika je v tem kdaj program preverja ujemanje tipov. Pri statičnih jezikih (OCaml, C++) se ujemanjem tipov preverja že pred izvajanjem, medtem ko pri jezikih z dinamičnim sistemom tipov (Python, JavaScript) se tipi preverjajo med izvajanjem, torej je možno, da se napaka zgodi šele med izvajanjem, saj bodo nekatere funkcije delovale za nekatere tipe, za druge pa ne. Pri OCamlu bi že takoj dobili napako, tudi če bi funkcija delovala pravilno za nekatere tipe.\\
+        let je\_majhen x =
+            if x < 10 then "Da" else false
+
         \item Kaj so repni klici, kaj so repno rekurzivne funkcije in kdaj jih uporabljamo? Kako bi običajno funkcijo pretvorili v repno rekurzivno?\\
-        add
+        Pravimo, da je klic funkcije repen, če se izvede kot zadnji korak v definiciji funkcije. Repno rekurzivna funkcija je rekurzivna funkcija, ki se kliče repno. Repne klice uporabljamo, ko ne želimo toliko stvari odložiti na sklad. Ker je pri rekurziji klicev funkcije navadno veliko, in s tem veliko odlaganja na sklad, se lahko zgodi prekoračitev sklada (stack overflow). Z repno rekurzijo lahko torej precej povečamo globino rekurzije. Prav tako to navadno naredi izvajanje funkcije hitrejše.Primer:\\ namesto let f x = x + 1 in let g x = 6 * f(x), napišemo repno:\\ let f x = x + 1 in let g x = f(6 * x + 6)\\
+        Razlaga: Pri prvem se začne izvajati g, a ker ni definirana repno, mora na sklad shraniti faktor 6 in potem čakati na f. Pri drugi pa je repna, zato ko se začne izvajati g, svoje izvajanje popolnoma prepusti f, zato ničesar ni treba shranjevati na sklad in izvejanje je hitrejše.\\
+        Običajno funkcijo navadno pretvorimo v repno rekurzivno, tako da si pomagamo s pomožnimi funkcijami, katerim dodamo še en argument, ki predstavlja akumulator (delno izračunan rezultat), kamor shranjujemo delno izračunan rezultat.\\
+        fold\_left je repno rekurzivna, fold\_right pa ni.
         \item Kaj so zapisni in naštevni tipi? Za kaj jih uporabljamo?\\
-        add
+        zapisni tip: tip, ki ga uporabljamo zato, da točno povemo, katere vrednosti pričakujemo. Definiramo jih s "type A = {x: int; y: int}" in ga uporabimo tako, da recimo: let a = {x=1; y=2} in potem dostopamo do polj s točko (a.x)\\
+        Nastevni tip: tip, ki ga uporabljamo zato, da povemo točno katere vrednosti pričakujemo. Definiramo jih s "type A = A1 | A2 | A3" in ga uporabimo tako, da recimo: let a = A1 in potem dostopamo do polj s točko (a.x)\\
+        Nastevni tipi imajo lahko dodatne vrednosti, ki jih dodamo tako: |A1 of int\\
+        To potem tako uporabimo: A1 42 ali pa z: "match a with |A1 x -"> x"\\
+        Nastevne tipe uporabljamo tudi za dodatno varnost (Recimo ce sta dva polja istega tipa lahko dodamo za vsakega še dodatno specifikacijo: Telefon of "string" in Email of "string")\\
+    
         \item Katere osnovnim matematičnim konstrukcijam ustrezajo naštevni tipi?\\
         add
+    
         \item Kaj so algebrajski tipi in kaj so najbolj znani primeri takih tipov?\\
         add
+    
         \item Iz česa so sestavljeni moduli in iz česa signature? Kdaj modul ustreza dani signaturi?\\
         add
+    
         \item Katere dele implementacije lahko skrivamo prek signatur in zakaj bi to želeli?\\
         add
+    
         \item Kaj je Curry-Howardov izomorfizem? Kako lahko dokaze logičnih izjav prevajamo na obstoj funkcij?\\
         add
+    
         \item V čem se dokazovanje v dokazovalniku kot je Lean, razlikuje od programiranja v jeziku kot je OCaml?\\
         add
+    
         \item Na primeru vektorjev razložite, kaj so odvisni tipi. Naštejte primere vrednosti/tipov odvisnih od vrednosti/tipov.\\
         add
         \item Čemu odvisni tipi ustrezajo v Curry-Howardovem izomorfizmu?\\
@@ -112,14 +142,18 @@
         funkcije imajo svoj tip (funkcijski tip), ki je vedno zgrajen iz vec tipov (vhodni in izhodni):  Poleg unkcij, ki jih sami definirajo, so nekatere že vgrajene, recimo: int\_of\_string, float\_of\_int, ...\\
         najbolj osnoven tip: 'a\\
         Za rekurzivne funkcije moraš spredaj napisati rec\\
-        Najboljše je rekurzivne funkcije zamenjati z match, primer: match n with |0 |1 |2->0 |\_->n\\
+        Najboljše je rekurzivne funkcije zamenjati z match, primer: match n with |0 |1 |2-">0 |\_-">n\\
         namesto match lahko napises tudi funkction\\
         pogoje se pise pred puscico z when :)\\
         poleg spremenljivk lahko z match razstavljamo sezname (glava in rep hihi)\\
         Seznami si lahko predstavljamo kot: prazen ali pa gl::rep, kjer je glav vrednost iz seznama, rep pa je spet seznam.\\
         Zlepljanje seznamov: @\\
         Zakaj imamo raje fold\_left? Razlaga z repnimi funkcijami(I think)\\
-        Da ni stach overflow, definiramo pomozno funkcijo z akumulatorjem (acc), da se zacasne vrednosti tja shranjujeno
+        Da ni stach overflow, definiramo pomozno funkcijo z akumulatorjem (acc), da se zacasne vrednosti tja shranjujeno\\
+        definicija tipov: type A = int * int\\
+        vpeljava tipa: karkoli: A\\
+        to naredimo zato da ugotovimo, kje se je napaka zgodila\\
+
     \end{enumerate}
 
 \end{document}
