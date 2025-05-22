@@ -59,14 +59,16 @@
         Razlaga: Pri prvem se začne izvajati g, a ker ni definirana repno, mora na sklad shraniti faktor 6 in potem čakati na f. Pri drugi pa je repna, zato ko se začne izvajati g, svoje izvajanje popolnoma prepusti f, zato ničesar ni treba shranjevati na sklad in izvejanje je hitrejše.\\
         Običajno funkcijo navadno pretvorimo v repno rekurzivno, tako da si pomagamo s pomožnimi funkcijami, katerim dodamo še en argument, ki predstavlja akumulator (delno izračunan rezultat), kamor shranjujemo delno izračunan rezultat.\\
         fold\_left je repno rekurzivna, fold\_right pa ni.
+    
         \item Kaj so zapisni in naštevni tipi? Za kaj jih uporabljamo?\\
         zapisni tip: tip, ki ga uporabljamo zato, da točno povemo, katere vrednosti pričakujemo. Definiramo jih s "type A = {x: int; y: int}" in ga uporabimo tako, da recimo: let a = {x=1; y=2} in potem dostopamo do polj s točko (a.x)\\
-        Nastevni tip: tip, ki ga uporabljamo zato, da povemo točno katere vrednosti pričakujemo. Definiramo jih s "type A = A1 | A2 | A3" in ga uporabimo tako, da recimo: let a = A1 in potem dostopamo do polj s točko (a.x)\\
-        Nastevni tipi imajo lahko dodatne vrednosti, ki jih dodamo tako: |A1 of int\\
+
+        Nastevni tip: tip, ki ga uporabljamo zato, da povemo točno katere vrednosti element lahko ima, ampak ima natanko enega izmed njih. Sestavljeni so iz imen polj in njihovimi tipi. Definiramo jih s "type A = A1 | A2 | A3" in ga uporabimo tako, da recimo: let a = A1 in potem dostopamo do polj s točko (a.x)\\
+        Nastevni tipi imajo lahko dodatne vrednosti (argumente), ki jih dodamo tako: |A1 of int\\
         To potem tako uporabimo: A1 42 ali pa z: "match a with |A1 x -"> x"\\
         Nastevne tipe uporabljamo tudi za dodatno varnost (Recimo ce sta dva polja istega tipa lahko dodamo za vsakega še dodatno specifikacijo: Telefon of "string" in Email of "string")\\
     
-        \item Katere osnovnim matematičnim konstrukcijam ustrezajo naštevni tipi?\\
+        \item Katerim osnovnim matematičnim konstrukcijam ustrezajo naštevni tipi?\\
         add
     
         \item Kaj so algebrajski tipi in kaj so najbolj znani primeri takih tipov?\\
