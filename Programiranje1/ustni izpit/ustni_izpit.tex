@@ -1,6 +1,7 @@
 \documentclass[a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[slovene]{babel}
+\usepackage[T1]{fontenc}
 \title{Ustna vprašanja}
 \author{}
 \date{}
@@ -30,10 +31,10 @@
     
         \item Kaj so funkcije višjega reda?\\
         To so funkcije, ki za argument vzamejo neko drugo funkcijo.  matematiki imamo na primer odvor ali integral, ki sprejmeta funkcijo in vrneta novo funkcijo.\\
-        V OCamlu je treba biti pazljiv, saj se zapis f g x prebere kot f (g, x), ne pa f(g(x)), kar ni funkcija višjega reda. Primer: map, filter, fold\_left,... recimo: List.map (fun x -"> x + 1) [1;2;3]
+        V OCamlu je treba biti pazljiv, saj se zapis f g x prebere kot f (g, x), ne pa f(g(x)), kar ni funkcija višjega reda. Primer: map, filter, fold\_left,... recimo: List.map (fun x -> x + 1) [1;2;3]
     
         \item Kaj so anonimne funkcije in kje jih uporabljamo?\\
-        Funkcije, ki jim ne damo imena, ker bi bila koda zato manj pregledna. Največkrat jih uporabljamo v funkcijah višjega reda, kot recimo List.map ali pa: (fun n -"> if n mod 2 = 0 then True else False)
+        Funkcije, ki jim ne damo imena, ker bi bila koda zato manj pregledna. Največkrat jih uporabljamo v funkcijah višjega reda, kot recimo List.map ali pa: (fun n -> if n mod 2 = 0 then True else False)
     
         \item Kaj so polimorfne funkcije in katere ste najpogosteje uporabljali?\\
         Funkcije, katerim tip ni točno določen: Za poljuben tip 'a lahko vzame recimo 'a list in še en 'a list in naredi 'a list (int list). Pogosti primeri so seznami (List.rev ali List.lenght), kjer funkcija deluje na enak način ne glede na tip argumenta.
@@ -43,11 +44,11 @@
         So funkcije več argumentov, recimo če imamo funkcije dveh argumentov pravzaprav vzame funkcijo prvega argumenta in vrne funkcijo drugega argumenta. Razlika s funkcijami več argumentov:\\
         Prednost Curryjrana funkcij je ta, da lahko v OCamlu funkcijo delno uporabimo na prvem argumentu ter ne dobimo type-errorja, med tem ko bi za ne-currjrano funkcijo uporaba le enega argumenta sprožila type-error.
         Funkcije več spremenljivk so desno asociativne: f x y je kot f (x, y)\\
-        Curryirane funkcije so levo asociativne: f x y je kot (f x) y oziroma: fun x -"> fun y -"> vrnitev\\
-        Curryirane in funkcije več argumentov so si izomorfne, saj lahko vsako funkcijo več argumentov pretvorimo v curryjrano funkcijo in obratno:\\ let curry f = fun x y -"> f (x, y) je obicajna funkcija -"> curry, saj je to njen tip: val curry : ('a * 'b -"> 'c) -"> 'a -"> 'b -"> 'c = "<fun">
+        Curryirane funkcije so levo asociativne: f x y je kot (f x) y oziroma: fun x -> fun y -> vrnitev\\
+        Curryirane in funkcije več argumentov so si izomorfne, saj lahko vsako funkcijo več argumentov pretvorimo v curryjrano funkcijo in obratno:\\ let curry f = fun x y -> f (x, y) je obicajna funkcija -> curry, saj je to njen tip: val curry : ('a * 'b -> 'c) -> 'a -> 'b -> 'c = "<fun>
     
         \item Kako gnezdimo funkcijske tipe pri funkcijah več argumentov?\\
-        Postavimo oklepaje okoli tipa argumenta. Na primer 'a -"> 'b -"> 'c je funkcija z dvema argumentoma, ('a -"> 'b) -"> 'c pa je funkcija ki sprejme funkcijo za argument.
+        Postavimo oklepaje okoli tipa argumenta. Na primer 'a -> 'b -> 'c je funkcija z dvema argumentoma, ('a -> 'b) -> 'c pa je funkcija ki sprejme funkcijo za argument.
     
         \item Kakšna je razlika med statičnimi in dinamičnimi tipi?\\
         Razlika je v tem kdaj program preverja ujemanje tipov. Pri statičnih jezikih (OCaml, C++) se ujemanjem tipov preverja že pred izvajanjem, medtem ko pri jezikih z dinamičnim sistemom tipov (Python, JavaScript) se tipi preverjajo med izvajanjem, torej je možno, da se napaka zgodi šele med izvajanjem, saj bodo nekatere funkcije delovale za nekatere tipe, za druge pa ne. Pri OCamlu bi že takoj dobili napako, tudi če bi funkcija delovala pravilno za nekatere tipe.\\
@@ -65,20 +66,46 @@
 
         Nastevni tip: tip, ki ga uporabljamo zato, da povemo točno katere vrednosti element lahko ima, ampak ima natanko enega izmed njih. Sestavljeni so iz imen polj in njihovimi tipi. Definiramo jih s "type A = A1 | A2 | A3" in ga uporabimo tako, da recimo: let a = A1 in potem dostopamo do polj s točko (a.x)\\
         Nastevni tipi imajo lahko dodatne vrednosti (argumente), ki jih dodamo tako: |A1 of int\\
-        To potem tako uporabimo: A1 42 ali pa z: "match a with |A1 x -"> x"\\
-        Nastevne tipe uporabljamo tudi za dodatno varnost (Recimo ce sta dva polja istega tipa lahko dodamo za vsakega še dodatno specifikacijo: Telefon of "string" in Email of "string")\\
+        To potem tako uporabimo: A1 42 ali pa z: "match a with |A1 x -> x"\\
+        Nastevne tipe uporabljamo tudi za dodatno varnost (Recimo ce sta dva polja istega tipa lahko dodamo za vsakega še dodatno specifikacijo: Telefon of "string" in Email of "string")
     
         \item Katerim osnovnim matematičnim konstrukcijam ustrezajo naštevni tipi?\\
-        add
+        Zapisni tipi so matematično kartezični produkt, naštevni tipi pa vsota(oz disjunktna unija).
     
         \item Kaj so algebrajski tipi in kaj so najbolj znani primeri takih tipov?\\
-        add
+        Algebrajski tipi so rekurzivni naštevni tipi (ampak zraven type ni treba pisati rec, le ko dejansko definiras funkcijo, ki je tega tipa in je rekurzivna napises rec).\\
+        Najbolj znani primeri so:\\
+        Naravna številla: type naravno = | Nic\\
+        | Naslednik of naravno\\
+        Verizni seznami (prazni ali pa iz repa in glave): type 'a seznam = | Prazen\\
+        | Sestavljen of 'a * 'a seznam\\
+        Aritneticni izrazi: type izraz = | Stevilo of int\\
+        | Plus of izraz * izraz\\
+        | Minus of izraz * izraz\\
+        | Krat of izraz * izraz\\
+        Dvojiska drevesa (Sestavljena dvojiska drevesa imajo koren, iz katerega gresta 2 otroka, ki sta tudi drevesi): type 'a drevo = | Prazno\\
+        | Sestavljeno of 'a * 'a drevo * 'a drevo
     
         \item Iz česa so sestavljeni moduli in iz česa signature? Kdaj modul ustreza dani signaturi?\\
-        add
-    
-        \item Katere dele implementacije lahko skrivamo prek signatur in zakaj bi to želeli?\\
-        add
+        \textbf{Moduli} so zbirke definicij programerskih objektov, kot so: tipi, funkcije, vrednosti in drugi moduli. Tudi same datoteke so moduli, ki vsebuje svoje definicije.\\
+        Nekaj najbolj osnovnih modulov: List, String, Random,\dots\\
+        Oblika: module ime = struct
+            let a = 1
+            let b = 2
+            type t = int
+        end\\
+        Glavni tip modula poimenujemo s t. Do funkcij iz modula dostopamo prek ImeModula.ime\_funkcije (enako kot npr. List.rev)\\
+        \textbf{Signatura} je tip modula, ki ga definira.\\
+        Oblika: signature ime = sig
+            type t
+            val a : int
+            val b : int
+        end\\
+        Uporaba signature: preverja tipe modulov in da so v modulih vse funkcije definirane. Koristno, da imas napisano, katrere stvari moras se implemetirati. Tako se lahko stvari lažje popravljajo in skrivamo stvari
+
+        \item Katere dele implementacije lahko skrivamo prek signatur in zakaj bi to želeli?\\ 
+        Skrivamo: pomozne funkicije, tipe, vrednosti, ki jih ne rabimo izven modula.\\
+        Skrivanje funkcij: Funkcijo zapisemo le v modul, ne pa v signaturo. Take skrite funkcije niso dostopne izven modula AKA ne moremo jih poklicati. To naredimo zato, da je modul bolj pregleden in enostaven.
     
         \item Kaj je Curry-Howardov izomorfizem? Kako lahko dokaze logičnih izjav prevajamo na obstoj funkcij?\\
         add
@@ -88,48 +115,70 @@
     
         \item Na primeru vektorjev razložite, kaj so odvisni tipi. Naštejte primere vrednosti/tipov odvisnih od vrednosti/tipov.\\
         add
+
         \item Čemu odvisni tipi ustrezajo v Curry-Howardovem izomorfizmu?\\
         add
+
         \item Kakšni sta videti načeli indukcije na verižnih seznamih in dvojiških drevesih? Uporabite enega od njih na primeru.\\
         add
+
         \item Kako uporabljamo indukcijo ob prisotnosti pomožnih rekurzivnih funkcij?\\
         add
+
         \item Kako deluje Turingov stroj?\\
         add
-        \item Kaj so izračunljive funkcije in kaj trdi Church-Turingova teza?\\
+
+        \item Kaj so izračunljive funkcije in kaj trdi Church-Turingova teza?\\ 
         add
+
         \item Kaj je univerzalni Turingov stroj?\\
         add
+
         \item Kaj je ustavitveni orakelj in zakaj ne obstaja?\\
         add
+
         \item Kaj je razlika med spremenljivimi in nespremenljivimi podatkovnimi strukturami? Kdaj uporabimo katere?\\
         add
+
         \item Kako je definirana notacija velikega O?\\
         add
+
         \item Kako so v pomnilniku predstavitvljeni verižni seznami in tabele?\\
         add
+
         \item Kakšne so časovne zahtevnosti osnovnih operacij na verižnih seznamih in tabelah?\\
         add
+
         \item Kako so definirana iskalna drevesa, kako potekajo na njih osnovne operacije in kakšna je njihova časovna zahtevnost?\\
         add
+
         \item Kako so definirana AVL drevesa, kako potekajo na njih osnovne operacije in kakšna je njihova časovna zahtevnost?\\
         add
+
         \item Razložite algoritem hitrega potenciranja.\\
         add
+
         \item Kako delujejo algoritmi za urejanje z izbiranjem, z vstavljanjem in z mehurčki.\\
         add
+
         \item Kako poteka urejanje z zlivanjem in kakšna je njegova časovna zahtevnost?\\
         add
+
         \item Kako poteka hitro urejanje in kakšni sta njegova povprečna in najslabša časovna zahtevnost?\\
         add
+
         \item Kako poteka hitro urejanje na mestu?\\
         add
+        
         \item Kakšna je razlika med pristopoma deli in vladaj ter dinamično programiranje?\\
         add
+
         \item Primerjajte pristopa od spodaj navzdol ter od zgoraj navzdol pri reševanju nalog z dinamičnim programiranjem. Kaj so prednosti katerega pristopa?\\
         add
+
         \item Kako implementiramo memoizacijo?\\
         add
+
         \item Kakšne so razlike med implementacijo memoizacije v dinamičnem jeziku, kot je Python, in v statičnem jeziku, kot je OCaml?\\
         add
     \end{enumerate}
@@ -138,13 +187,14 @@
     \begin{enumerate}
         \item Osnovna arhitektura in assembly
         Assembly vzame nekaj, kar je podobno človeškemu jeziku in to pretvori v strijno kodo (prijazno za procesor)
+
         \item OCaml
         V terminalu moras za zakljucek funkcije uporabiti\\
         pretvorba int v float: float\_of\_int\\
-        funkcije imajo svoj tip (funkcijski tip), ki je vedno zgrajen iz vec tipov (vhodni in izhodni):  Poleg unkcij, ki jih sami definirajo, so nekatere že vgrajene, recimo: int\_of\_string, float\_of\_int, ...\\
+        funkcije imajo svoj tip (funkcijski tip), ki je vedno zgrajen iz vec tipov (vhodni in izhodni):  Poleg unkcij, ki jih sami definirajo, so nekatere že vgrajene, recimo: int\_of\_string, float\_of\_int,\ldots\\
         najbolj osnoven tip: 'a\\
         Za rekurzivne funkcije moraš spredaj napisati rec\\
-        Najboljše je rekurzivne funkcije zamenjati z match, primer: match n with |0 |1 |2-">0 |\_-">n\\
+        Najboljše je rekurzivne funkcije zamenjati z match, primer: match n with |0 |1 |2->0 |\_->n\\
         namesto match lahko napises tudi funkction\\
         pogoje se pise pred puscico z when :)\\
         poleg spremenljivk lahko z match razstavljamo sezname (glava in rep hihi)\\
@@ -155,6 +205,10 @@
         definicija tipov: type A = int * int\\
         vpeljava tipa: karkoli: A\\
         to naredimo zato da ugotovimo, kje se je napaka zgodila\\
+        Abstrakcija skriva detajle. Uporabljamo jo zato, da skrijemo podrobnosti in s tem poenostavimo razumevanje, preprečimo nepričakovano uporabo in olajšamo kasnejše spremembe implementacije.\\
+        Konstruktorji: nacini, kako lahko ustvarimo vrednosti danega tipa, recimo naravna stevila imajo 2 konstruktorja: Nic in Naslednik\\
+
+        Pametni konstruktorji pa vzamejo podatke, preverijo, če so v redu in nato konstruirajo neko vrednost.
 
     \end{enumerate}
 
