@@ -108,7 +108,8 @@
         Skrivanje funkcij: Funkcijo zapisemo le v modul, ne pa v signaturo. Take skrite funkcije niso dostopne izven modula AKA ne moremo jih poklicati. To naredimo zato, da je modul bolj pregleden in enostaven.
     
         \item Kaj je Curry-Howardov izomorfizem? Kako lahko dokaze logičnih izjav prevajamo na obstoj funkcij?\\
-        add
+        \textbf{POPRAVI}
+        Curry-Howardov izomorfizem pravi, da je direktna korespondenca med formalno logiko in računalniškimi kalkulacijami. Izjave predstavimo s tipi: implikacijo => AB predstavimo s funkcijo A -> B, konjunkcijo A B predstavimo z naborom A * B in negacijo A z funkcijo A  empty kjer je empty tip ki predstavlja prazno množico (?). To je poln nabor in izkaže se da je algebra nad tipi izomorfna bulovi algebri.
     
         \item V čem se dokazovanje v dokazovalniku kot je Lean, razlikuje od programiranja v jeziku kot je OCaml?\\
         add
@@ -207,8 +208,14 @@
         to naredimo zato da ugotovimo, kje se je napaka zgodila\\
         Abstrakcija skriva detajle. Uporabljamo jo zato, da skrijemo podrobnosti in s tem poenostavimo razumevanje, preprečimo nepričakovano uporabo in olajšamo kasnejše spremembe implementacije.\\
         Konstruktorji: nacini, kako lahko ustvarimo vrednosti danega tipa, recimo naravna stevila imajo 2 konstruktorja: Nic in Naslednik\\
-
-        Pametni konstruktorji pa vzamejo podatke, preverijo, če so v redu in nato konstruirajo neko vrednost.
+        %
+        Pametni konstruktorji pa vzamejo podatke, preverijo, če so v redu in nato konstruirajo neko vrednost.\\
+        failwith "Opis napake" namerno sesuje funkcijo. Uporabljamo, zato da vmo, kje je napaka v nasi kodi. Njegov tip je poljuben ('a)\\
+        %
+        Zakaj uporabimo za dokazovanje Lean namesto OCaml: Želimo se znebiti rekurzije v neskončno in pa moznosti failwith. OCaml nima kvantifikatorjev, zato je težko dokazovati. Lean je bolj matematičen in zato lepši za dokazovanje.
+        %
+        \item Lean\\
+        ukazi: \#eval, preveri tip: \#check, definicija: def
 
     \end{enumerate}
 
