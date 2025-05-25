@@ -2,6 +2,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage[slovene]{babel}
 \usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\graphicspath{ {./images/} }
 \title{Ustna vprašanja}
 \author{}
 \date{}
@@ -109,49 +113,74 @@
     
         \item Kaj je Curry-Howardov izomorfizem? Kako lahko dokaze logičnih izjav prevajamo na obstoj funkcij?\\
         \textbf{POPRAVI}
-        Curry-Howardov izomorfizem pravi, da je direktna korespondenca med formalno logiko in računalniškimi kalkulacijami. Izjave predstavimo s tipi: implikacijo => AB predstavimo s funkcijo A -> B, konjunkcijo A B predstavimo z naborom A * B in negacijo A z funkcijo A  empty kjer je empty tip ki predstavlja prazno množico (?). To je poln nabor in izkaže se da je algebra nad tipi izomorfna bulovi algebri.
+        Curry-Howardov izomorfizem pravi, da je direktna povezava med formalno logiko in računalniškimi kalkulacijami. Izjave predstavimo s tipi (vsaki izjavi ustreza nek tip): implikacijo A => B predstavimo s funkcijo A -> B, konjunkcijo A $\land$ B predstavimo z naborom A * B in negacijo $\lnot$ A z funkcijo A -> empty kjer je empty tip ki predstavlja prazno množico. To je poln nabor in izkaže se da je algebra nad tipi izomorfna boolovi algebri.
     
         \item V čem se dokazovanje v dokazovalniku kot je Lean, razlikuje od programiranja v jeziku kot je OCaml?\\
-        add
+        V OCamlu se da “dokazati” tudi napačne trditve s pomočjo rekurzije ali pa uporabo failwith. Medtem ko ti dokazovalnik takih stvari ne bo pustil oziroma ti bo sporočil, da dokaz ni popoln. Poleg tega v Leanu lažje sproti vidiš kaj dokazuješ in kaj še moraš dokazati (z uporabo taktičnega načina). OCaml nima kvantifikatorjev, zato je težko dokazovati. Lean je bolj matematičen in zato lepši za dokazovanje.
     
         \item Na primeru vektorjev razložite, kaj so odvisni tipi. Naštejte primere vrednosti/tipov odvisnih od vrednosti/tipov.\\
-        add
+        Odvisni tipi so tipi, ki so odvisni od vrednosti vsaj enega od argumentov. To pomeni, da lahko tip vsebuje vrednost, ki je definirana v času izvajanja programa. Na primer, lahko imamo tip vektorja (array elementov tipa A z dolžino n), ki je odvisen od dolžine n.\\
+        %
+        \underline{Tipi, odvisno od tipov}: Parametrični tipi ('a -> 'a list)\\
+        \underline{Tipi odvisni od vrednosti}: \textbf{Odvisni tipi} ((A, n) -> Vektor(A, n))\\
+        \underline{Vrednosti odvisne od tipov}: Polimorfne funkcije (List.rev, vprašanje 8)\\
+        \underline{Vrednosti odvisne od vrednosti}: Običajne funkcije (n -> 2n - 1)
 
         \item Čemu odvisni tipi ustrezajo v Curry-Howardovem izomorfizmu?\\
-        add
+        Predikatom (predikat je izjava, odvisna od neke vrednosti). Z odvisnimi tipi lahko dokazujemo kvantifikatorja (univerzalni in eksistenčni).\\
+        Univerzalni je ekvivalenten kartezičnemu produktu vseh spremenljivk x, od katerih je naš predikat odvisen.\\
+        Eksistenčni pa je ekvivalenten vsoti (disjunktni uniji) vseh spremenljivk x, od katerih je naš predikat odvisen.\\
+        Če pa imamo izjavo, ki ni odvisen od spremenljivke, dobimo običajno funkcijo.
+        \begin{figure}[h]
+            \centering
+            \includegraphics[scale=0.25]{predikati.jpg}
+        \end{figure}
 
         \item Kakšni sta videti načeli indukcije na verižnih seznamih in dvojiških drevesih? Uporabite enega od njih na primeru.\\
-        add
+        Načeli indukcije na verižnih seznamih in dvojiških drevesih sta podobni. Pri verižnih seznamih imamo bazo indukcije, ki pravi, da je prazni seznam prazen, in indukcijski korak, ki pravi, da če nekaj velja za seznam dolžine xs, mora veljati tudi, če mu dodamo glavo. Torej če pokažemo, da velja za prazen seznam, velja za vse sezname dolžine nič, če sklepamo, da iz repa velja tudi za cel sestavljen seznam (torej repu dodamo glavo), velja, da gremo lahko iz seznamov dolzine n na sezname dolzie n + 1. Potem velja za vse sezname.\\
+        Pri dvojiških drevesih imamo bazo indukcije, ki pravi, da je prazno drevo prazno, in indukcijski korak, ki pravi, da če nekaj velja za levo drevo in za desno drevo, potem velja tudi za sestavljeno drevo oziroma za drevo, ki ima dva otroka: levega in desnega
 
         \item Kako uporabljamo indukcijo ob prisotnosti pomožnih rekurzivnih funkcij?\\
-        add
+        Pret theorem definiramo theorem, ki bo služil kot lemma.
 
         \item Kako deluje Turingov stroj?\\
-        add
+        \textbf{Turingov stroj} je peterica oziroma program, sestavljen iz: neskoncnega traku simbolov (kakor neskoncen pomnilnik), glave, koncnega stevila stanj in prehodne funkcije. Prehodna funkcija pove: Če trenutno vidiš določen simbol in si v določenem stanju, potem na trak zapiši nekaj, pojdi v neko stanje in se premakni levo/desno potraku. Prehodna funkcija je delno definirana, saj želimo, da se nekje ustavi. Stroj lahko spremeni simbol na traku, premakne glavo levo ali desno in spremeni stanje.\\
+        \underline{Trak} je neskoncno zaporedje znakov, ki so od nekje naprej (naprej in nazaj) vsi prazni.\\
+        \underline{Konfiguracija} Turingovega stroja je sestavljena iz trenutnega stanja, položaja glave in vsebine traku.\\
+        Posamezni koraki so sestavljeni iz \underline{delnih funkcij step}, ki sprejmejo konfiguracijo in vrne novo konfiguracijo.\\
+        \underline{Delna funkcija run} je rekurzivna funkcija, ki sprejme konfiguracijo in vrne novo konfiguracijo, če se stroj ustavi, pa ne vrne ničesar. Če je funkcijs definirana, stroj teče. Če pa ni več definirana, se ustavi. Zato imamo lahko neustavljive turingove stroje.
 
         \item Kaj so izračunljive funkcije in kaj trdi Church-Turingova teza?\\ 
-        add
+        Izračunljive funkcije so funkcije, ki jih lahko izračunamo s Turingovim strojem. To je pa takrat, ko obstaja tak turingov stroj, ki za dano vhodno vrednost n funkcije f izračuna izhodno vrednost f(n) v končnem času.\\
+        Church-Turingova teza trdi, da so vse izračunljive funkcije enake tistim, ki jih lahko izračunamo s Turingovim strojem. To pomeni, da če obstaja funkcija, ki je izračunljiva, potem obstaja tudi Turingov stroj, ki jo lahko izračuna.
 
         \item Kaj je univerzalni Turingov stroj?\\
-        add
+        Zna simulirati vse ostale Turingove stroje. To pomeni, da lahko sprejme opis katerega koli Turingovega stroja in vhodno vrednost ter izračuna izhodno vrednost tega Turingovega stroja za dano vhodno vrednost. Univerzalnih strojev je neskončno mnogo, saj lahko vsak Turingov stroj opišemo na več načinov. 
 
         \item Kaj je ustavitveni orakelj in zakaj ne obstaja?\\
-        add
+        Funkcija, ki pove, ali se bo nek Turingov stroj ustavil ali ne. Torej če dobi turingov stroj in vhodno kodo da zna povedati, ali se bo stroj nekje ustavil. Ne obstaja, ker bi lahko z njim rešili problem ustavitve, ki je nedoločljiv. To pomeni, da ne moremo napisati programa, ki bi za vsak vhodni program in vhodno vrednost povedal, ali se bo program ustavil ali ne. Primer: Domena, da je vsako sodo število vsota dveh praštevil. Stroj bi šel čez vsa soda števila, vsako poskusi razcepiti na dva praštevila, če mu ne uspe, se ustavi. Ampak ne vemo, ali se to kdaj ustavi.
 
         \item Kaj je razlika med spremenljivimi in nespremenljivimi podatkovnimi strukturami? Kdaj uporabimo katere?\\
-        add
+        Spremenljive podatkovne strukture so strukture, ki se lahko spremenijo, medtem ko nespremenljive tega ne zmorejo. Spremenljive strukture so uporabne ko želimo nek objekt manipulirati in nas ne zanima kakšno vrednost je imel prej. Na primer v for zankah. Nespremenljive podatkovne strukture pa uporabljamo, ko želimo ohraniti staro struktuto po spremembi.
 
         \item Kako je definirana notacija velikega O?\\
-        add
+        \textbf{Definicija}: $f \in O(g) \iff \exists x_0 ,\exists M$. $\forall x > x_0$ velja: $|f(x)| \leq M|g(x)|$\\
+        Pri časovni zahtevnosti nas ne zanima nek konstanten faktor, saj je odvisen tudi od računalnika. Enaka definicija velja tudi v -, zato so absolutne vrednosti. $x_0$ imamo, ker nas zanima le, s čim je funkcija omejena od nekega števila naprej (v $\infty$), ne pa za prvih nekaj vrednosti.\\
+        \textbf{Lastnosti}: $f_1 \in O(g_1)$ in $f_2 \in O(g_2)$, potem je $f_1 + f_2 \in O(g_1 + g_2)$ in $f_1 * f_2 \in O(g_1 * g_2)$.
 
         \item Kako so v pomnilniku predstavitvljeni verižni seznami in tabele?\\
-        add
+        Verižni seznami so bodisi prazni, bodisi sestavljeni iz glave in repa. Sestavljen seznam ima v pomnilniku oznako, da je sestavljen, glavo in kazalec na njegov rep. V pomnilniku so 1 in 0. Števila znamo zapisati z 0 in 1. Kazalce pišemo kot naslov celice, v katero kazalec kaže. Dvojno dvopičje pa zapišemo z 1.\\
+        Tabele pa imajo najprej podano dolžino tabele in nato nanizane elemente tabele. Zato je dostopanje do določenega elementa v tabeli hitrejše, saj takoj vemo, na katerem mestu v pomnilniku se nahaja, medtem ko pri verižnih seznamih moramo iti skozi vse elemente, da pridemo do določenega.
 
         \item Kakšne so časovne zahtevnosti osnovnih operacij na verižnih seznamih in tabelah?\\
-        add
+        \begin{figure}[h]
+            \centering
+            \includegraphics[scale=0.4]{31.jpg}
+        \end{figure}\\
+        \textbf{Razlaga}: V Pythonu imajo tabele napisano, koliko elementov je v tabeli in pa koliko prostora je rezervirano za tabelo. Zato lahko enostavno appendamo nekaj na konec. Če mu zmanjka prostora, tabelo prekopira, zato na vsake toliko časa pride do O(n) operacije. Za kopiranje tabele je časovna zahtevnost O(n), saj moramo prekopirati vse elemente.
 
         \item Kako so definirana iskalna drevesa, kako potekajo na njih osnovne operacije in kakšna je njihova časovna zahtevnost?\\
-        add
+        zacni z video 10, 1:12:00
 
         \item Kako so definirana AVL drevesa, kako potekajo na njih osnovne operacije in kakšna je njihova časovna zahtevnost?\\
         add
@@ -212,10 +241,22 @@
         Pametni konstruktorji pa vzamejo podatke, preverijo, če so v redu in nato konstruirajo neko vrednost.\\
         failwith "Opis napake" namerno sesuje funkcijo. Uporabljamo, zato da vmo, kje je napaka v nasi kodi. Njegov tip je poljuben ('a)\\
         %
-        Zakaj uporabimo za dokazovanje Lean namesto OCaml: Želimo se znebiti rekurzije v neskončno in pa moznosti failwith. OCaml nima kvantifikatorjev, zato je težko dokazovati. Lean je bolj matematičen in zato lepši za dokazovanje.
-        %
         \item Lean\\
-        ukazi: \#eval, preveri tip: \#check, definicija: def
+        V OCamlu bi napisali lahko neresnico: let dokaz\_nepravilne\_izjave : ('a -> 'b) -> ('b -> 'a) =
+        fun (f : 'a -> 'b) -> fun (y : 'b) -> failwith "nekaj iz A"\\
+        %
+        ukazi v Leanu: \#eval, preveri tip: \#check, definicija: def, print: \#print.\\
+        Lean je boljši za dokazovanje: Daljše dokaze lahko "dokazuješ s taktikami", v katerega greš z \textbf{by}. Osnonvn izrazi v taktičnem načinu: intro x (nove spremenljivke in funkcije), apply f (funkcijo uporabiš na spremenljivkah), exact x (ntočno x je to), constructor (iz znanih spremeljivk naredi kartezični produkt), assumption (uporabi predpostavko)\\
+        %
+        Predikati so funkcije iz vrednosti v izjave (predikat je neka lastnost kot np. "je sodo")\\
+        Prop je tip izjav, zato da pri prevajanju program izpusti dokaze, saj za dejanski program niso pomembni. Le enkrat se morajo napisati.\\
+        %
+        V Leanu lahko pišemo \textbf{Implicitne tipe}: namesto da tip napišeš (A: Type), napišeš \{A: Type\} in potem lahko v funkciji pišeš samo A, brez tipa. To je uporabno, ko imamo veliko argumentov istega tipa in ko lean sam zna ugotoviti tip (recimo pri sestavljenih seznamih lahko ugotovi tip, če imamo pa le prazen seznam. pa ga ne zna ugotoviti, saj je lahko seznam int ali seznam str,\ldots)\\
+        %
+        Mnozica naravnih stevil je najmanjsa mnozica, ki vsebuje nic in naslednika.
+        %
+        \item Časovna zahtevnost\\
+        Array: [|\_;\_;\_|]podobno kot List, le da so Arrayi boljši pri dostopu do elementov, saj imajo konstanto časovno zahtevnost, medtem ko imajo seznami linearno časovno zahtevnost. Arrayi so tudi spremenljivi (lahko uporabimo t.(3) <- 5, da tretjemu elementu t damo vrednost 5), medtem ko so seznami nespremenljivi (t.(3) <- 5 ne bo delovalo).
 
     \end{enumerate}
 
