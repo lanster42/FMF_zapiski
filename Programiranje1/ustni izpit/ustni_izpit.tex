@@ -177,26 +177,49 @@
             \centering
             \includegraphics[scale=0.4]{31.jpg}
         \end{figure}\\
-        \textbf{Razlaga}: V Pythonu imajo tabele napisano, koliko elementov je v tabeli in pa koliko prostora je rezervirano za tabelo. Zato lahko enostavno appendamo nekaj na konec. Če mu zmanjka prostora, tabelo prekopira, zato na vsake toliko časa pride do O(n) operacije. Za kopiranje tabele je časovna zahtevnost O(n), saj moramo prekopirati vse elemente.
+        \textbf{Razlaga}: V Pythonu imajo tabele napisano, koliko elementov je v tabeli in pa koliko prostora je rezervirano za tabelo. Zato lahko enostavno appendamo nekaj na konec. Če mu zmanjka prostora, tabelo prekopira, zato na vsake toliko časa pride do O(n) operacije. Za kopiranje tabele je časovna zahtevnost O(n), saj moramo prekopirati vse elemente. 
 
         \item Kako so definirana iskalna drevesa, kako potekajo na njih osnovne operacije in kakšna je njihova časovna zahtevnost?\\
-        zacni z video 10, 1:12:00
+        Dvojiško drevo je iskalno, če so vsi elementi v levem poddrevesu manjši od korena, v desnem pa večji ter da so poddrevesa tudi iskalna. Type od iskalnih dreves: type 'a t = prazno | Sestavljeno of 'a * 'a t * 'a t.\\
+        Za iskanje elementa v iskalnem drevesu začnemo pri korenu, preverimo če je enak (takrat bo element v drevesu), če je manjši, gremo v levo poddrevo, če je večji, pa v desno poddrevo. Tako gremo dokler ne pridemo do praznega poddrevesa ali do elementa.\\ 
+        Če želimo dodati element, gremo na enak način, dokler ne pridemo do praznega poddrevesa, kjer element dodamo.\\
+        Če pa želimo odstraniti element iz lista, ga preprosto le odstranimo, ko ga najdemo, če pa je element v korenu, pa ga zamenjamo z najbolj desnim elementom (največji) levega otroka ali pa z najbolj levim elementom (najmanjši) desnega otroka.\\ 
+        Časovna zahtevnost operacij na iskalnem drevesu je O(h), kjer je h globina drevesa. Število elementov z globino raste eksponentno, zato globina drevesa narašča logaritemsko glede na število elementov v drevesu. Ampak ni le log(n) časovna zahtevnost, saj je odvisna tudi od tega, kako je drevo uravnoteženo. Če je popolno, je časovna zahtevnost O(log n), če pa ni, pa lahko pade na O(n).
 
         \item Kako so definirana AVL drevesa, kako potekajo na njih osnovne operacije in kakšna je njihova časovna zahtevnost?\\
-        add
+        AVL drevesa so dvojiška iskalna drevesa, ki so dodatno uravnotežena. To pomeni, da je razlika v globini levega in desnega poddrevesa pri vsakem vozlišču največ 1. Dodatno morajo biti poddrevesa tudi AVL drevesa.\\
+        Osnovne operacije potekajo podobno kot pri navadnih iskalnih drevesih, vendar dodajanje in odstranjevanje elementov lahko povzroči, da drevo ni več AVL. V tem primeru moramo drevo ponovno uravnotežiti. To storimo z rotacijami (glej dodatne informacije).\\
+        Časovna zahtevnost osnovnih operacij: O(log n). Razlaga:\\
+        Pri danih elementih iščemo največjo globino AVL drevesa oziroma ekvivalentno: najmanjše število elementov pri dani globini. Koliko pa je to? Imamo globino h. Zagotovo imamo koren, iz katerega ima ena veja globino h in druga globino (h-1), torej: Št. elementov = 1 št. elementov levega poddrevesa + 1 št. elementov desnega poddrevesa + 1 št. korena = F(h) = F(h-1) + F(h-2) + 1.\\
+        To je enako Fibonaccijevi zaporedju, ki je eksponentno. Torej je časovna zahtevnost O(h) = O(log n).
 
         \item Razložite algoritem hitrega potenciranja.\\
-        add
+        Potenciranje navadno rešujemo z rekurzivno enačbo $a^n = a * a^{n-1}$ s časovno zahtevnostjo O(n). Lahko pa upoštevamo da velja $a^{2n} = (a^n)^2$. Torej lahko podamo rekurzivno enačbo $a^n = (a^{n/2})^2$, če je n sodo, in $a^n = a * (a^{(n-1)/2})^2$, če je n liho. Tako dobimo časovno zahtevnost O(log n), saj se vsak korak deli na dva dela, ki sta približno enake velikosti.
 
         \item Kako delujejo algoritmi za urejanje z izbiranjem, z vstavljanjem in z mehurčki.\\
-        add
+        n je dolžina lista\\
+        \textbf{Algoritem z izbiranjem}: gremo skozi list in izberemo najmanjši element v listu in ga odstranimo in ga damo na konec v nov list. To delamo dokler ne zmanjka elementov v listu. Časovna zahtevnost je O(n2), saj gremo skozi seznam n-krat in v vsakem koraku iščemo najmanjši element, kar je O(n).\\
+        \textbf{Algoritem z vstavljanjem}: Na levi imamo urejen del lista, na desni neurejen. Vzamemo prvi element neurejenga dela in gremo skozi urejen del, dokler ne najdemo mesta kjer velja, da do desno po urejenem delu elementi večji od izbranega, levo pa manjši. Tja odložimo element. Tako nadaljujemo. Časovna zahtevnost je O(n2), saj v vsakem koraku gremo skozi urejen del, ki je lahko velik n-1.\\
+        \textbf{Algoritem z mehurčki}: Vzamemo prvi element seznama. Če je večji od naslednjega elementa ju zamenjamo. In gremo na naslednji element seznama (ki je zdaj lahko isti element ki smo ga že zamenjali). Tako nadaljujemo dokler nam ne uspe priti čez seznam brez da bi zamenjali kateri koli element. Časovna zahtevnost je O(n2), saj v vsakem koraku gremo skozi seznam n-1 krat in v vsakem koraku zamenjamo največ en element.
 
         \item Kako poteka urejanje z zlivanjem in kakšna je njegova časovna zahtevnost?\\
-        add
+        Primer: ureditev seznama [5; 1; 2; 4; 6; 1; 3] z zlivanjem.\\
+        1. Razdelimo seznam na dva dela: [5; 1; 2] in [4; 6; 1; 3].\\
+        2. Podseznama rekurzivno uredimo\\
+        3. Urejena podseznama zlijemo skupaj: Gledamo, kateri je manjši element iz levega in desnega podseznama. Če je levi manjši, ga damo na novo urejen seznam, drugače pa desnega. Tako nadaljujemo dokler ne zmanjka elementov v enem od podseznamov. Nato dodamo še preostale elemente iz drugega podseznama.\\
+        Stabilno urejanje: Če sta dva elementa enaka, ostaneta v istem vrstnem redu.
+        \textbf{Dokaz za čas zahtevnost O(n log n)}: 12 video 1:00:00
+
 
         \item Kako poteka hitro urejanje in kakšni sta njegova povprečna in najslabša časovna zahtevnost?\\
-        add
-
+        Primer: ureditev seznama [5; 1; 2; 4; 6; 1; 3] s hitrim urejanjem.\\
+        1. Za pivot vzamemo nek element, recimo 5, nato pivotiramo ostale elemente: označimo, kateri so manjši in kateri večji od pivota.\\
+        2. Elemente, ki so manjši od pivota, damo na levo stran, tiste, ki so večji, pa na desno stran. Tako dobimo dva podseznama: [1; 2; 4; 1; 3] in [6].\\
+        3. Podseznama rekurzivno uredimo s hitrim urejanjem.\\
+        4. Na koncu zlepimo lev seznam, pivot in desni seznam in dobimo: [1; 1; 2; 3; 4; 5; 6].\\
+        Časovna zahtevnost: povprečna O(n log n), najslabša O(n**2). To je odvisno od tega, kako izberemo pivot. Če je pivot najmanjši ali največji element, dobimo najslabšo časovno zahtevnost O(n**2). Če pa je pivot naključen element (nekje blizu sredine), dobimo povprečno časovno zahtevnost O(n log n), saj se vsak korak deli na dva dela, ki sta približno enake velikosti.\\
+        Dobra izbira pivota: Izberemo prvi, zadnji in sredinski element in izberemo sredinsko vrednost med njimi. Druga možnost je, da premešamo seznam in izberemo prvi element kot pivot, ker imamo ponavadi opravka z nekako urejenimi seznami.\\
+        Hitro urejanje ni stabilno urejanje.
         \item Kako poteka hitro urejanje na mestu?\\
         add
         
@@ -256,7 +279,24 @@
         Mnozica naravnih stevil je najmanjsa mnozica, ki vsebuje nic in naslednika.
         %
         \item Časovna zahtevnost\\
-        Array: [|\_;\_;\_|]podobno kot List, le da so Arrayi boljši pri dostopu do elementov, saj imajo konstanto časovno zahtevnost, medtem ko imajo seznami linearno časovno zahtevnost. Arrayi so tudi spremenljivi (lahko uporabimo t.(3) <- 5, da tretjemu elementu t damo vrednost 5), medtem ko so seznami nespremenljivi (t.(3) <- 5 ne bo delovalo).
+        Array: [|\_;\_;\_|]podobno kot List, le da so Arrayi boljši pri dostopu do elementov, saj imajo konstanto časovno zahtevnost, medtem ko imajo seznami linearno časovno zahtevnost. Arrayi so tudi spremenljivi (lahko uporabimo t.(3) <- 5, da tretjemu elementu t damo vrednost 5), medtem ko so seznami nespremenljivi (t.(3) <- 5 ne bo delovalo).\\
+        print\_endline nič ne vrne, le izpiše nekaj na zaslon.\\
+        Fisker-Yates shuffle je algoritem, ki zmeša seznam permutacijsko pošteno. Deluje tako, da gremo čez seznam od konca do začetka in vsakemu elementu zamenjamo mesto z naključnim elementom pred njim (ali samim seboj). Časovna zahtevnost je O(n), saj gremo čez celoten seznam enkrat. To je tudi najhitrejši, saj moramo vsakem primeru iti čez vse elemente seznama.\\
+        Funkcija assert preveri, ali je podana trditev resnična. Če ni, sproži izjemo. Uporabljamo jo za preverjanje predpostavk v kodi, da se prepričamo, da so pogoji, ki jih pričakujemo, resnični. Če naletimo na assert false, pomeni, da programer je mislil, da se to ne bo zgdilo.\\
+        \textbf{Rotacije AVL dreves}: AVL drevo je uravnoteženo, če je razlika v globini levega in desnega poddrevesa pri vsakem vozlišču največ 1. Če ta razlika preseže 1, moramo drevo uravnotežiti z rotacijami: Imamo 4 možnosti, možnosti rotacije (BŠS): levo, desno, levo-levo, levo-desno in pusti na miru.\\
+        Pri \textbf{levi rotaciji} se desno poddrevo dvigne na koren, levi otrok postane desni otrok starega korena, levi otrok novega korena pa postane levo poddrevo starega korena. IDK predstaulej si. Pri \textbf{levi-desni rotaciji} najprej naredimo desno rotacijo na levem otroku, nato pa še levo rotacijo na korenu\\
+        Pri Dodajanju je dovolj, da uravnotežimo le eno drevo. Pri brisanju pa moramo uravnotežiti vsa drevesa, ki so na poti do korena, saj se lahko zgodi, da se bo zaradi brisanja elementa v desnem poddrevesu levega otroka izravnotežilo novo poddrevo. Ampak še vedno bo treba drevo uravnotežiti največ h krat, torej s časovno zahtevnostjo O(log n) krat, kjer je h globina drevesa.\\
+        Časovna zahtevnost za eno rotacijo: V pomnilniku so drevesa predstavljena ko verzžni seznami, torej iz korena (glave) imamo dva kazalca: na levo in desno drevo. Mi pri rotaciji ne bomo drevesa spreminjali, ampak bomo novega naredili. Ampak ni nam treba nanovo celega skonstruirati, le koren definiramo na novo in koren enega poddrevesa moramo nanovo definirati(star koren), ostala poddrevesa pa so enaka kot prej, zato le pokažemo nanje. Torej časovna zahtevnost ni nič odvisna od števila elementov v poddrevesu, enako je za vsa drevesa. Torej časovna zahtevnost je O(1) za eno rotacijo.\\
+        Kako konstantno izračunamo dolžino?\\
+        let sestavljen l d x = Sestavljen(1 + max (visina l) (visina d), l, x, d)\\
+        Čas za ustavitev tega drevesa in izracun dolzine je zdaj O(1), saj imamo v vsakem vozlišču shranjeno dolžino poddrevesa. Torej lahko dolžino izračunamo v O(1) času.
+        \item Deli in vladaj\\
+        Pri deli in vladaj pristopu razdelimo problem na manjše podprobleme, ki jih rešimo rekurzivno, nato pa združimo rešitve podproblemov v rešitev celotnega problema. Podproblemi so za faktor manjši.\\
+        Glavna algoritma za urejanje sta: hitro urejanje in urejanje z zlivanjem.\\
+        \item Dinamično programiranje (kakor rekurzija pri diskretni)\\
+        Pri dinamičnem programiranju razdelimo problem na manjše podprobleme, ki jih rešimo rekurzivno, vendar se podprimeri med sabo pokrivajo. Zato podproblemi niso za faktor manjši ampak malo manjši. Pri dinamičnem imamo 2 principa: \textbf{Od spodaj navzgor} in \textbf{Od zgoraj navzdol -  memoizacija}.\\
+        Od spodaj navzgor pomeni, da začnemo z reševanjem najmanjših podproblemov in nato gradimo rešitve večjih podproblemov. To je podobno kot pri rekurziji, le da shranjujemo rešitve podproblemov, da jih ne rešujemo večkrat.
+        % Rešitve podproblemov shranimo v tabelo, da jih ne rešujemo večkrat. Tako zmanjšamo časovno zahtevnost problema.
 
     \end{enumerate}
 

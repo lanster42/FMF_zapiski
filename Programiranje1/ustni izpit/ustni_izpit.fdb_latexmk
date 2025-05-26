@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1748208678.09366 "c:/Users/lanst/OneDrive/Documents/All important/FMF/UNI_SideBitches/Programiranje1/ustni izpit/ustni_izpit.tex" "ustni_izpit.pdf" "ustni_izpit" 1748208678.83758 0
+["pdflatex"] 1748291549.39539 "c:/Users/lanst/OneDrive/Documents/All important/FMF/UNI_SideBitches/Programiranje1/ustni izpit/ustni_izpit.tex" "ustni_izpit.pdf" "ustni_izpit" 1748291550.1004 0
   "31.jpg" 1748206618 32974 32af50cec1a9aaf9248e929e49baac0d ""
   "C:/Users/lanst/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1748165057 81088 29d6fa367ac022d1b69251d68c0742e6 ""
   "C:/Users/lanst/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1000.pk" 1706346335 25420 4920214537237184788ef779924e9000 ""
@@ -32,9 +32,11 @@
   "C:/Users/lanst/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy6.tfm" 1136765053 1116 933a60c408fc0a863a92debe84b2d294 ""
   "C:/Users/lanst/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy8.tfm" 1136765053 1120 8b7d695260f3cff42e636090a8002094 ""
   "C:/Users/lanst/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1247596667 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
+  "C:/Users/lanst/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1247596667 36281 c355509802a035cadc5f15869451dcee ""
   "C:/Users/lanst/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1247596667 35752 024fb6c41858982481f6968b5fc26508 ""
   "C:/Users/lanst/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1247596667 32762 7fee39e011c23b3589931effd97b9702 ""
   "C:/Users/lanst/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "C:/Users/lanst/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1247596666 32716 08e384dc442464e7285e891af9f45947 ""
   "C:/Users/lanst/AppData/Local/Programs/MiKTeX/tex/context/base/mkii/supp-pdf.mkii" 1580390158 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "C:/Users/lanst/AppData/Local/Programs/MiKTeX/tex/generic/babel/babel.sty" 1704647332 150008 7a05b0fdc0167c04e192003e780ab195 ""
   "C:/Users/lanst/AppData/Local/Programs/MiKTeX/tex/generic/babel/locale/sl/babel-sl.ini" 1704647337 3997 e341121ef7374c38d90d55d90679cb39 ""
@@ -64,10 +66,10 @@
   "C:/Users/lanst/AppData/Local/Programs/MiKTeX/tex/latex/graphics/keyval.sty" 1665067579 2671 7e67d78d9b88c845599a85b2d41f2e39 ""
   "C:/Users/lanst/AppData/Local/Programs/MiKTeX/tex/latex/graphics/trig.sty" 1665067579 4023 293ea1c16429fc0c4cf605f4da1791a9 ""
   "C:/Users/lanst/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1704400941 30006 57b07afb710ee2f649c65cfbafda39c1 ""
-  "c:/Users/lanst/OneDrive/Documents/All important/FMF/UNI_SideBitches/Programiranje1/ustni izpit/ustni_izpit.tex" 1748208677 25018 6b18bd22cc644178b12c5db4368a22f2 ""
+  "c:/Users/lanst/OneDrive/Documents/All important/FMF/UNI_SideBitches/Programiranje1/ustni izpit/ustni_izpit.tex" 1748291549 34559 bfe2f21b03765395669ed43841c08b65 ""
   "predikati.jpg" 1748164293 50285 4e34a00b3ef9cb3a35aa4ecb8ab252ed ""
-  "ustni_izpit.aux" 1748208678 132 098600ceacfb9e7b137db96cbea055cb "pdflatex"
-  "ustni_izpit.tex" 1748208677 25018 6b18bd22cc644178b12c5db4368a22f2 ""
+  "ustni_izpit.aux" 1748291549 133 1e8d3021b56529a946dc2f0203082408 "pdflatex"
+  "ustni_izpit.tex" 1748291549 34559 bfe2f21b03765395669ed43841c08b65 ""
   (generated)
   "ustni_izpit.aux"
   "ustni_izpit.log"
