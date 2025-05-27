@@ -158,21 +158,23 @@
 
         \item Kako deluje Turingov stroj?\\
         Definicija: \textbf{Turingov stroj} je peterica: končno števino simbolov (kakor neskončen pomnilnik), prazen simbol, končna množica stanj, začetno stanje in prehodna funkcija.
-        Prehodna funkcija pove: Če trenutno vidiš določen simbol in si v določenem stanju, potem na trak zapiši nekaj, pojdi v neko stanje in se premakni levo/desno potraku. Prehodna funkcija je delno definirana, saj želimo, da se nekje ustavi. Stroj lahko spremeni simbol na traku, premakne glavo levo ali desno in spremeni stanje.\\
+        Prehodna funkcija pove: Če trenutno vidiš določen simbol in si v določenem stanju, potem na trak zapiši nekaj, pojdi v neko stanje in se premakni levo/desno po traku. Prehodna funkcija je delno definirana, saj želimo, da se nekje ustavi. Stroj lahko spremeni simbol na traku, premakne glavo levo ali desno in spremeni stanje.\\
         \underline{Trak} je neskoncno zaporedje znakov, ki so od nekje naprej (naprej in nazaj) vsi prazni.\\
         \underline{Konfiguracija} Turingovega stroja je sestavljena iz trenutnega stanja, položaja glave in vsebine traku.\\
         Posamezni koraki so sestavljeni iz \underline{delnih funkcij step}, ki sprejmejo konfiguracijo in vrne novo konfiguracijo.\\
-        \underline{Delna funkcija run} je rekurzivna funkcija, ki sprejme konfiguracijo in vrne novo konfiguracijo, če se stroj ustavi, pa ne vrne ničesar. Če je funkcijs definirana, stroj teče. Če pa ni več definirana, se ustavi. Zato imamo lahko neustavljive turingove stroje.
+        \underline{Delna funkcija run} je rekurzivna funkcija, ki sprejme konfiguracijo in vrne novo konfiguracijo, če se stroj ustavi, pa ne vrne ničesar. Če je funkcija definirana, stroj teče. Če pa ni več definirana, se ustavi. Zato imamo lahko neustavljive turingove stroje.
 
         \item Kaj so izračunljive funkcije in kaj trdi Church-Turingova teza?\\ 
         Izračunljive funkcije so funkcije, ki jih lahko izračunamo s Turingovim strojem. To je pa takrat, ko obstaja tak turingov stroj, ki za dano vhodno vrednost n funkcije f izračuna izhodno vrednost f(n) v končnem času.\\
-        Church-Turingova teza trdi, da so vse izračunljive funkcije enake tistim, ki jih lahko izračunamo s Turingovim strojem. To pomeni, da če obstaja funkcija, ki je izračunljiva, potem obstaja tudi Turingov stroj, ki jo lahko izračuna.
+        \textbf{Church-Turingova teza} trdi, da so vse izračunljive funkcije \underline{na naravnih številih} enake tistim, ki jih lahko izračunamo s Turingovim strojem. To pomeni, da če obstaja funkcija, ki je izračunljiva, potem obstaja tudi Turingov stroj, ki jo lahko izračuna.
 
         \item Kaj je univerzalni Turingov stroj?\\
         Zna simulirati vse ostale Turingove stroje. To pomeni, da lahko sprejme opis katerega koli Turingovega stroja in vhodno vrednost ter izračuna izhodno vrednost tega Turingovega stroja za dano vhodno vrednost. Univerzalnih strojev je neskončno mnogo, saj lahko vsak Turingov stroj opišemo na več načinov. 
 
         \item Kaj je ustavitveni orakelj in zakaj ne obstaja?\\
-        Funkcija, ki pove, ali se bo nek Turingov stroj ustavil ali ne. Torej če dobi turingov stroj in vhodno kodo da zna povedati, ali se bo stroj nekje ustavil. Ne obstaja, ker bi lahko z njim rešili problem ustavitve, ki je nedoločljiv. To pomeni, da ne moremo napisati programa, ki bi za vsak vhodni program in vhodno vrednost povedal, ali se bo program ustavil ali ne. Primer: Domena, da je vsako sodo število vsota dveh praštevil. Stroj bi šel čez vsa soda števila, vsako poskusi razcepiti na dva praštevila, če mu ne uspe, se ustavi. Ampak ne vemo, ali se to kdaj ustavi.
+        Ustavitveni orakelj je funkcija, ki pove, ali se bo nek Turingov stroj ustavil ali ne. Torej če dobi turingov stroj in vhodno kodo da zna povedati, ali se bo stroj nekje ustavil. Ne obstaja, ker bi lahko z njim rešili problem ustavitve, ki je nedoločljiv. To pomeni, da ne moremo napisati programa, ki bi za vsak vhodni program in vhodno vrednost povedal, ali se bo program ustavil ali ne.\\
+        Dokaz: Recimo, da obstaja stroj H, ki reši ustavitveni problem, torej ki lahko za vse stroje M pove, kdaj se bodo ustavili in kdaj ne. Lahko definiramo tudi stroj X, ki se bo na vhodu $k_M$ obnašal ravno nasprotno kot M: če se bo M na $k_M$ ustavil, bo X divergiral, in obratno. Ampak X je tudi turingov stroj, zato ga lahko uporabimo na samemu sebi oz. na svoji kodi $k_X$. Zdaj če bo ustavitveni orakelj rekel, da naj se X ustavi, se X ne bo ustavil in obratno. Pridemo do ciklanja.\\
+        Primer: Domena, da je vsako sodo število vsota dveh praštevil. Stroj bi šel čez vsa soda števila, vsako poskusi razcepiti na dva praštevila, če mu ne uspe, se ustavi. Ampak ne vemo, ali se to kdaj ustavi.
 
         \item Kaj je razlika med spremenljivimi in nespremenljivimi podatkovnimi strukturami? Kdaj uporabimo katere?\\
         Spremenljive podatkovne strukture so strukture, ki se lahko spremenijo, medtem ko nespremenljive tega ne zmorejo. Spremenljive strukture so uporabne ko želimo nek objekt manipulirati in nas ne zanima kakšno vrednost je imel prej. Na primer v for zankah. Nespremenljive podatkovne strukture pa uporabljamo, ko želimo ohraniti staro struktuto po spremembi.
@@ -183,15 +185,15 @@
         \textbf{Lastnosti}: $f_1 \in O(g_1)$ in $f_2 \in O(g_2)$, potem je $f_1 + f_2 \in O(g_1 + g_2)$ in $f_1 * f_2 \in O(g_1 * g_2)$.
 
         \item Kako so v pomnilniku predstavitvljeni verižni seznami in tabele?\\
-        Verižni seznami so bodisi prazni, bodisi sestavljeni iz glave in repa. Sestavljen seznam ima v pomnilniku oznako, da je sestavljen, glavo in kazalec na njegov rep. V pomnilniku so 1 in 0. Števila znamo zapisati z 0 in 1. Kazalce pišemo kot naslov celice, v katero kazalec kaže. Dvojno dvopičje pa zapišemo z 1.\\
-        Tabele pa imajo najprej podano dolžino tabele in nato nanizane elemente tabele. Zato je dostopanje do določenega elementa v tabeli hitrejše, saj takoj vemo, na katerem mestu v pomnilniku se nahaja, medtem ko pri verižnih seznamih moramo iti skozi vse elemente, da pridemo do določenega.
+        Verižni seznami so bodisi prazni, bodisi sestavljeni iz glave in repa. Sestavljen seznam ima v pomnilniku oznako ::, ki pomeni, da je sestavljen, vrednost v glavi in kazalec na njegov rep. Taka struktura je učinkovita, če hočemo dodajati elemente na začetek ampak ni, če moramo ugotoviti, kater element je na katerem indeksu (moramo se sprehoditi čez vse). V pomnilniku so 1 in 0. Števila znamo zapisati z 0 in 1. Kazalce pišemo kot naslov celice, v katero kazalec kaže. Dvojno dvopičje zapišemo z 1, prazen seznam pa z 0.\\
+        Tabele (Array) pa imajo najprej podano dolžino tabele in nato nanizane elemente tabele. Zato je dostopanje do določenega elementa v tabeli hitrejše, saj takoj vemo, na katerem mestu v pomnilniku se nahaja, medtem ko pri verižnih seznamih moramo iti skozi vse elemente, da pridemo do določenega. Ne moremo pa podaljšati Arraya.
 
         \item Kakšne so časovne zahtevnosti osnovnih operacij na verižnih seznamih in tabelah?\\
         \begin{figure}[h]
             \centering
             \includegraphics[scale=0.4]{31.jpg}
         \end{figure}\\
-        \textbf{Razlaga}: V Pythonu imajo tabele napisano, koliko elementov je v tabeli in pa koliko prostora je rezervirano za tabelo. Zato lahko enostavno appendamo nekaj na konec. Če mu zmanjka prostora, tabelo prekopira, zato na vsake toliko časa pride do O(n) operacije. Za kopiranje tabele je časovna zahtevnost O(n), saj moramo prekopirati vse elemente. 
+        \textbf{Razlaga}: V Pythonu imajo \underline{na začetku} tabele napisano, koliko elementov je v tabeli in pa koliko prostora je rezervirano za tabelo. Zato lahko enostavno appendamo nekaj na konec, na začetek pa mora celo tabelo prekopirati. Če mu zmanjka prostora, tabelo prekopira, zato na vsake toliko časa pride do O(n) operacije. Za kopiranje tabele je časovna zahtevnost O(n), saj moramo prekopirati vse elemente. 
 
         \item Kako so definirana iskalna drevesa, kako potekajo na njih osnovne operacije in kakšna je njihova časovna zahtevnost?\\
         Dvojiško drevo je iskalno, če so vsi elementi v levem poddrevesu manjši od korena, v desnem pa večji ter da so poddrevesa tudi iskalna. Type od iskalnih dreves: type 'a t = prazno | Sestavljeno of 'a * 'a t * 'a t.\\
@@ -208,21 +210,21 @@
         To je enako Fibonaccijevi zaporedju, ki je eksponentno. Torej je časovna zahtevnost O(h) = O(log n).
 
         \item Razložite algoritem hitrega potenciranja.\\
-        Potenciranje navadno rešujemo z rekurzivno enačbo $a^n = a * a^{n-1}$ s časovno zahtevnostjo O(n). Lahko pa upoštevamo da velja $a^{2n} = (a^n)^2$. Torej lahko podamo rekurzivno enačbo $a^n = (a^{n/2})^2$, če je n sodo, in $a^n = a * (a^{(n-1)/2})^2$, če je n liho. Tako dobimo časovno zahtevnost O(log n), saj se vsak korak deli na dva dela, ki sta približno enake velikosti.
+        Potenciranje navadno rešujemo z rekurzivno enačbo $a^n = a * a^{n-1}$ s časovno zahtevnostjo O(n). Lahko pa upoštevamo da velja $a^{2n} = (a^n)^2$. Torej lahko podamo rekurzivno enačbo $a^n = (a^{n/2})^2$, če je n sodo, in $a^n = a * (a^{(n-1)/2})^2$, če je n liho. To nam pomaga, saj če na primer poznamo $a^18$ lahko izračunamo $a^36$ s samo enim množenjem. Tako dobimo časovno zahtevnost O(log n), saj se vsak korak deli na dva dela, ki sta približno enake velikosti.
 
         \item Kako delujejo algoritmi za urejanje z izbiranjem, z vstavljanjem in z mehurčki.\\
         n je dolžina lista\\
-        \textbf{Algoritem z izbiranjem}: gremo skozi list in izberemo najmanjši element v listu in ga odstranimo in ga damo na konec v nov list. To delamo dokler ne zmanjka elementov v listu. Časovna zahtevnost je O(n2), saj gremo skozi seznam n-krat in v vsakem koraku iščemo najmanjši element, kar je O(n).\\
-        \textbf{Algoritem z vstavljanjem}: Na levi imamo urejen del lista, na desni neurejen. Vzamemo prvi element neurejenga dela in gremo skozi urejen del, dokler ne najdemo mesta kjer velja, da do desno po urejenem delu elementi večji od izbranega, levo pa manjši. Tja odložimo element. Tako nadaljujemo. Časovna zahtevnost je O(n2), saj v vsakem koraku gremo skozi urejen del, ki je lahko velik n-1.\\
-        \textbf{Algoritem z mehurčki}: Vzamemo prvi element seznama. Če je večji od naslednjega elementa ju zamenjamo. In gremo na naslednji element seznama (ki je zdaj lahko isti element ki smo ga že zamenjali). Tako nadaljujemo dokler nam ne uspe priti čez seznam brez da bi zamenjali kateri koli element. Časovna zahtevnost je O(n2), saj v vsakem koraku gremo skozi seznam n-1 krat in v vsakem koraku zamenjamo največ en element.
+        \textbf{Algoritem z izbiranjem}: gremo skozi list in izberemo najmanjši element v listu in ga odstranimo in ga damo na začetek v nov list. To delamo dokler ne zmanjka elementov v listu. Časovna zahtevnost je O(n2), saj gremo skozi seznam n-krat in v vsakem koraku iščemo najmanjši element, kar je O(n).\\
+        \textbf{Algoritem z vstavljanjem}: Kot pri taroku vstavljamo karte na prava mesta. Na levi imamo urejen del lista, na desni neurejen. Vzamemo prvi element neurejenga dela in gremo skozi urejen del, dokler ne najdemo mesta kjer velja, da do desno po urejenem delu elementi večji od izbranega, levo pa manjši. Tja odložimo element. Tako nadaljujemo. Časovna zahtevnost je O(n2), saj v vsakem koraku gremo skozi urejen del, ki je lahko velik n-1.\\
+        \textbf{Algoritem z mehurčki}: Postopoma primerjamo zaporedne 2 elementa tabele. Vzamemo prvi element. Če je večji od naslednjega elementa ju zamenjamo. In gremo na naslednji element seznama (ki je zdaj lahko isti element ki smo ga že zamenjali). Tako nadaljujemo dokler nam ne uspe priti čez seznam brez da bi zamenjali kateri koli element. Na konec priplava največji element. To ponovimo in na predzadje mesto pride 2. največji element. Časovna zahtevnost je O(n2), saj v vsakem koraku gremo skozi seznam n-1 krat in v vsakem koraku zamenjamo največ en element.
 
         \item Kako poteka urejanje z zlivanjem in kakšna je njegova časovna zahtevnost?\\
         Primer: ureditev seznama [5; 1; 2; 4; 6; 1; 3] z zlivanjem.\\
-        1. Razdelimo seznam na dva dela: [5; 1; 2] in [4; 6; 1; 3].\\
+        1. Razdelimo seznam na dva dela (vseeno kakšna, le da približno enako velika): [5; 1; 2] in [4; 6; 1; 3].\\
         2. Podseznama rekurzivno uredimo\\
         3. Urejena podseznama zlijemo skupaj: Gledamo, kateri je manjši element iz levega in desnega podseznama. Če je levi manjši, ga damo na novo urejen seznam, drugače pa desnega. Tako nadaljujemo dokler ne zmanjka elementov v enem od podseznamov. Nato dodamo še preostale elemente iz drugega podseznama.\\
         Stabilno urejanje: Če sta dva elementa enaka, ostaneta v istem vrstnem redu.
-        \textbf{Dokaz za čas zahtevnost O(n log n)}: 12 video 1:00:00
+        \textbf{Dokaz za čas zahtevnost O(n log n)}: Za razdelitev na polovico porabimo O(n) ali pa O(1) časa, a ni važno, saj za zlivanje porabimo O(n) časa. Poleg tega na vsakem koraku seznam razpade na 2 dela: 2T(n/2). Ko te dve seštejemo skupaj dobimo O(n*logn).
 
 
         \item Kako poteka hitro urejanje in kakšni sta njegova povprečna in najslabša časovna zahtevnost?\\
@@ -233,6 +235,7 @@
         4. Na koncu zlepimo lev seznam, pivot in desni seznam in dobimo: [1; 1; 2; 3; 4; 5; 6].\\
         Časovna zahtevnost: povprečna O(n log n), najslabša O(n**2). To je odvisno od tega, kako izberemo pivot. Če je pivot najmanjši ali največji element, dobimo najslabšo časovno zahtevnost O(n**2). Če pa je pivot naključen element (nekje blizu sredine), dobimo povprečno časovno zahtevnost O(n log n), saj se vsak korak deli na dva dela, ki sta približno enake velikosti.\\
         Dobra izbira pivota: Izberemo prvi, zadnji in sredinski element in izberemo sredinsko vrednost med njimi. Druga možnost je, da premešamo seznam in izberemo prvi element kot pivot, ker imamo ponavadi opravka z nekako urejenimi seznami.\\
+        Razdelitev čas. zahtevnosti: Za pivotiranje in stikanje skupaj porabimo O(n). Pri uspešnem izboru pivota pri vsakem koraku seznam razpade na n/2 elementov: 2T(n/2). To pa pride O(n*logn).\\
         Hitro urejanje ni stabilno urejanje.
 
         \item Kako poteka hitro urejanje na mestu?\\
@@ -302,14 +305,14 @@
         Mnozica naravnih stevil je najmanjsa mnozica, ki vsebuje nic in naslednika.
         %
         \item Časovna zahtevnost\\
-        Array: [|\_;\_;\_|]podobno kot List, le da so Arrayi boljši pri dostopu do elementov, saj imajo konstanto časovno zahtevnost, medtem ko imajo seznami linearno časovno zahtevnost. Arrayi so tudi spremenljivi (lahko uporabimo t.(3) <- 5, da tretjemu elementu t damo vrednost 5), medtem ko so seznami nespremenljivi (t.(3) <- 5 ne bo delovalo).\\
+        Array: [|\_;\_;\_|] podobno kot List, le da so Arrayi boljši pri dostopu do elementov, saj imajo konstanto časovno zahtevnost, medtem ko imajo seznami linearno časovno zahtevnost. Arrayi so tudi spremenljivi (lahko uporabimo t.(3) <- 5, da tretjemu elementu t damo vrednost 5), medtem ko so seznami nespremenljivi (t.(3) <- 5 ne bo delovalo).\\
         print\_endline nič ne vrne, le izpiše nekaj na zaslon.\\
         Fisker-Yates shuffle je algoritem, ki zmeša seznam permutacijsko pošteno. Deluje tako, da gremo čez seznam od konca do začetka in vsakemu elementu zamenjamo mesto z naključnim elementom pred njim (ali samim seboj). Časovna zahtevnost je O(n), saj gremo čez celoten seznam enkrat. To je tudi najhitrejši, saj moramo vsakem primeru iti čez vse elemente seznama.\\
         Funkcija assert preveri, ali je podana trditev resnična. Če ni, sproži izjemo. Uporabljamo jo za preverjanje predpostavk v kodi, da se prepričamo, da so pogoji, ki jih pričakujemo, resnični. Če naletimo na assert false, pomeni, da programer je mislil, da se to ne bo zgdilo.\\
         \textbf{Rotacije AVL dreves}: AVL drevo je uravnoteženo, če je razlika v globini levega in desnega poddrevesa pri vsakem vozlišču največ 1. Če ta razlika preseže 1, moramo drevo uravnotežiti z rotacijami: Imamo 4 možnosti, možnosti rotacije (BŠS): levo, desno, levo-levo, levo-desno in pusti na miru.\\
         Pri \textbf{levi rotaciji} se desno poddrevo dvigne na koren, levi otrok postane desni otrok starega korena, levi otrok novega korena pa postane levo poddrevo starega korena. IDK predstaulej si. Pri \textbf{levi-desni rotaciji} najprej naredimo desno rotacijo na levem otroku, nato pa še levo rotacijo na korenu\\
         Pri Dodajanju je dovolj, da uravnotežimo le eno drevo. Pri brisanju pa moramo uravnotežiti vsa drevesa, ki so na poti do korena, saj se lahko zgodi, da se bo zaradi brisanja elementa v desnem poddrevesu levega otroka izravnotežilo novo poddrevo. Ampak še vedno bo treba drevo uravnotežiti največ h krat, torej s časovno zahtevnostjo O(log n) krat, kjer je h globina drevesa.\\
-        Časovna zahtevnost za eno rotacijo: V pomnilniku so drevesa predstavljena ko verzžni seznami, torej iz korena (glave) imamo dva kazalca: na levo in desno drevo. Mi pri rotaciji ne bomo drevesa spreminjali, ampak bomo novega naredili. Ampak ni nam treba nanovo celega skonstruirati, le koren definiramo na novo in koren enega poddrevesa moramo nanovo definirati(star koren), ostala poddrevesa pa so enaka kot prej, zato le pokažemo nanje. Torej časovna zahtevnost ni nič odvisna od števila elementov v poddrevesu, enako je za vsa drevesa. Torej časovna zahtevnost je O(1) za eno rotacijo.\\
+        Časovna zahtevnost za eno rotacijo: V pomnilniku so drevesa predstavljena ko verižni seznami, torej iz korena (glave) imamo dva kazalca: na levo in desno drevo. Mi pri rotaciji ne bomo drevesa spreminjali, ampak bomo novega naredili. Ampak ni nam treba nanovo celega skonstruirati, le koren definiramo na novo in koren enega poddrevesa moramo nanovo definirati (star koren), ostala poddrevesa pa so enaka kot prej, zato le pokažemo nanje. Torej časovna zahtevnost ni nič odvisna od števila elementov v poddrevesu, enako je za vsa drevesa. Torej časovna zahtevnost je O(1) za eno rotacijo.\\
         Kako konstantno izračunamo dolžino?\\
         let sestavljen l d x = Sestavljen(1 + max (visina l) (visina d), l, x, d)\\
         Čas za ustavitev tega drevesa in izracun dolzine je zdaj O(1), saj imamo v vsakem vozlišču shranjeno dolžino poddrevesa. Torej lahko dolžino izračunamo v O(1) času.

@@ -5,13 +5,19 @@ let rec razdeli pivot lst levi desni =
   | gl :: rep ->
       if gl < pivot then razdeli pivot rep (gl :: levi) desni
       else razdeli pivot rep levi (gl :: desni)
+(* Random
+Moral bi le razdeliti z List.partition: let rec pivotiraj p xs =
+  List.partition (fun x -> x <= p) xs 
+  Ta izbira pivota že ima časovno zahtevnost O(n), kaj bi šele, ko mi dejsnko poiščemo to cifro.*)
+
 
 let rec hitro_izberi lst k =
   match lst with
   | [] -> failwith "prekratek seznam"
-  | [x] -> x
+  | [x] -> x (* poiskati moramo "k-to" po velikosti. Zato le če je k = 1 bo to veljalo. Boljša implementacija: [x] when k != 1 -> failwith "prekratek seznam"  *)
+  (* | gl :: rep when k > List.lenght lst -> failwith"---" *)
   | gl :: rep ->
-      let levi, desni = razdeli gl rep [] [] in
+      let levi, desni = razdeli gl rep [] [] in (* Seveda narobe implementirana funkcija razdeli. Boljše: Namesto gl randomiziramo ali pa vzamemo sredinjski element. *)
       let velikost_levih = List.length levi in
       if k = velikost_levih + 1 then gl
       else if k <= velikost_levih then hitro_izberi levi k
