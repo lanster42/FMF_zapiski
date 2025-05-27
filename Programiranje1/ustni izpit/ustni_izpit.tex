@@ -14,7 +14,7 @@
 \section*{Vprašanja}
     \begin{enumerate}
         \item Kakšna je razlika med registrom in RAM-om?\\
-        Procesor je sestavljen iz več stvari. Notri je tudi več registrov in RAM. Registri so majhni in hitri, RAM je počasen, a zelo velik.(kot špajza in kuhinjska miza). Procesor lahko dela s stvarmi v registrih, potem pa si bo informacije shranil v RAM.
+        Procesor je sestavljen iz več stvari. Notri je tudi več registrov in RAM. Registri so majhni in hitri, RAM je počasen, a zelo velik (kot špajza in kuhinjska miza). Procesor lahko dela s stvarmi v registrih, potem pa si bo informacije shranil v RAM. Moderni računalnik ima par sto registrov (majhna količina zaradi individualnega dodajanja na vezje), ter približno 8 GB rama.
     
         \item Kakšne registre poznamo in kakšen je njihov namen?\\
         Naši računalniki imajo približno 30 registrov. V assemblyju:\\
@@ -24,86 +24,95 @@
         
         \item Kako in zakaj uporabljamo sklad?\\
         Sklad se začne čisto na koncu pomnilnika.
-        Na sklad si shranjujemo začasne vrednosti: S push A bomo na vrh sklada naložili vrednost, ki je trenutno na registru A, potem pa s POP vzememo s sklada vrhno vrednost s sklada.
+        Na sklad si shranjujemo začasne vrednosti: S push B bomo na vrh sklada naložili vrednost, ki je trenutno na registru B, potem pa s POP B vzememo s sklada vrhno vrednost s sklada.
     
         \item Kako delujejo skoki, pogojni skoki in klici funkcij?\\
-        Skok spremeni vrednost kazalca za ukaz. S tem se spremeni kateri ukaz pride naslednji
+        Skok spremeni vrednost kazalca za ukaz. JMP 0: IP bo skočil na začetek.\\
+        Pogojni skoki pa so podobni, le da se izvedejo le, če je zadoščen nek pogoj. Obstaja veliko različnih pogojev, na primer: JZ 0: IP bo skočil na začetek, če je zastavica Z nastavljena na true. Da preveriš, če je true, moraš pred JZ 0 napisati CMP reg, reg/const/add (na Z je true, če sta vrednosti enaki, na C je true, če je leva vrednost manjša od desne).\\
+        Klic funkcij: CALL add: naredi dve stvari: shrani vrednost naslednjega ukaza na sklad in skoči na mesto add. Ko se funkcija konča, se vrne na naslednji ukaz, ki je bil shranjen na sklad z RET.
     
         \item Katere osnovne in sestavljene vgrajene tipe poznamo in kdaj uporabljamo katerega?\\
-        Primeri osnovnih tipov: cela števila - int (+, -, *, /), nizi - string (stikanje z \^. Obstaja standardna knjiznica za delanje s stringi: String, ki ima ogromno vgrajenih funkcij), števila s plavajočo vejico - float (zraven operacij moras pisati piko), logične vrednosti (bool), enotski tip - unit (to je zato, da lahko recimo: ne damo nic argumentov v funkcijo (recimo Random.bool()) oziroma ce funkcije "nic" ne vracajo, vracajo unit), znaki (char)\\
-        primeri sestavljenih tipov: seznami - list (recimo int list), nabori (imajo tocno doloceno dolzino, recimo za datum. Ni nujno, da so vsa polja istega tipa. Do prostora je najlazje dostopati tako, da jih razstavimo z (x, y, z)), delne vrednosti - option (lahko je None ali pa Some(a), kjer je Some(a) tipa "a option")
+        Primeri osnovnih tipov: cela števila - \underline{int} (+, -, *, /), nizi - \underline{string} (stikanje z \^. Obstaja standardna knjiznica za delanje s stringi: String, ki ima ogromno vgrajenih funkcij), števila s plavajočo vejico - \underline{float} (zraven operacij moras pisati piko), logične vrednosti (bool), enotski tip - \underline{unit} (to je zato, da lahko recimo: ne damo nic argumentov v funkcijo (recimo Random.bool()) oziroma ce funkcije "nic" \ ne vracajo, vracajo unit), \underline{znaki} (char), na katerih se lahko dobimo kodo.
+
+
+        Primeri sestavljenih tipov: seznami - \underline{list} (recimo int list), \underline{nabori} (imajo tocno doloceno dolzino, recimo za datum. Ni nujno, da so vsa polja istega tipa. Do prostora je najlazje dostopati tako, da jih razstavimo z (x, y, z)), delne vrednosti - \underline{option} (lahko je None ali pa Some(a), kjer je Some(a) tipa "a option")
     
         \item Kaj so funkcije višjega reda?\\
-        To so funkcije, ki za argument vzamejo neko drugo funkcijo.  matematiki imamo na primer odvor ali integral, ki sprejmeta funkcijo in vrneta novo funkcijo.\\
-        V OCamlu je treba biti pazljiv, saj se zapis f g x prebere kot f (g, x), ne pa f(g(x)), kar ni funkcija višjega reda. Primer: map, filter, fold\_left,... recimo: List.map (fun x -> x + 1) [1;2;3]
+        To so funkcije, ki za argument vzamejo neko drugo funkcijo.  matematiki imamo na primer odvod ali integral, ki sprejmeta funkcijo in vrneta novo funkcijo.\\
+        V OCamlu je treba biti pazljiv, saj se zapis f g x prebere kot f (g, x), ne pa f(g(x)), kar ni funkcija višjega reda. Zato zapišemo le f g, kjer je funkcija g tipa recimo (x -> x). Primer: map, filter, fold\_left,\ldots. recimo: List.map (fun x -> x + 1) [1; 2; 3], List\_filter (fun x -> x mod 2 = 0) [1; 2; 3], List.fold\_left (fun acc x -> acc + x) 0 [1; 2; 3].
     
         \item Kaj so anonimne funkcije in kje jih uporabljamo?\\
-        Funkcije, ki jim ne damo imena, ker bi bila koda zato manj pregledna. Največkrat jih uporabljamo v funkcijah višjega reda, kot recimo List.map ali pa: (fun n -> if n mod 2 = 0 then True else False)
+        Funkcije, ki jim ne damo imena, ker bi bila koda zato manj pregledna. Največkrat jih uporabljamo v funkcijah višjega reda, kot recimo List.map ali pa: (fun n -> if n mod 2 = 0 then True else False). V Pythonu je to lambda funkcija.
     
         \item Kaj so polimorfne funkcije in katere ste najpogosteje uporabljali?\\
         Funkcije, katerim tip ni točno določen: Za poljuben tip 'a lahko vzame recimo 'a list in še en 'a list in naredi 'a list (int list). Pogosti primeri so seznami (List.rev ali List.lenght), kjer funkcija deluje na enak način ne glede na tip argumenta.
-        Najpogostejše: @, 
+        Najpogosteje uporabljamo polimorfne funkcije, ki delujejo na seznamih, kot so: List.map, List.filter, List.fold\_left, List.fold\_right, List.rev, List.length, List.nth, List.append.
     
         \item Kaj so Curryjrane funkcije in v kakšnem odnosu so z običajnimi funkcijami, ki sprejmejo nabor več argumentov?\\
-        So funkcije več argumentov, recimo če imamo funkcije dveh argumentov pravzaprav vzame funkcijo prvega argumenta in vrne funkcijo drugega argumenta. Razlika s funkcijami več argumentov:\\
-        Prednost Curryjrana funkcij je ta, da lahko v OCamlu funkcijo delno uporabimo na prvem argumentu ter ne dobimo type-errorja, med tem ko bi za ne-currjrano funkcijo uporaba le enega argumenta sprožila type-error.
-        Funkcije več spremenljivk so desno asociativne: f x y je kot f (x, y)\\
-        Curryirane funkcije so levo asociativne: f x y je kot (f x) y oziroma: fun x -> fun y -> vrnitev\\
-        Curryirane in funkcije več argumentov so si izomorfne, saj lahko vsako funkcijo več argumentov pretvorimo v curryjrano funkcijo in obratno:\\ let curry f = fun x y -> f (x, y) je obicajna funkcija -> curry, saj je to njen tip: val curry : ('a * 'b -> 'c) -> 'a -> 'b -> 'c = "<fun>
+        So funkcije več argumentov, recimo če imamo funkcije dveh argumentov pravzaprav vzamemo funkcijo prvega argumenta in vrnemo funkcijo drugega argumenta. Razlika z osnovnimi funkcijami več argumentov:\\
+        Prednost Curryjrana funkcij je ta, da lahko v OCamlu funkcijo \underline{delno uporabimo} na prvem argumentu ter ne dobimo type-errorja, med tem ko bi za ne-currjrano funkcijo uporaba le enega argumenta sprožila type-error.
+        Funkcije več spremenljivk so \underline{desno asociativne}: f x y je kot f (x, y) oziroma x*y -> z\\
+        Curryirane funkcije so \underline{levo asociativne}: f x y je kot (f x) y oziroma: x -> y -> z\\
+        Curryirane in funkcije več argumentov so si izomorfne, saj lahko vsako funkcijo več argumentov pretvorimo v curryjrano funkcijo in obratno:\\
+        let curry f = fun x y -> f (x, y) je pretvorba obicajne funkcije -> curry funkcijo, saj je to njen tip: val curry : ('a * 'b -> 'c) -> 'a -> 'b -> 'c = "<fun">.
     
         \item Kako gnezdimo funkcijske tipe pri funkcijah več argumentov?\\
-        Postavimo oklepaje okoli tipa argumenta. Na primer 'a -> 'b -> 'c je funkcija z dvema argumentoma, ('a -> 'b) -> 'c pa je funkcija ki sprejme funkcijo za argument.
+        Odvisno, ali so curryirane ali ne. Osnovno gnezdenje je levo asociativno (curry). Če pa želimo osnovno funkcijo več argumentov f(x, y), pa postavimo oklepaje okoli tipa argumenta. Na primer 'a -> ('b -> 'c) je curryirana funkcija (pravilno postavljeni oklepaji), ('a -> 'b) -> 'c pa je funkcija ki sprejme funkcijo za argument.
     
         \item Kakšna je razlika med statičnimi in dinamičnimi tipi?\\
-        Razlika je v tem kdaj program preverja ujemanje tipov. Pri statičnih jezikih (OCaml, C++) se ujemanjem tipov preverja že pred izvajanjem, medtem ko pri jezikih z dinamičnim sistemom tipov (Python, JavaScript) se tipi preverjajo med izvajanjem, torej je možno, da se napaka zgodi šele med izvajanjem, saj bodo nekatere funkcije delovale za nekatere tipe, za druge pa ne. Pri OCamlu bi že takoj dobili napako, tudi če bi funkcija delovala pravilno za nekatere tipe.\\
+        Razlika je v tem kdaj program preverja ujemanje tipov. Pri statičnih jezikih (OCaml) se ujemanjem tipov preverja že pred izvajanjem, medtem ko pri jezikih z dinamičnim sistemom tipov (Python) se tipi preverjajo med izvajanjem, torej je možno, da se napaka zgodi šele med izvajanjem, saj bodo nekatere funkcije delovale za nekatere tipe, za druge pa ne. Pri OCamlu bi že takoj dobili napako, tudi če bi funkcija delovala pravilno za nekatere tipe.\\
+        Funkcija, ki bi jo Python najprej sprejel, OCaml pa že takoj zavrnil, saj se "Da" in false ne ujemata glede tipov:\\
         let je\_majhen x =
-            if x < 10 then "Da" else false
+            if x < 10 then "Da"\ else false
 
         \item Kaj so repni klici, kaj so repno rekurzivne funkcije in kdaj jih uporabljamo? Kako bi običajno funkcijo pretvorili v repno rekurzivno?\\
-        Pravimo, da je klic funkcije repen, če se izvede kot zadnji korak v definiciji funkcije. Repno rekurzivna funkcija je rekurzivna funkcija, ki se kliče repno. Repne klice uporabljamo, ko ne želimo toliko stvari odložiti na sklad. Ker je pri rekurziji klicev funkcije navadno veliko, in s tem veliko odlaganja na sklad, se lahko zgodi prekoračitev sklada (stack overflow). Z repno rekurzijo lahko torej precej povečamo globino rekurzije. Prav tako to navadno naredi izvajanje funkcije hitrejše.Primer:\\ namesto let f x = x + 1 in let g x = 6 * f(x), napišemo repno:\\ let f x = x + 1 in let g x = f(6 * x + 6)\\
+        Pravimo, da je klic funkcije repen, če se izvede kot zadnji korak v definiciji funkcije. Repno rekurzivna funkcija je rekurzivna funkcija, ki se kliče repno. Repne klice uporabljamo, ko ne želimo toliko stvari odložiti na sklad. Ker je pri rekurziji klicev funkcije navadno veliko, in s tem veliko odlaganja na sklad, se lahko zgodi prekoračitev sklada (stack overflow). Z repno rekurzijo lahko torej precej povečamo globino rekurzije. Prav tako to navadno naredi izvajanje funkcije hitrejše. Primer:\\ namesto let f x = x + 1 in let g x = 6 * f(x), napišemo repno:\\ let f x = x + 1 in let g x = f(6 * x + 6)\\
         Razlaga: Pri prvem se začne izvajati g, a ker ni definirana repno, mora na sklad shraniti faktor 6 in potem čakati na f. Pri drugi pa je repna, zato ko se začne izvajati g, svoje izvajanje popolnoma prepusti f, zato ničesar ni treba shranjevati na sklad in izvejanje je hitrejše.\\
-        Običajno funkcijo navadno pretvorimo v repno rekurzivno, tako da si pomagamo s pomožnimi funkcijami, katerim dodamo še en argument, ki predstavlja akumulator (delno izračunan rezultat), kamor shranjujemo delno izračunan rezultat.\\
+        \underline{Običajno funkcijo navadno pretvorimo v repno rekurzivno}, tako da si pomagamo s pomožnimi funkcijami, katerim dodamo še en argument, ki predstavlja akumulator, kamor shranjujemo delno izračunan rezultat.\\
         fold\_left je repno rekurzivna, fold\_right pa ni.
     
         \item Kaj so zapisni in naštevni tipi? Za kaj jih uporabljamo?\\
-        zapisni tip: tip, ki ga uporabljamo zato, da točno povemo, katere vrednosti pričakujemo. Definiramo jih s "type A = {x: int; y: int}" in ga uporabimo tako, da recimo: let a = {x=1; y=2} in potem dostopamo do polj s točko (a.x)\\
-
-        Nastevni tip: tip, ki ga uporabljamo zato, da povemo točno katere vrednosti element lahko ima, ampak ima natanko enega izmed njih. Sestavljeni so iz imen polj in njihovimi tipi. Definiramo jih s "type A = A1 | A2 | A3" in ga uporabimo tako, da recimo: let a = A1 in potem dostopamo do polj s točko (a.x)\\
-        Nastevni tipi imajo lahko dodatne vrednosti (argumente), ki jih dodamo tako: |A1 of int\\
+        \textbf{Zapisni tip}: tip, ki ga uporabljamo zato, da točno povemo, katere vrednosti pričakujemo. Definiramo jih s "type A = \{x: int; y: int\}"\ in ga uporabimo tako, da recimo: let a = \{x=1; y=2\} in potem dostopamo do polj s točko (a.x)\\
+        Posodabljanje: \{datum with dan = datum.dan - 1\} bo obdržal vsa polja od datuma in posodobil le polje dan.\\
+        Pametni konstruktorji: Funkcije, ki vrnejo zapisni tip le v primeru, ko so vsi podatki pravilni.\\
+        \textbf{Naštevni tip}: tip, ki ga uporabljamo zato, da povemo točno katere vrednosti element lahko ima, ampak ima natanko enega izmed njih. Sestavljeni so iz imen polj in njihovimi tipi. Definiramo jih s "type A = A1 | A2 | A3"\ in ga uporabimo tako, da recimo: let a = A1 in potem dostopamo do polj s točko (a.x)\\
+        Naštevni tipi imajo lahko dodatne vrednosti (argumente), ki jih dodamo tako: |A1 of int\\
         To potem tako uporabimo: A1 42 ali pa z: "match a with |A1 x -> x"\\
-        Nastevne tipe uporabljamo tudi za dodatno varnost (Recimo ce sta dva polja istega tipa lahko dodamo za vsakega še dodatno specifikacijo: Telefon of "string" in Email of "string")
+        Nastevne tipe uporabljamo tudi za dodatno varnost (Recimo ce sta dva polja istega tipa lahko dodamo za vsakega še dodatno specifikacijo: Telefon of "\ string"\ in Email of "\ string")
     
         \item Katerim osnovnim matematičnim konstrukcijam ustrezajo naštevni tipi?\\
-        Zapisni tipi so matematično kartezični produkt, naštevni tipi pa vsota(oz disjunktna unija).
+        Zapisni tipi so matematično kartezični produkt, naštevni tipi pa vsota(oz. disjunktna unija).
     
         \item Kaj so algebrajski tipi in kaj so najbolj znani primeri takih tipov?\\
         Algebrajski tipi so rekurzivni naštevni tipi (ampak zraven type ni treba pisati rec, le ko dejansko definiras funkcijo, ki je tega tipa in je rekurzivna napises rec).\\
         Najbolj znani primeri so:\\
         Naravna številla: type naravno = | Nic\\
         | Naslednik of naravno\\
-        Verizni seznami (prazni ali pa iz repa in glave): type 'a seznam = | Prazen\\
+        Verižni seznami (prazni ali pa iz repa in glave): type 'a seznam = | Prazen\\
         | Sestavljen of 'a * 'a seznam\\
-        Aritneticni izrazi: type izraz = | Stevilo of int\\
+        Aritmetični izrazi: type izraz = \\| Stevilo of int\\
         | Plus of izraz * izraz\\
         | Minus of izraz * izraz\\
         | Krat of izraz * izraz\\
-        Dvojiska drevesa (Sestavljena dvojiska drevesa imajo koren, iz katerega gresta 2 otroka, ki sta tudi drevesi): type 'a drevo = | Prazno\\
-        | Sestavljeno of 'a * 'a drevo * 'a drevo
+        Dvojiška drevesa (Sestavljena dvojiska drevesa imajo koren, iz katerega gresta 2 otroka, ki sta tudi drevesi): type 'a drevo = | Prazno\\
+        | Sestavljeno of 'a drevo * 'a * 'a drevo
     
         \item Iz česa so sestavljeni moduli in iz česa signature? Kdaj modul ustreza dani signaturi?\\
         \textbf{Moduli} so zbirke definicij programerskih objektov, kot so: tipi, funkcije, vrednosti in drugi moduli. Tudi same datoteke so moduli, ki vsebuje svoje definicije.\\
         Nekaj najbolj osnovnih modulov: List, String, Random,\dots\\
-        Oblika: module ime = struct
-            let a = 1
-            let b = 2
-            type t = int
+        Oblika: module ime = struct\\
+            let a = 1\\
+            let b = 2\\
+            type t = int\\
         end\\
-        Glavni tip modula poimenujemo s t. Do funkcij iz modula dostopamo prek ImeModula.ime\_funkcije (enako kot npr. List.rev)\\
-        \textbf{Signatura} je tip modula, ki ga definira.\\
-        Oblika: signature ime = sig
-            type t
-            val a : int
-            val b : int
+        Glavni tip modula poimenujemo s t. Do funkcij iz modula dostopamo prek ImeModula.ime\_funkcije (enako kot npr. List.rev)
+
+
+        \textbf{Signatura} je tip modula, ki ga definira.
+        Oblika: module type IME = sig\\
+            type t\\
+            val a : int\\
+            val b : int\\
         end\\
         Uporaba signature: preverja tipe modulov in da so v modulih vse funkcije definirane. Koristno, da imas napisano, katrere stvari moras se implemetirati. Tako se lahko stvari lažje popravljajo in skrivamo stvari
 
@@ -112,11 +121,10 @@
         Skrivanje funkcij: Funkcijo zapisemo le v modul, ne pa v signaturo. Take skrite funkcije niso dostopne izven modula AKA ne moremo jih poklicati. To naredimo zato, da je modul bolj pregleden in enostaven.
     
         \item Kaj je Curry-Howardov izomorfizem? Kako lahko dokaze logičnih izjav prevajamo na obstoj funkcij?\\
-        \textbf{POPRAVI}
-        Curry-Howardov izomorfizem pravi, da je direktna povezava med formalno logiko in računalniškimi kalkulacijami. Izjave predstavimo s tipi (vsaki izjavi ustreza nek tip): implikacijo A => B predstavimo s funkcijo A -> B, konjunkcijo A $\land$ B predstavimo z naborom A * B in negacijo $\lnot$ A z funkcijo A -> empty kjer je empty tip ki predstavlja prazno množico. To je poln nabor in izkaže se da je algebra nad tipi izomorfna boolovi algebri.
+        Curry-Howardov izomorfizem pravi, da je direktna povezava med formalno logiko in računalniškimi kalkulacijami. Izjave se ujemajo s tipi (vsaki izjavi ustreza nek tip): implikacijo A => B predstavimo s funkcijo A -> B (oz s potenco), konjunkcijo A $\land$ B predstavimo z naborom A * Bm disjunkcijo A $\lor$ B predstavimo z A + B in negacijo $\lnot$ A z funkcijo A -> empty, kjer je empty tip ki predstavlja prazno množico. To je poln nabor in izkaže se da je algebra nad tipi izomorfna boolovi algebri. Torej namesto da delamo z množicami, delamo s funkcijskim tipom. To nam pomaga dokaze pisati z računalnikom, ki je sposoben preveriti, ali je dokaz pravilen.
     
         \item V čem se dokazovanje v dokazovalniku kot je Lean, razlikuje od programiranja v jeziku kot je OCaml?\\
-        V OCamlu se da “dokazati” tudi napačne trditve s pomočjo rekurzije ali pa uporabo failwith. Medtem ko ti dokazovalnik takih stvari ne bo pustil oziroma ti bo sporočil, da dokaz ni popoln. Poleg tega v Leanu lažje sproti vidiš kaj dokazuješ in kaj še moraš dokazati (z uporabo taktičnega načina). OCaml nima kvantifikatorjev, zato je težko dokazovati. Lean je bolj matematičen in zato lepši za dokazovanje.
+        V OCamlu se da “dokazati” tudi napačne trditve s pomočjo rekurzije (let rec f x = f x) ali pa uporabo failwith. Medtem ko ti dokazovalnik takih stvari ne bo pustil oziroma ti bo sporočil, da dokaz ni popoln. Poleg tega v Leanu lažje sproti vidiš kaj dokazuješ in kaj še moraš dokazati (z uporabo taktičnega načina). OCaml nima kvantifikatorjev ($\forall$ in $\exists$), zato je težko dokazovati. Lean je bolj matematičen in zato lepši za dokazovanje.
     
         \item Na primeru vektorjev razložite, kaj so odvisni tipi. Naštejte primere vrednosti/tipov odvisnih od vrednosti/tipov.\\
         Odvisni tipi so tipi, ki so odvisni od vrednosti vsaj enega od argumentov. To pomeni, da lahko tip vsebuje vrednost, ki je definirana v času izvajanja programa. Na primer, lahko imamo tip vektorja (array elementov tipa A z dolžino n), ki je odvisen od dolžine n.\\
@@ -220,24 +228,31 @@
         Časovna zahtevnost: povprečna O(n log n), najslabša O(n**2). To je odvisno od tega, kako izberemo pivot. Če je pivot najmanjši ali največji element, dobimo najslabšo časovno zahtevnost O(n**2). Če pa je pivot naključen element (nekje blizu sredine), dobimo povprečno časovno zahtevnost O(n log n), saj se vsak korak deli na dva dela, ki sta približno enake velikosti.\\
         Dobra izbira pivota: Izberemo prvi, zadnji in sredinski element in izberemo sredinsko vrednost med njimi. Druga možnost je, da premešamo seznam in izberemo prvi element kot pivot, ker imamo ponavadi opravka z nekako urejenimi seznami.\\
         Hitro urejanje ni stabilno urejanje.
+
         \item Kako poteka hitro urejanje na mestu?\\
-        add
+        Hitro urejanje na mestu pa poteka s pomočjo dveh kazalcev. Začnemo s kazalcem na začetku in na koncu. Prvi kazalec se premika naprej po seznamu, dokler ne naleti na element večji od pivota, zadnji kazalec pa gre nazaj po seznamu dokler ne naleti na element manjši od pivota. Ta dva elementa zamenjamo med sabo in tako nadaljujemo naprej. Zdaj imamo en del s števili manjšimi od pivota in drug del s števili večjimi od pivota. Ta dva dela rekurzivno uredimo.
         
         \item Kakšna je razlika med pristopoma deli in vladaj ter dinamično programiranje?\\
-        add
+        S pristop deli in vladaj razdelimo nalogo na manjše dele za konstanten faktor in jih rekurzivno rešimo. Včasih se te manjše naloge prekrivajo (potrebujejo iste kalkulacije). Ne splača se teh delov računati večkrat. Takrat se nam splača uporabiti dinamično programiranje, kjer si zapomnimo kalkulacije, ki jih bomo potrebovali večkrat.
 
         \item Primerjajte pristopa od spodaj navzdol ter od zgoraj navzdol pri reševanju nalog z dinamičnim programiranjem. Kaj so prednosti katerega pristopa?\\
-        add
+        Pri od zgoraj navzdol narediš tko kot rekurziji, samo da daš čez memoizacijo (sproti si shranjujemo vrednosti), pri od spodaj navzgor pa najdeš nek vrstni red in pol v tem vrstenm redu računaš.
+        Recimo, pri fibonacciju lahko z memoizacijo: f(n) = f(n-1) + f(n-2) in si shranjuješ z memoizacijo te vrednosti takrat ko jih izračunaš. Lahko greš pa lepo po vrsti iterativno računat števila eno za drugim.
+        Iterativen je lahko malo hitrejši in porabi manj spomina, ampak memoizacijo je pa malo lažje napisat.
 
         \item Kako implementiramo memoizacijo?\\
-        add
+        Implementacija memoizacije v pythonu: Najprej 
+        Imamo funkcijo f. Napišemo funkcijo momoizacija(f), ki vsebuje funkcijo, ki preveri ali ima shranjeno vrednost funkcije f klicane na nekem elementu. Če jo ima, vrne to vrednost, če pa ne pa pokliče funkcijo f in doda to vrednost med shranjene vrednosti ter vrne to vrednost.
 
         \item Kakšne so razlike med implementacijo memoizacije v dinamičnem jeziku, kot je Python, in v statičnem jeziku, kot je OCaml?\\
-        add
+        (Odgovor se nanaša na f iz prejšnjega vprašanja)
+        Če je f rekurzivna funkcija imamo problem, saj kliče samo sebe namesto memoizirano verzijo sebe. V pythonu to ni problem, saj je dinamični jezik. Preprosto ime f zamenjamo z memoizacija f. Oziroma preprosteje nad f napišemo @memoizacija.
+        Ker je Ocaml statični jezik tega ne moremo narediti tako preprosto, saj v statičnem jeziku ne moramo klicati funkcije v prihodnost kot to lahko naredi Python. Rekurzivne funkcije je potrebno odviti. Funkciji f podamo še eno funkcijo (g) ki se bo klicala namesto f, ko bi želeli f klicati rekurzivno. Tako f ni več rekurzivna. Potem lahko f memoiziramo preprosto tako da ko v funkciji memoizacija želimo klicati f(x, f) kličemo f(x, memoizacija(f)).
+
     \end{enumerate}
 
 \section*{Dodatne informacije}
-    \begin{enumerate}
+    \begin{itemize}
         \item Osnovna arhitektura in assembly
         Assembly vzame nekaj, kar je podobno človeškemu jeziku in to pretvori v strijno kodo (prijazno za procesor)
 
@@ -246,6 +261,7 @@
         pretvorba int v float: float\_of\_int\\
         funkcije imajo svoj tip (funkcijski tip), ki je vedno zgrajen iz vec tipov (vhodni in izhodni):  Poleg unkcij, ki jih sami definirajo, so nekatere že vgrajene, recimo: int\_of\_string, float\_of\_int,\ldots\\
         najbolj osnoven tip: 'a\\
+        \underline{Veriženje}: 10 |> succ |> kvadriraj\\
         Za rekurzivne funkcije moraš spredaj napisati rec\\
         Najboljše je rekurzivne funkcije zamenjati z match, primer: match n with |0 |1 |2->0 |\_->n\\
         namesto match lahko napises tudi funkction\\
@@ -262,7 +278,7 @@
         Konstruktorji: nacini, kako lahko ustvarimo vrednosti danega tipa, recimo naravna stevila imajo 2 konstruktorja: Nic in Naslednik\\
         %
         Pametni konstruktorji pa vzamejo podatke, preverijo, če so v redu in nato konstruirajo neko vrednost.\\
-        failwith "Opis napake" namerno sesuje funkcijo. Uporabljamo, zato da vmo, kje je napaka v nasi kodi. Njegov tip je poljuben ('a)\\
+        failwith "Opis napake" namerno sesuje funkcijo. Uporabljamo, zato da vmo, kje je napaka v nasi kodi. Njegov tip je poljuben ('a)
         %
         \item Lean\\
         V OCamlu bi napisali lahko neresnico: let dokaz\_nepravilne\_izjave : ('a -> 'b) -> ('b -> 'a) =
@@ -292,12 +308,17 @@
         Čas za ustavitev tega drevesa in izracun dolzine je zdaj O(1), saj imamo v vsakem vozlišču shranjeno dolžino poddrevesa. Torej lahko dolžino izračunamo v O(1) času.
         \item Deli in vladaj\\
         Pri deli in vladaj pristopu razdelimo problem na manjše podprobleme, ki jih rešimo rekurzivno, nato pa združimo rešitve podproblemov v rešitev celotnega problema. Podproblemi so za faktor manjši.\\
-        Glavna algoritma za urejanje sta: hitro urejanje in urejanje z zlivanjem.\\
+        Glavna algoritma za urejanje sta: hitro urejanje in urejanje z zlivanjem.
         \item Dinamično programiranje (kakor rekurzija pri diskretni)\\
         Pri dinamičnem programiranju razdelimo problem na manjše podprobleme, ki jih rešimo rekurzivno, vendar se podprimeri med sabo pokrivajo. Zato podproblemi niso za faktor manjši ampak malo manjši. Pri dinamičnem imamo 2 principa: \textbf{Od spodaj navzgor} in \textbf{Od zgoraj navzdol -  memoizacija}.\\
-        Od spodaj navzgor pomeni, da začnemo z reševanjem najmanjših podproblemov in nato gradimo rešitve večjih podproblemov. To je podobno kot pri rekurziji, le da shranjujemo rešitve podproblemov, da jih ne rešujemo večkrat.
+        Od spodaj navzgor pomeni, da začnemo z reševanjem najmanjših podproblemov in nato gradimo rešitve večjih podproblemov. To je podobno kot pri rekurziji, le da shranjujemo rešitve podproblemov, da jih ne rešujemo večkrat.\\
+        Memoizacija pa pomeni, da začnemo z reševanjem največjega podproblema in nato gradimo rešitve manjših podproblemov. To je podobno kot pri rekurziji, le da shranjujemo rešitve podproblemov, da jih ne rešujemo večkrat. Največji izziv je ponavadi najti rekurzivno zvezo. Ko jo najdemo, samo še napišemo @cache oziroma @speed.
         % Rešitve podproblemov shranimo v tabelo, da jih ne rešujemo večkrat. Tako zmanjšamo časovno zahtevnost problema.
+        Memoizacijo v pythonu lahko implementiramo z uporabo: from functools import cache in potem pred definicijo funkcije z memoizacijo napisemo @cache, ki shrani rezultate funkcije glede na vhodne argumente.\\
+        Z @ definiramo \textbf{dekorator}: Funkcija visjega reda, ki sprejme funkcijo f kot argument, iz nje dobi rezultat in ga shrani pod ime f. Dekoratorji so uporabni za dodajanje funkcionalnosti obstoječim funkcijam brez spreminjanja njihove kode. Ponavadi torej dekoratorji vračajo funkcije. V Pythonu lahko dekoratorje definiramo z uporabo @decorator pred definicijo funkcije. Primer: \\
+        V OCamlu pa lahko uporabimo tabelo ali slovar za shranjevanje rezultatov funkcije glede na vhodne argumente.\\
+        \textbf{Hash table}: Podatkovna struktura kot iskalna drevesa, verizni seznami. Je način, kako shranjujemo podatke. Je velika tabela. Ko shranimo notri podatek, najprej izračunamo njegov hash (zgoščeno vrednost), ki je nekako naključen in ga uporabimo kot indeks v tabeli. Če je indeks že zaseden (dve vrednosti imata enak hash), imamo več možnosti. Lahko imamo na posameznem mestu verižni seznam z vsemi možnostmi tega indeksa ali pa vrednost shranimo na naslednje prosto mesto. Takrat gremo pri iskanju od tega indeksa naprej gledati vrednosti in če pridemo do praznega mesta, vrednosti ni notri. To je hitrejše kot iskanje po seznamu, saj lahko dostopamo do podatka v konstantnem času O(1) preko indeksa. Vendar pa je časovna zahtevnost iskanja v najslabšem primeru O(n), če imamo veliko kolizij (več vrednosti ima enak hash). Implementacija: Hashtbl.add in Hashtbl.find\_opt.
 
-    \end{enumerate}
+    \end{itemize}
 
 \end{document}
