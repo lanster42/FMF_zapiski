@@ -35,7 +35,7 @@
         Primeri osnovnih tipov: cela števila - \underline{int} (+, -, *, /), nizi - \underline{string} (stikanje z \^. Obstaja standardna knjiznica za delanje s stringi: String, ki ima ogromno vgrajenih funkcij), števila s plavajočo vejico - \underline{float} (zraven operacij moras pisati piko), logične vrednosti (bool), enotski tip - \underline{unit} (to je zato, da lahko recimo: ne damo nic argumentov v funkcijo (recimo Random.bool()) oziroma ce funkcije "nic" \ ne vracajo, vracajo unit), \underline{znaki} (char), na katerih se lahko dobimo kodo.
 
 
-        Primeri sestavljenih tipov: seznami - \underline{list} (recimo int list), \underline{nabori} (imajo tocno doloceno dolzino, recimo za datum. Ni nujno, da so vsa polja istega tipa. Do prostora je najlazje dostopati tako, da jih razstavimo z (x, y, z)), delne vrednosti - \underline{option} (lahko je None ali pa Some(a), kjer je Some(a) tipa "a option")
+        Primeri sestavljenih tipov: seznami - \underline{list} (recimo int list, stinakje z @), \underline{nabori} (imajo tocno doloceno dolzino, recimo za datum. Ni nujno, da so vsa polja istega tipa. Do prostora je najlazje dostopati tako, da jih razstavimo z (x, y, z)), delne vrednosti - \underline{option} (lahko je None ali pa Some(a), kjer je Some(a) tipa "a option")
     
         \item Kaj so funkcije višjega reda?\\
         To so funkcije, ki za argument vzamejo neko drugo funkcijo.  matematiki imamo na primer odvod ali integral, ki sprejmeta funkcijo in vrneta novo funkcijo.\\
@@ -127,11 +127,11 @@
         V OCamlu se da “dokazati” tudi napačne trditve s pomočjo rekurzije (let rec f x = f x) ali pa uporabo failwith. Medtem ko ti dokazovalnik takih stvari ne bo pustil oziroma ti bo sporočil, da dokaz ni popoln. Poleg tega v Leanu lažje sproti vidiš kaj dokazuješ in kaj še moraš dokazati (z uporabo taktičnega načina). OCaml nima kvantifikatorjev ($\forall$ in $\exists$), zato je težko dokazovati. Lean je bolj matematičen in zato lepši za dokazovanje.
     
         \item Na primeru vektorjev razložite, kaj so odvisni tipi. Naštejte primere vrednosti/tipov odvisnih od vrednosti/tipov.\\
-        Odvisni tipi so tipi, ki so odvisni od vrednosti vsaj enega od argumentov. To pomeni, da lahko tip vsebuje vrednost, ki je definirana v času izvajanja programa. Na primer, lahko imamo tip vektorja (array elementov tipa A z dolžino n), ki je odvisen od dolžine n.\\
+        Odvisni tipi so tipi, ki so odvisni od vrednosti vsaj enega od argumentov. To pomeni, da lahko tip vsebuje vrednost, ki je definirana v času izvajanja programa. Na primer, lahko imamo tip vektorja (seznam elementov tipa A in fiksno dolžino n), ki je odvisen od dolžine n.\\
         %
         \underline{Tipi, odvisno od tipov}: Parametrični tipi ('a -> 'a list)\\
         \underline{Tipi odvisni od vrednosti}: \textbf{Odvisni tipi} ((A, n) -> Vektor(A, n))\\
-        \underline{Vrednosti odvisne od tipov}: Polimorfne funkcije (List.rev, vprašanje 8)\\
+        \underline{Vrednosti odvisne od tipov}: Polimorfne funkcije (List.rev, funkcije, ki vzamejo kot arg tudi nek tip)\\
         \underline{Vrednosti odvisne od vrednosti}: Običajne funkcije (n -> 2n - 1)
 
         \item Čemu odvisni tipi ustrezajo v Curry-Howardovem izomorfizmu?\\
@@ -146,13 +146,19 @@
 
         \item Kakšni sta videti načeli indukcije na verižnih seznamih in dvojiških drevesih? Uporabite enega od njih na primeru.\\
         Načeli indukcije na verižnih seznamih in dvojiških drevesih sta podobni. Pri verižnih seznamih imamo bazo indukcije, ki pravi, da je prazni seznam prazen, in indukcijski korak, ki pravi, da če nekaj velja za seznam dolžine xs, mora veljati tudi, če mu dodamo glavo. Torej če pokažemo, da velja za prazen seznam, velja za vse sezname dolžine nič, če sklepamo, da iz repa velja tudi za cel sestavljen seznam (torej repu dodamo glavo), velja, da gremo lahko iz seznamov dolzine n na sezname dolzie n + 1. Potem velja za vse sezname.\\
-        Pri dvojiških drevesih imamo bazo indukcije, ki pravi, da je prazno drevo prazno, in indukcijski korak, ki pravi, da če nekaj velja za levo drevo in za desno drevo, potem velja tudi za sestavljeno drevo oziroma za drevo, ki ima dva otroka: levega in desnega
+        Pri dvojiških drevesih imamo bazo indukcije, ki pravi, da je prazno drevo prazno, in indukcijski korak, ki pravi, da če nekaj velja za levo drevo in za desno drevo, potem velja tudi za sestavljeno drevo oziroma za drevo, ki ima dva otroka: levega in desnega.
+        Indukcija na verižnih seznamih v Lean:\\
+        Primer: funkcija stakni, ki sprejme 2 seznama in vrne združen seznam: def stakni {A: Type} : List A -> List A -> List A :=\\
+        fun xs ys => match xs with\\
+        | [] => xs
+        | x :: xs' => x :: stakni xs' ys
 
         \item Kako uporabljamo indukcijo ob prisotnosti pomožnih rekurzivnih funkcij?\\
-        Pret theorem definiramo theorem, ki bo služil kot lemma.
+        Pred theorem definiramo theorem, ki bo služil kot naša lema, to dokažemo z indunkcijo, ponavadi bo imela nek splošni akumulator, ki bo potem v originalnem theoremu 0. V originalni funkciji se na to našo lemmo zglasimo tako: by rw [ime\_lemme].
 
         \item Kako deluje Turingov stroj?\\
-        \textbf{Turingov stroj} je peterica oziroma program, sestavljen iz: neskoncnega traku simbolov (kakor neskoncen pomnilnik), glave, koncnega stevila stanj in prehodne funkcije. Prehodna funkcija pove: Če trenutno vidiš določen simbol in si v določenem stanju, potem na trak zapiši nekaj, pojdi v neko stanje in se premakni levo/desno potraku. Prehodna funkcija je delno definirana, saj želimo, da se nekje ustavi. Stroj lahko spremeni simbol na traku, premakne glavo levo ali desno in spremeni stanje.\\
+        Definicija: \textbf{Turingov stroj} je peterica: končno števino simbolov (kakor neskončen pomnilnik), prazen simbol, končna množica stanj, začetno stanje in prehodna funkcija.
+        Prehodna funkcija pove: Če trenutno vidiš določen simbol in si v določenem stanju, potem na trak zapiši nekaj, pojdi v neko stanje in se premakni levo/desno potraku. Prehodna funkcija je delno definirana, saj želimo, da se nekje ustavi. Stroj lahko spremeni simbol na traku, premakne glavo levo ali desno in spremeni stanje.\\
         \underline{Trak} je neskoncno zaporedje znakov, ki so od nekje naprej (naprej in nazaj) vsi prazni.\\
         \underline{Konfiguracija} Turingovega stroja je sestavljena iz trenutnega stanja, položaja glave in vsebine traku.\\
         Posamezni koraki so sestavljeni iz \underline{delnih funkcij step}, ki sprejmejo konfiguracijo in vrne novo konfiguracijo.\\
@@ -286,6 +292,7 @@
         %
         ukazi v Leanu: \#eval, preveri tip: \#check, definicija: def, print: \#print.\\
         Lean je boljši za dokazovanje: Daljše dokaze lahko "dokazuješ s taktikami", v katerega greš z \textbf{by}. Osnonvn izrazi v taktičnem načinu: intro x (nove spremenljivke in funkcije), apply f (funkcijo uporabiš na spremenljivkah), exact x (ntočno x je to), constructor (iz znanih spremeljivk naredi kartezični produkt), assumption (uporabi predpostavko)\\
+        V Leanu se type definira kot inductive Naravno where |nic: Naravno |naslednik: Naravno -> Naravno\\
         %
         Predikati so funkcije iz vrednosti v izjave (predikat je neka lastnost kot np. "je sodo")\\
         Prop je tip izjav, zato da pri prevajanju program izpusti dokaze, saj za dejanski program niso pomembni. Le enkrat se morajo napisati.\\
