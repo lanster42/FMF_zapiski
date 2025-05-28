@@ -174,7 +174,7 @@
         \item Kaj je ustavitveni orakelj in zakaj ne obstaja?\\
         Ustavitveni orakelj je funkcija, ki pove, ali se bo nek Turingov stroj ustavil ali ne. Torej če dobi turingov stroj in vhodno kodo da zna povedati, ali se bo stroj nekje ustavil. Ne obstaja, ker bi lahko z njim rešili problem ustavitve, ki je nedoločljiv. To pomeni, da ne moremo napisati programa, ki bi za vsak vhodni program in vhodno vrednost povedal, ali se bo program ustavil ali ne.\\
         Dokaz: Recimo, da obstaja stroj H, ki reši ustavitveni problem, torej ki lahko za vse stroje M pove, kdaj se bodo ustavili in kdaj ne. Lahko definiramo tudi stroj X, ki se bo na vhodu $k_M$ obnašal ravno nasprotno kot M: če se bo M na $k_M$ ustavil, bo X divergiral, in obratno. Ampak X je tudi turingov stroj, zato ga lahko uporabimo na samemu sebi oz. na svoji kodi $k_X$. Zdaj če bo ustavitveni orakelj rekel, da naj se X ustavi, se X ne bo ustavil in obratno. Pridemo do ciklanja.\\
-        Primer: Domena, da je vsako sodo število vsota dveh praštevil. Stroj bi šel čez vsa soda števila, vsako poskusi razcepiti na dva praštevila, če mu ne uspe, se ustavi. Ampak ne vemo, ali se to kdaj ustavi.
+        Primer: Domena, da je vsako sodo število vsota dveh praštevil. Stroj bi šel čez vsa soda štev<ila, vsako poskusi razcepiti na dva praštevila, če mu ne uspe, se ustavi. Ampak ne vemo, ali se to kdaj ustavi.
 
         \item Kaj je razlika med spremenljivimi in nespremenljivimi podatkovnimi strukturami? Kdaj uporabimo katere?\\
         Spremenljive podatkovne strukture so strukture, ki se lahko spremenijo, medtem ko nespremenljive tega ne zmorejo. Spremenljive strukture so uporabne ko želimo nek objekt manipulirati in nas ne zanima kakšno vrednost je imel prej. Na primer v for zankah. Nespremenljive podatkovne strukture pa uporabljamo, ko želimo ohraniti staro struktuto po spremembi.
@@ -224,7 +224,7 @@
         2. Podseznama rekurzivno uredimo\\
         3. Urejena podseznama zlijemo skupaj: Gledamo, kateri je manjši element iz levega in desnega podseznama. Če je levi manjši, ga damo na novo urejen seznam, drugače pa desnega. Tako nadaljujemo dokler ne zmanjka elementov v enem od podseznamov. Nato dodamo še preostale elemente iz drugega podseznama.\\
         Stabilno urejanje: Če sta dva elementa enaka, ostaneta v istem vrstnem redu.
-        \textbf{Dokaz za čas zahtevnost O(n log n)}: Za razdelitev na polovico porabimo O(n) ali pa O(1) časa, a ni važno, saj za zlivanje porabimo O(n) časa. Poleg tega na vsakem koraku seznam razpade na 2 dela: 2T(n/2). Ko te dve seštejemo skupaj dobimo O(n*logn).
+        \textbf{Dokaz za čas zahtevnost O(n log n)}: Za razdelitev na polovico porabimo O(n) ali pa O(1) časa, a ni važno, saj za zlivanje porabimo O(n) časa. Poleg tega na vsakem koraku seznam razpade na 2 dela: 2T(n/2). Ko te dve seštejemo skupaj dobimo O(n*logn). Intuitivno: za vsak korak potrebujemo O(n), nivojev pa je O(log n).
 
 
         \item Kako poteka hitro urejanje in kakšni sta njegova povprečna in najslabša časovna zahtevnost?\\
@@ -245,30 +245,36 @@
         S pristop deli in vladaj razdelimo nalogo na manjše dele za konstanten faktor in jih rekurzivno rešimo. Včasih se te manjše naloge prekrivajo (potrebujejo iste kalkulacije). Ne splača se teh delov računati večkrat. Takrat se nam splača uporabiti dinamično programiranje, kjer si zapomnimo kalkulacije, ki jih bomo potrebovali večkrat.
 
         \item Primerjajte pristopa od spodaj navzdol ter od zgoraj navzdol pri reševanju nalog z dinamičnim programiranjem. Kaj so prednosti katerega pristopa?\\
-        Pri od zgoraj navzdol narediš tko kot rekurziji, samo da daš čez memoizacijo (sproti si shranjujemo vrednosti), pri od spodaj navzgor pa najdeš nek vrstni red in pol v tem vrstenm redu računaš.
+        Pri od zgoraj navzdol narediš tko kot rekurziji, samo da daš čez memoizacijo (sproti si shranjujemo vrednosti), pri od spodaj navzgor pa najdeš nek vrstni red in potem v tem vrstenm redu računaš.
         Recimo, pri fibonacciju lahko z memoizacijo: f(n) = f(n-1) + f(n-2) in si shranjuješ z memoizacijo te vrednosti takrat ko jih izračunaš. Lahko greš pa lepo po vrsti iterativno računat števila eno za drugim.
-        Iterativen je lahko malo hitrejši in porabi manj spomina, ampak memoizacijo je pa malo lažje napisat.
+        Iterativen je lahko malo hitrejši in porabi manj spomina, ampak memoizacijo je lažje pisati in je bolj berljiva, saj se piše kot rekurzija. Prednost principa od spodaj navzgor je, da lahko izračunaš vrednosti, ki jih potrebuješ, ne da bi moral računati vse predhodne vrednosti. To je uporabno, če imaš veliko vrednosti, ki jih moraš izračunati in ne želiš računati vseh predhodnih vrednosti.
 
         \item Kako implementiramo memoizacijo?\\
-        Implementacija memoizacije v pythonu: Najprej 
-        Imamo funkcijo f. Napišemo funkcijo momoizacija(f), ki vsebuje funkcijo, ki preveri ali ima shranjeno vrednost funkcije f klicane na nekem elementu. Če jo ima, vrne to vrednost, če pa ne pa pokliče funkcijo f in doda to vrednost med shranjene vrednosti ter vrne to vrednost.
+        Implementacija memoizacije v pythonu: Funkcija memoizacija(f) vzame (skoraj) poljubno funkcijo f in z njeno pomočjo definira funkcijo mem\_f, ki preveri, če vrednost ima, vrne to vrednost, če pa ne pa pokliče funkcijo f in doda to vrednost med shranjene vrednosti ter vrne to vrednost (vrednosti si shranjuje v slovar):\\
+        def memoizacija(f):\\
+        def mem\_f(x):\\
+        if x not in rezultati:\\
+            rezultati[x] = f(x)\\
+        return rezultati[x]\\
+        return mem\_f
 
         \item Kakšne so razlike med implementacijo memoizacije v dinamičnem jeziku, kot je Python, in v statičnem jeziku, kot je OCaml?\\
         (Odgovor se nanaša na f iz prejšnjega vprašanja)
-        Če je f rekurzivna funkcija imamo problem, saj kliče samo sebe namesto memoizirano verzijo sebe. V pythonu to ni problem, saj je dinamični jezik. Preprosto ime f zamenjamo z memoizacija f. Oziroma preprosteje nad f napišemo @memoizacija.
-        Ker je Ocaml statični jezik tega ne moremo narediti tako preprosto, saj v statičnem jeziku ne moramo klicati funkcije v prihodnost kot to lahko naredi Python. Rekurzivne funkcije je potrebno odviti. Funkciji f podamo še eno funkcijo (g) ki se bo klicala namesto f, ko bi želeli f klicati rekurzivno. Tako f ni več rekurzivna. Potem lahko f memoiziramo preprosto tako da ko v funkciji memoizacija želimo klicati f(x, f) kličemo f(x, memoizacija(f)).
+        Če funkcija ni rekurzivna, poteka enako kot v Pythonu.
+        Če je f rekurzivna funkcija imamo problem, saj kliče samo sebe namesto memoizirano verzijo sebe. V pythonu to ni problem, saj je dinamični jezik. V njem lahko preprosto ime f zamenjamo z memoizacija f. Oziroma preprosteje nad f napišemo @memoizacija.
+        Ker je Ocaml statični jezik tega ne moremo narediti tako preprosto, saj v statičnem jeziku ne moramo klicati funkcije v prihodnost kot to lahko naredi Python. Rekurzivne funkcije je potrebno odviti (prekiniti rekurzijo). Funkciji f podamo še en argument: funkcijo (g) ki se bo klicala namesto f, ko bi želeli f klicati rekurzivno. Tako f ni več rekurzivna. Potem lahko f memoiziramo preprosto, tako da ko v funkciji memoizacija želimo klicati f(x, f) kličemo f(x, memoizacija(f)). V OCamlu si vrednosti shranjujemo v Hush tabeli. Uporabljamo Hushtbl.add, Hushtbl.find\_opt.
 
     \end{enumerate}
 
 \section*{Dodatne informacije}
     \begin{itemize}
-        \item Osnovna arhitektura in assembly
-        Assembly vzame nekaj, kar je podobno človeškemu jeziku in to pretvori v strijno kodo (prijazno za procesor)
+        \item Osnovna arhitektura in assembly\\
+        Assembly vzame nekaj, kar je podobno človeškemu jeziku in to pretvori v strojno kodo (prijazno za procesor)
 
-        \item OCaml
-        V terminalu moras za zakljucek funkcije uporabiti\\
+        \item OCaml\\
+        V terminalu moras za zakljucek funkcije uporabiti ;;\\
         pretvorba int v float: float\_of\_int\\
-        funkcije imajo svoj tip (funkcijski tip), ki je vedno zgrajen iz vec tipov (vhodni in izhodni):  Poleg unkcij, ki jih sami definirajo, so nekatere že vgrajene, recimo: int\_of\_string, float\_of\_int,\ldots\\
+        funkcije imajo svoj tip (funkcijski tip), ki je vedno zgrajen iz vec tipov (vhodni in izhodni):  Poleg funkcij, ki jih sami definiramo, so nekatere že vgrajene, recimo: int\_of\_string, float\_of\_int,\ldots\\
         najbolj osnoven tip: 'a\\
         \underline{Veriženje}: 10 |> succ |> kvadriraj\\
         Za rekurzivne funkcije moraš spredaj napisati rec\\
@@ -276,10 +282,10 @@
         namesto match lahko napises tudi funkction\\
         pogoje se pise pred puscico z when :)\\
         poleg spremenljivk lahko z match razstavljamo sezname (glava in rep hihi)\\
-        Seznami si lahko predstavljamo kot: prazen ali pa gl::rep, kjer je glav vrednost iz seznama, rep pa je spet seznam.\\
+        Seznami si lahko predstavljamo kot: prazen ali pa gl::rep, kjer je glava vrednost iz seznama, rep pa je spet seznam.\\
         Zlepljanje seznamov: @\\
         Zakaj imamo raje fold\_left? Razlaga z repnimi funkcijami(I think)\\
-        Da ni stach overflow, definiramo pomozno funkcijo z akumulatorjem (acc), da se zacasne vrednosti tja shranjujeno\\
+        Da ni stack overflow, definiramo pomozno funkcijo z akumulatorjem (acc), da se zacasne vrednosti tja shranjujeno\\
         definicija tipov: type A = int * int\\
         vpeljava tipa: karkoli: A\\
         to naredimo zato da ugotovimo, kje se je napaka zgodila\\
@@ -325,7 +331,7 @@
         Memoizacija pa pomeni, da začnemo z reševanjem največjega podproblema in nato gradimo rešitve manjših podproblemov. To je podobno kot pri rekurziji, le da shranjujemo rešitve podproblemov, da jih ne rešujemo večkrat. Največji izziv je ponavadi najti rekurzivno zvezo. Ko jo najdemo, samo še napišemo @cache oziroma @speed.
         % Rešitve podproblemov shranimo v tabelo, da jih ne rešujemo večkrat. Tako zmanjšamo časovno zahtevnost problema.
         Memoizacijo v pythonu lahko implementiramo z uporabo: from functools import cache in potem pred definicijo funkcije z memoizacijo napisemo @cache, ki shrani rezultate funkcije glede na vhodne argumente.\\
-        Z @ definiramo \textbf{dekorator}: Funkcija visjega reda, ki sprejme funkcijo f kot argument, iz nje dobi rezultat in ga shrani pod ime f. Dekoratorji so uporabni za dodajanje funkcionalnosti obstoječim funkcijam brez spreminjanja njihove kode. Ponavadi torej dekoratorji vračajo funkcije. V Pythonu lahko dekoratorje definiramo z uporabo @decorator pred definicijo funkcije. Primer: \\
+        Z @ definiramo \textbf{dekorator}: Funkcija visjega reda, ki sprejme funkcijo f kot argument, iz nje dobi rezultat in ga shrani pod ime f. Dekoratorji so uporabni za dodajanje funkcionalnosti obstoječim funkcijam brez spreminjanja njihove kode. Ponavadi torej dekoratorji vračajo funkcije. V Pythonu lahko dekoratorje definiramo z uporabo @decorator pred definicijo funkcije. \\
         V OCamlu pa lahko uporabimo tabelo ali slovar za shranjevanje rezultatov funkcije glede na vhodne argumente.\\
         \textbf{Hash table}: Podatkovna struktura kot iskalna drevesa, verizni seznami. Je način, kako shranjujemo podatke. Je velika tabela. Ko shranimo notri podatek, najprej izračunamo njegov hash (zgoščeno vrednost), ki je nekako naključen in ga uporabimo kot indeks v tabeli. Če je indeks že zaseden (dve vrednosti imata enak hash), imamo več možnosti. Lahko imamo na posameznem mestu verižni seznam z vsemi možnostmi tega indeksa ali pa vrednost shranimo na naslednje prosto mesto. Takrat gremo pri iskanju od tega indeksa naprej gledati vrednosti in če pridemo do praznega mesta, vrednosti ni notri. To je hitrejše kot iskanje po seznamu, saj lahko dostopamo do podatka v konstantnem času O(1) preko indeksa. Vendar pa je časovna zahtevnost iskanja v najslabšem primeru O(n), če imamo veliko kolizij (več vrednosti ima enak hash). Implementacija: Hashtbl.add in Hashtbl.find\_opt.
 
