@@ -5,10 +5,7 @@ let rec razdeli pivot lst levi desni =
   | gl :: rep ->
       if gl < pivot then razdeli pivot rep (gl :: levi) desni
       else razdeli pivot rep levi (gl :: desni)
-(* Random
-Moral bi le razdeliti z List.partition: let rec pivotiraj p xs =
-  List.partition (fun x -> x <= p) xs 
-  Ta izbira pivota že ima časovno zahtevnost O(n), kaj bi šele, ko mi dejsnko poiščemo to cifro.*)
+(* Ta izbira pivota ima časovno zahtevnost O(n), ker se enkrat sprehodimo čez seznam.*)
 
 
 let rec hitro_izberi lst k =
@@ -17,7 +14,7 @@ let rec hitro_izberi lst k =
   | [x] -> x (* poiskati moramo "k-to" po velikosti. Zato le če je k = 1 bo to veljalo. Boljša implementacija: [x] when k != 1 -> failwith "prekratek seznam"  *)
   (* | gl :: rep when k > List.lenght lst -> failwith"---" *)
   | gl :: rep ->
-      let levi, desni = razdeli gl rep [] [] in (* Seveda narobe implementirana funkcija razdeli. Boljše: Namesto gl randomiziramo ali pa vzamemo sredinjski element. *)
+      let levi, desni = razdeli gl rep [] [] in (* Boljše: Namesto gl randomiziramo ali pa vzamemo sredinjski element. *)
       let velikost_levih = List.length levi in
       if k = velikost_levih + 1 then gl
       else if k <= velikost_levih then hitro_izberi levi k
@@ -27,7 +24,7 @@ let rec hitro_izberi lst k =
 let razdalja (x1, y1) (x2, y2) =
   let raz1 = x2 -. x1 in
   let raz2 = y2 -. y1 in
-  sqrt (raz1 *. raz1 +. raz2 *. raz2)
+  sqrt (raz1 *. raz1 +. raz2 *. raz2) (* izračunana klasična razdalja med točkami *)
 
 let grobo_najblizji_par tocke =
   let rec aux min_razdalja naj_par = function
@@ -41,14 +38,14 @@ let grobo_najblizji_par tocke =
   | _ -> None
 
 let najblizji_par tocke =
-  let urejene_tocke = List.sort (fun (x1, _) (x2, _) -> compare x1 x2) tocke in
+  let urejene_tocke = List.sort (fun (x1, _) (x2, _) -> compare x1 x2) tocke in (* Točke primerjamo po x in jih uredimo. Boljše bi bilo hitro urejanje s pivotom. *)
   let rec rekurzivno_najblizji pts =
     match pts with
     | [] | [_] -> None
     | [p1; p2] -> Some (p1, p2)
     | _ -> let mid = List.length pts / 2 in
         let levi_del = List.filteri (fun i _ -> i < mid) pts in
-        let desni_del = List.filteri (fun i _ -> i >= mid) pts in
+        let desni_del = List.filteri (fun i _ -> i >= mid) pts in (* razdelim na levi in desni del počasi: lenght računaš. Ampak pri meni se boljše ne da, saj morajo biti točke urejene.*)
         let najblizji_levo = rekurzivno_najblizji levi_del in
         let najblizji_desno = rekurzivno_najblizji desni_del in
         let najboljsi_par =
@@ -58,6 +55,10 @@ let najblizji_par tocke =
           | None, None -> None in
         najboljsi_par in
   rekurzivno_najblizji urejene_tocke
+(* Razdelimo na dve polovici, potem najde najblizni par v levi in desni polovici. Ampak to pa ni pravilno, saj sta lahko najblizja para tudi v različnih polovicah.
+Na koncu primerja dva najmanjša para in vzame manjšega.
+Moral bi pa napisati še, kaj velja za točke na sredini. *)
+
 
 (* 1: Coin Sums *)
 let st_nacinov_vsote vsota kovanci =
@@ -68,6 +69,7 @@ let st_nacinov_vsote vsota kovanci =
     | (v, gl :: rep) when v >= 0 -> aux (v - gl) (gl :: rep) + aux v rep
     | _ -> 0 in
   aux vsota kovanci
+(* Časovna zahtevnost je O(n * m), kjer je n število kovancev in m vsota. *)
 
 (* st nacinov za £2 *)
 let st_nacinov =
@@ -80,8 +82,9 @@ let rec najvecja_vsota_poti trikotnik =
   | [vrh] -> List.hd vrh
   | _ -> let zadnja = List.hd (List.rev trikotnik) in
       let predzadnja = List.nth trikotnik (List.length trikotnik - 2) in
-      let nova_vrstica = List.mapi (fun i x -> x + max (List.nth zadnja i) (List.nth zadnja (i + 1))) predzadnja in
+      let nova_vrstica = List.mapi (fun i x -> x + max (List.nth zadnja i) (List.nth zadnja (i + 1))) predzadnja in (* Tukaj je x element v zadnji vrstici na mestu i. *)
       najvecja_vsota_poti (List.rev (nova_vrstica :: List.tl (List.rev trikotnik)))
+(* Časovna zahtevnost je n3 zaradi List.nth. Z Array bi lahko konstantno do tega dostopani, zato bi bilo n2. *)
 
 (* 3: Red, Green, and Blue Tiles *)
 let rec stevilo_nacinov_tlaka dolzina =
@@ -89,7 +92,9 @@ let rec stevilo_nacinov_tlaka dolzina =
     stevilo_nacinov_tlaka (dolzina - 1) +
     stevilo_nacinov_tlaka (dolzina - 2) +
     stevilo_nacinov_tlaka (dolzina - 3) +
-    stevilo_nacinov_tlaka (dolzina - 4)
+    stevilo_nacinov_tlaka (dolzina - 4) (* to je slabo napisana rekurzivna zveza. Moral bi napisati začetne pogoje: x when x <0 -> 0, 0 -> 1, 1 -> 1 *)
+
+(* Za boljšo učinkovitost bi moraj podatke shranjevati v hushtbl: let spomin = hushtbl.create 100 *)
 
 (* st za 50 tiles *)
 let nacini_tlaka_50 = stevilo_nacinov_tlaka 50
