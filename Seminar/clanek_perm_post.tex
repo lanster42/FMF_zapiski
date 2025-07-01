@@ -31,7 +31,7 @@
 \author{Lan Stare\\
 Fakulteta za matematiko in fiziko \\
 Oddelek za matematiko}
-\date{11.\ maj 2025}
+\date{maj 2025}
 
 \begin{document}
 
@@ -53,8 +53,6 @@ A kaj se zgodi, če poštenost razumemo v kontekstu primerjav med kockami? Preds
 
 Poštenosti mesta seveda implicira poštenost prvega, saj če so vse kocke enako verjetne, potem je tudi verjetnost, da bo katerakoli kocka zmagala, enaka.
 
-% Ali bi bilo mogoče, da neka kocka $A$ pogosteje premaga kocko $B$, $B$ pogosteje premaga kocko $C$, a $C$ pogosteje premaga kocko $A$? Ta nenavadna situacija ni le teoretična\,--\,gre za znani primer \emph{neprehodnih kock}, ki presenetljivo nasprotujejo intuiciji.
-
 Po drugi strani si lahko predstavljamo situacijo, kjer želimo, da igra med več igralci ne daje prednosti nobenemu igralcu, ne glede na to, kako si razdelijo vloge ali vrstni red. V tem kontekstu nastopi zanimiv pojem {\em permutacijske poštenosti}.
 
 \begin{definicija}
@@ -74,8 +72,9 @@ Obstaja več načinov, kako lahko definiramo permutacijsko-poštene nabori kock.
   Predpostavimo, da obstaja permutacijsko-pošten nabor $K = \{K_1, K_2, K_3, K_4, K_5\}$, kjer so vse kocke 6-strane. Na vseh stranicah morajo biti različna števila, drugače bi lahko prišlo do enakih izidov, kar bi pomenilo, da nabor ne bi bil permutacijsko pošten. Če 5 igralcev meče 6-strane kocke, je torej $6^5$ možnih izidov. Teh $6^5$ različnih izidov pa mora biti deljivo s številom igralcev, če hočemo, da ima vsaka kocka enako strani. Število $6^5 = 2^5 * 3^5$ pa ni deljivo s 5.
 \qed\\
 
+Ta trditev nam pokaže, da za vsak $n$ obstaja infumumno število ploskev na kocki, ki je potrebno, da je nabor permutacijsko-pošten. Za 5 in za vsa večja praštevila igralcev torej potrebujemo vsaj 7 ploskev na kocki. Za recimo 6 igralcev pa bi se trditev morala malo spremeniti, saj iz zgornje trditve ne sledi, da kocke ne morajo biti 6-strane, saj je $6^6$ deljivo s 6.
 
-Iskanje permutacijsko-poštenega nabora kock lahko posplošimo na iskanje nehomogenega nabora, kjer lahko igralec naenkrat meče več kock z različnim številom strani. Več o takih kockah si bomo pogledali na koncu v zaključku. Mi se bomo posvetili permutacijsko-poštenim naborom, ki imajo enako število ploskev (kot smo videli, bo to s številom igralcev naraščalo). Prav posebaj bomo poskušali odgovoriti na naslednji vprašanji:
+Iskanje permutacijsko-poštenega nabora kock lahko posplošimo na iskanje nehomogenega nabora, kjer lahko igralec naenkrat meče več kock z različnim številom strani. Primere takih kock si bomo pogledali pri poglavju {\em Zanimivosti in odprta vprašanja}. Mi se bomo posvetili permutacijsko-poštenim naborom, ki imajo enako število ploskev (kot smo videli, bo to s številom igralcev naraščalo). Prav posebaj bomo poskušali odgovoriti na naslednji vprašanji:
 \begin{itemize}
   \item Ali obstajajo permutacijsko-pošteni nabori kock z enakim številom stranic za poljubno število igralcev?
   \item Kako jih sistematično konstruirati?
@@ -149,25 +148,86 @@ S to konstrukcijo smo torej posplošili trditev za 3 igralce na poljubno števil
 \section{Izboljšana konstrukcija}
 
 Čeprav smo s prejšnjo konstrukcijo dobili permutacijsko-pošten nabor kock, je ta nabor precej velik. Število ploskev na kockah je namreč $d = (n!)^{(n-1)}$, kar hitro postane zelo veliko. Na primer, za 4 igralce dobimo $d = 24^3 = 13824$ ploskev na vsaki kocki, za 5 igralcev pa že $d = 120^4 = 207360000$. To je seveda preveliko, da bi bilo praktično uporabno.
-V tem delu bomo predstavili izboljšano konstrukcijo, ki omogoča manjše število ploskev na kockah, hkrati pa ohranja permutacijsko-poštenost.
+V tem delu članka bomo predstavili izboljšano konstrukcijo, ki omogoča manjše število ploskev na kockah, hkrati pa ohranja permutacijsko-poštenost.
 
-Michael Purcell je v [\ref{purcell}], je metodo, ki smo jo ravnokar obravnavali, izboljšal. Dokazal je, da je na primer za 5 igralcev dovolj 120 strana kocka.
+Michael Purcell je v [\ref{purcell}], metodo, ki smo jo ravnokar obravnavali, izboljšal. Dokazal je, da je na primer za 5 igralcev dovolj 120 strana kocka.
 
-Za njegovo, tako imenovano {\em Združitveno konstrukcijo}, bomo najprej vpeljali m/n permutacijsko-poštenost.
+Za njegovo, tako imenovano {\em Združitveno konstrukcijo}, bomo postopoma skonstruirali permutacijsko-pošten nabor 4 kock. Najprej bomo vpeljali m/n permutacijsko-poštenost.
 
 \begin{definicija} Naj bo $K = \{K_1, K_2, \ldots, K_n\}$ nabor kock. Pravimo, da je $K$ \textbf{m/n permutacijsko-pošten}, če je vsaka podmnožica $m$ kock iz $K$ permutacijsko-poštena.
 \end{definicija}
 
-To pomeni, da če je nabor 4/6 permutacijsko-pošten, je nabor 6 kock 4/4 permutacijsko-pošten, 3/3 permutacijsko-pošten in tudi 2/2 permutacijsko-pošten, ni pa nujno 5/5 in 6/6 permutacijsko-pošten. To pa pomeni, da če vzamemo katerekoli 4 kocke iz nabor 6 kock, ki je 4/6 permutacijsko-pošten, bodo permutacijsko poštene. Prav tako velja za 3 in 2 kocki, ne pa nujno za 5 in 6 kock.
+To pomeni, da če je nabor $4/6$ permutacijsko-pošten, je nabor 6 kock $4/4$ permutacijsko-pošten,$ 3/3$ permutacijsko-pošten in tudi $2/2$ permutacijsko-pošten, ni pa nujno $5/5$ in $6/6$ permutacijsko-pošten. To pa pomeni, da če vzamemo katerekoli 4 kocke iz nabor 6 kock, ki je $4/6$ permutacijsko-pošten, bodo permutacijsko poštene. Prav tako velja za 3 in 2 kocki, ne pa nujno za 5 in 6 kock.
 
-Konstrukcija, ki smo jo opisali v Trditvi 6, je pravzaprav iz 1/3 permutacijsko-poštenega nabora kock sestavili 2/3 permutacijsko-pošten nabor in na koncu še 3/3 permutacijsko-pošten nabor kock. Na začetku smo vzeli nabor ABC, ki predstavlja 3 1-strane kocke. Nato smo z njimi sestavili 2/3 permutacijsko-pošten nabor kock, ki je bil sestavljen iz 6 2-stranih kock. Na koncu smo te 2-strane kocke zlepili skupaj in dobili 3/3 permutacijsko-pošten nabor kock, ki je bil sestavljen iz 6 3-stranih kock.
+Konstrukcija, ki smo jo opisali v Trditvi 6, je pravzaprav iz $1/3$ permutacijsko-poštenega nabora kock sestavila $2/3$ permutacijsko-pošten nabor in na koncu še $3/3$ permutacijsko-pošten nabor kock. Na začetku smo vzeli nabor ABC, ki predstavlja 3 1-strane kocke. Nato smo z njimi sestavili $2/3$ permutacijsko-pošten nabor kock, ki je bil sestavljen iz 6 2-stranih kock. Na koncu smo te 2-strane kocke zlepili skupaj in dobili $3/3$ permutacijsko-pošten nabor kock, ki je bil sestavljen iz 6 3-stranih kock. S Purcellovo {\em Združitveno konstrukcijo} bomo zdaj konstruirali $4/4$ permutacijsko-pošten nabor kock.
 
-Purcellova {\em Združitvena konstrukcija} sloni na tem, da če zlepimo skupaj \underline{točno določene} nabore $m/n$ permutacijsko-poštenih kock, lahko konstruiramo manjši nabor $(m+1)/n$ permutacijsko-poštenih kocke, kot smo ga v Izreku 7.
+Začnimo z osnovnim nizom ABCD, ki predstavlja 4 1-strane kocke (4d1), ki so $1/4$ permutacijsko-poštene. Naj bo zdaj $T$ nabor kock, ki ga predstavlja niz ABCDDCBA. Naslednja trditev nam pove, da je $T$ $2/4$ permutacijsko-pošten nabor 4 kock.
+
+\begin{trditev}
+Če imamo množico $d$-stranskih kock, ki je $1/n$-permutacijsko-poštena, potem lahko s podvajanjem in zrcaljenjem njihove nizovne predstavitve dobimo množico $2d$-stranskih kock, ki je $2/n$-permutacijsko-poštena.
+\end{trditev}
+
+{\em Dokaz:\/}
+Naj bo $s$ nizovna predstavitev kock, in naj bo $s'$ njen zrcaljeni zapis. Združimo ju v en niz: $t = s \,\|\, s'$. Ker je $s$ $1/n$-permutacijsko-pošten, se vsak simbol v njem pojavi enako pogosto.
+
+Ko iščemo vse vzorce dolžine 2 v $t$, jih dobimo iz treh delov:
+\begin{itemize}
+  \item vzorce iz niza $s$,
+  \item vzorce na meji med $s$ in $s'$,
+  \item vzorce iz niza $s'$.
+\end{itemize}
+
+Ker je $s'$ zrcaljen, ima enako število vseh vzorcev kot $s$, le v obratnem vrstnem redu. Vzorce na meji med $s$ in $s'$ pa je točno $l^2$, kjer je $l$ dolžina niza $s$.
+
+Zato se vsak možen vzorec dolžine 2 v celotnem nizu $t$ pojavi enako pogosto, kar pomeni, da so kocke z nizom $t$ $2/n$-permutacijsko-poštene.
+\qed
+
+S Trditvijo 9 smo torej 4 1-stranim kockam dodali stran tako, da so zdaj 2-strane kocke, ki so $2/4$ permutacijsko-poštene. Z naslednjim izrekom bomo te 2-strane kocke združili v 6 3-stranih kock, ki bodo $3/4$ permutacijsko-poštene.
+
+\begin{izrek}[Dvižni izrek]
+Naj bo za vsak $1 \le i \le k$ množica $\mathcal{S}_i$ množica kock z $d_i$ stranmi, ki je $m/n$-permutacijsko-poštena in ima nizovno predstavitev $s_i$. Če obstaja konstanta $C$, tako da za vsak vzorec $x$ dolžine $m + 1$ velja:
+\[
+\sum_{i=1}^{k} (x; s_i) = C,
+\]
+potem je združena množica $\mathcal{S} = \mathcal{S}_1 \,\|\, \mathcal{S}_2 \,\|\, \cdots \,\|\, \mathcal{S}_k$ množica kock, ki je $(m+1)/n$-permutacijsko-poštena.
+\end{izrek}
+
+{\em Dokaz:\/}
+Naj bo $s = s_1 \,\|\, s_2 \,\|\, \cdots \,\|\, s_k$ združena nizovna predstavitev vseh množic. Razčlenimo število pojavitev vzorca $x$ dolžine $m+1$ v $s$ po tem, kako se posamezni simboli vzorca nahajajo v različnih delih $s_i$.
+
+Če se celoten vzorec razdeli med več različnih delov, potem vsaka taka porazdelitev prispeva enak delež k skupnemu številu pojavitev, ne glede na konkretni vzorec $x$ — ker so vse $S_i$ po predpostavki $m/n$-permutacijsko-poštene, in s tem tudi $\ell/n$-poštene za vsako $\ell \le m$.
+
+Preostale pojavitve (kjer je celoten vzorec $x$ znotraj istega $s_i$) skupaj tvorijo vsoto $\sum_{i=1}^{k} (x; s_i) = C$, ki je po predpostavki neodvisna od izbire $x$.
+
+Torej ima vsak vzorec dolžine $m+1$ enako skupno število pojavitev v $s$, kar pomeni, da je združena množica $S$ $(m+1)/n$-permutacijsko-poštena.
+
+Poleg tega vrstni red združevanja $S_i$ ne vpliva na rezultat.
+\qed\\
+
+Tako smo dobili $3/4$ permutacijsko-pošten nabor kock, ki je sestavljen iz 4 6-stranih kock. Čisto na koncu bomo brez dokaza navedli še trditev, ki nam bo 3/4 permutacijsko-pošten nabor kock združila v 4/4 permutacijsko-pošten nabor kock.
+
+\begin{trditev}
+Naj bo $S$ množica $d_s$-stranskih kock z nizovno predstavitvijo $s = (s_1, s_2, \ldots, s_r).$
+Naj bo $s'$ zrcaljeni niz $s$ in naj bo $t = s \,\|\, s'$
+združeni niz, ki predstavlja množico kock z $d_t = 2 d_s$ stranmi. Če je $S$ $3/n$-permutacijsko-poštena množica, potem je množica kock s predstavitvijo $t$ $4/n$-permutacijsko-poštena.
+\end{trditev}
+
+\begin{opomba}
+  Dokaz te trditve se nahaja v [\ref{purcell}] pod {\em Proof 10}.
+\end{opomba}
+
+Na zadnjem koraku smo torej dobili $4/4$ permutacijsko-pošten nabor kock, ki je sestavljen iz 4 12-stranih kock.
+
+Če želimo zdaj konstruirati permutacijsko-pošten nabor kock za $n$ igralcev, lahko uporabimo zelo podobno konstrukcijo. Za $n = 5$ bomo začeli z osnovnim nizom ABCDE, ki predstavlja 5 1-stranih kock. Nato bomo uporabili Trditvi 9 in 10, da dobimo $2/5$ in $3/5$ permutacijsko-pošten nabor kock. Ko uporabimo Izrek 10 za dvig množice $\mathcal{T}_5$ in ustvarjanje množice $\mathcal{U}_5$, ki je $3/5$ permutacijsko-poštena, ugotovimo, da je treba uporabiti šest različnih permutacij. Tako na koncu četrtega koraka dobimo množico $\mathcal{G}_5$ petih $24$-stranskih kock.
+Na koncu bomo te kocke združili v $4/5$ permutacijsko-pošten nabor kock, ki bo sestavljen iz 6 12-stranih kock.
+
+
+Za ustvarjanje množice $5/5$ permutacijsko-poštenih kock lahko sledimo postopku, podobnemu opisanemu zgoraj za ustvarjanje množice $4/4$ permutacijsko-poštenih kock. Postopek je podoben, vendar ko uporabimo Izrek 6 za dvig množice $\mathcal{T}_5$ in ustvarjanje množice $\mathcal{U}_5$, ki je $3/5$ permutacijsko-poštena, ugotovimo, da je treba uporabiti šest različnih permutacij. Tako na koncu četrtega koraka dobimo množico $\mathcal{G}_5$ petih $24$-stranskih kock. Žal nismo uspeli najti načina za dvig množice $\mathcal{G}_5$ z manj kot $120$ permutacijami. Ta postopek vodi do množice petih $2880$-stranskih kock, ki je $5/5$ permutacijsko-poštena.
+
+Na srečo lahko naredimo bolje. Namesto da začnemo s semenom, ki je $1/5$ permutacijsko-pošteno, in gradimo vse iz nič, lahko začnemo s poljubnim semenom, ki je $4/5$ permutacijsko-pošteno, in uporabimo to za iskanje kompatibilne množice kock.
 
 
 
-
-  
 
 \section{Zanimivosti in odprta vprašanja}
 
@@ -200,6 +260,8 @@ Najprej nam v glavo stopita dve vprašanji:
 \end{zgled}
 
 \section{Sklep}
+Za določanje vrstnega reda igralcev je veliko bolj efektivno uporabiti drugačno permutacijsko-pošteno metodo kot metanje kock. Najlažja je verjetno uporaba kart, kjer si vsak izmed $n$ igracev izbere eno izmed zmešanih $n$ kart. Vrstni red določajo vrednosti na kartah. Tak način podpira določanje vrstnega reda do 64 igralcev, kar je v vsakdanjih primerih dovolj.
+
 Tema permutacijsko-poštenih naborov kock je zelo odprta in polna še neodgovorjenih vprašanj. Bogata je s kombinatornimi in verjetnostnimi izzivi, ki ponujajo širok spekter raziskovalnih možnosti. Permutacijsko-pošteni nabori kock so zanimivi ne le zaradi svoje teoretične vrednosti, temveč tudi zaradi praktične uporabnosti v igrah in simulacijah.
 
 \section*{Literatura}
@@ -208,6 +270,8 @@ Tema permutacijsko-poštenih naborov kock je zelo odprta in polna še neodgovorj
   \item Eric Harshbarger, \emph{Go first dice}, 2023. \url{http://www.ericharshbarger.org/dice/go_first_dice.html}
   \item Polylog, \emph{We designed special dice using math, but there's a catch}, 2022. \url{https://www.youtube.com/watch?v=-64UT8yikng&t=66s}
   \item SHU Recreational Maths Research Cluster, \emph{James Grime 'Go First Dice for five players and beyond' (SHU-RMRC Seminar 29th June 2020)}, 2021. \url{https://www.youtube.com/watch?v=L3d0YIW7wHU&t=1s}
+  
+  \textbf{Slikovna gradiva}:
   \item 
 \end{enumerate}
 
