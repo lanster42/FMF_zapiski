@@ -199,9 +199,7 @@ Naj bo $s = s_1 \,\|\, s_2 \,\|\, \cdots \,\|\, s_k$ združena nizovna predstavi
 
 Preostale pojavitve (kjer je celoten vzorec $x$ znotraj istega $s_i$) skupaj tvorijo vsoto $\sum_{i=1}^{k} (x; s_i) = C$, ki je po predpostavki neodvisna od izbire $x$.
 
-Torej ima vsak vzorec dolžine $m+1$ enako skupno število pojavitev v $s$, kar pomeni, da je združena množica $S$ $(m+1)/n$-permutacijsko-poštena.
-
-Poleg tega vrstni red združevanja $S_i$ ne vpliva na rezultat.
+Torej ima vsak vzorec dolžine $m+1$ enako skupno število pojavitev v $s$, kar pomeni, da je združena množica $S$ $(m+1)/n$-permutacijsko-poštena. Poleg tega vrstni red združevanja $S_i$ ne vpliva na rezultat.
 \qed\\
 
 Tako smo dobili $3/4$ permutacijsko-pošten nabor kock, ki je sestavljen iz 4 6-stranih kock. Čisto na koncu bomo brez dokaza navedli še trditev, ki nam bo 3/4 permutacijsko-pošten nabor kock združila v 4/4 permutacijsko-pošten nabor kock.
@@ -218,16 +216,18 @@ združeni niz, ki predstavlja množico kock z $d_t = 2 d_s$ stranmi. Če je $S$ 
 
 Na zadnjem koraku smo torej dobili $4/4$ permutacijsko-pošten nabor kock, ki je sestavljen iz 4 12-stranih kock.
 
-Če želimo zdaj konstruirati permutacijsko-pošten nabor kock za $n$ igralcev, lahko uporabimo zelo podobno konstrukcijo. Za $n = 5$ bomo začeli z osnovnim nizom ABCDE, ki predstavlja 5 1-stranih kock. Nato bomo uporabili Trditvi 9 in 10, da dobimo $2/5$ in $3/5$ permutacijsko-pošten nabor kock. Ko uporabimo Izrek 10 za dvig množice $\mathcal{T}_5$ in ustvarjanje množice $\mathcal{U}_5$, ki je $3/5$ permutacijsko-poštena, ugotovimo, da je treba uporabiti šest različnih permutacij. Tako na koncu četrtega koraka dobimo množico $\mathcal{G}_5$ petih $24$-stranskih kock.
-Na koncu bomo te kocke združili v $4/5$ permutacijsko-pošten nabor kock, ki bo sestavljen iz 6 12-stranih kock.
+Če želimo zdaj konstruirati permutacijsko-pošten nabor kock za $n$ igralcev, lahko uporabimo zelo podobno konstrukcijo. Za $n = 5$ bomo začeli z osnovnim nizom ABCDE, ki predstavlja 5 1-stranih kock. Nato bomo uporabili trditvi 9 in 10, da dobimo $2/5$ in $3/5$ permutacijsko-pošten nabor kock. Ko uporabimo Izrek 10 za dvig množice $T_5$ in ustvarjanje množice $U_5$, ki je $3/5$ permutacijsko-poštena, ugotovimo, da je treba uporabiti šest različnih permutacij. Tako na koncu četrtega koraka dobimo množico $G_5$ petih $24$-stranih kock. Žal nismo uspeli najti načina za dvig množice $G_5$ z manj kot $120$ permutacijami. Ta postopek nam na koncu omogoča, da dobimo $5/5$ permutacijsko-pošten nabor kock, ki je sestavljen iz 5 2880-stranih kock.
 
+Na srečo pa lahko nmanjšamo število teh ploskev na drugačen način. Namesto da začnemo z nizom ABCDE, ki je $1/5$ permutacijsko-pošteno (in gradimo vse iz nič), lahko začnemo s poljubnim nizom, ki je $4/5$ permutacijsko-pošteno, in ga z Dvožnim izrekom dvignemo v $5/5$ permutacijsko-pošten nabor.
 
-Za ustvarjanje množice $5/5$ permutacijsko-poštenih kock lahko sledimo postopku, podobnemu opisanemu zgoraj za ustvarjanje množice $4/4$ permutacijsko-poštenih kock. Postopek je podoben, vendar ko uporabimo Izrek 6 za dvig množice $\mathcal{T}_5$ in ustvarjanje množice $\mathcal{U}_5$, ki je $3/5$ permutacijsko-poštena, ugotovimo, da je treba uporabiti šest različnih permutacij. Tako na koncu četrtega koraka dobimo množico $\mathcal{G}_5$ petih $24$-stranskih kock. Žal nismo uspeli najti načina za dvig množice $\mathcal{G}_5$ z manj kot $120$ permutacijami. Ta postopek vodi do množice petih $2880$-stranskih kock, ki je $5/5$ permutacijsko-poštena.
+Če najdemo $4/5$ permutacijsko-pošten nabor 5 kock, lahko torej z Dvižnim izrekom dobimo $5/5$ permutacijsko-pošten nabor 5 kock. Michael Purcell je v [\ref{purcell}] našel tak nabor, ki je sestavljen iz 5 120-stranih kock. Primer teh kock je prikazan na sliki \ref{fig:pp_nabor}.
 
-Na srečo lahko naredimo bolje. Namesto da začnemo s semenom, ki je $1/5$ permutacijsko-pošteno, in gradimo vse iz nič, lahko začnemo s poljubnim semenom, ki je $4/5$ permutacijsko-pošteno, in uporabimo to za iskanje kompatibilne množice kock.
-
-
-
+\begin{figure}
+  \centering
+  \includegraphics[width=0.45\textwidth]{Slike za pp/120_kocke.jpg}
+  \caption{Permutacijsko-pošten nabor 120-stranih kock za 5 igralcev.}
+  \label{fig:pp_nabor}
+\end{figure}
 
 \section{Zanimivosti in odprta vprašanja}
 
@@ -269,10 +269,12 @@ Tema permutacijsko-poštenih naborov kock je zelo odprta in polna še neodgovorj
   \item \label{purcell} Michael Purcell, Building Sets of Permutation-Fair Dice, \emph{The American Mathematical Monthly}, 2024. \url{https://doi.org/10.1080/00029890.2024.2345576}
   \item Eric Harshbarger, \emph{Go first dice}, 2023. \url{http://www.ericharshbarger.org/dice/go_first_dice.html}
   \item Polylog, \emph{We designed special dice using math, but there's a catch}, 2022. \url{https://www.youtube.com/watch?v=-64UT8yikng&t=66s}
-  \item SHU Recreational Maths Research Cluster, \emph{James Grime 'Go First Dice for five players and beyond' (SHU-RMRC Seminar 29th June 2020)}, 2021. \url{https://www.youtube.com/watch?v=L3d0YIW7wHU&t=1s}
+  \item SHU Recreational Maths Research Cluster, \emph{James Grime 'Go First Dice for five players and beyond' (SHU-RMRC Seminar 29th June 2020)}, 2021. \url{https://www.youtube.com/watch?v=L3d0YIW7wHU&t=1s}\\
   
-  \textbf{Slikovna gradiva}:
+  \textbf{Slikovna gradiva}, maj 2025:
+  \item \url{https://www.tandfonline.com/cms/asset/dc190ac3-5462-49d3-9894-07aa571ba455/uamm_a_2345576_f0001_c.jpg}
+  \item \url{http://www.ericharshbarger.org/dice/6_player_gfd.jpg}
+  \item \url{http://www.ericharshbarger.org/dice/gfd_02.jpg}
   \item 
 \end{enumerate}
-
 \end{document}
