@@ -1,8 +1,10 @@
 # Dodatna gradiva
 ## za programerske predmete na FMF
 
-Predvidevam da bodo tukej samo naloge od Prog1 ampak lahko se zgodi da me kej preseneti.
-Update: ponovem je notri še seminarska iz predmeta...you guessed it: *Seminar*.
+<p>Ta repozitorij je dom zapiskov iz naslednjih predmetov tekom mojega študija:<br>
+ <strong>Programiranje 1</strong> <br>
+ <strong>Seminar</strong> <br>
+ <strong>Diplomski seminar</strong> </p>
 
 ## Your dearest:
-止めてください
+**lanster42**
