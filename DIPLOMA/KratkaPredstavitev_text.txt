@@ -1,0 +1,34 @@
+Kratka predstavitev
+
+SLIDE 1:
+Pri diplomski nalogi se bom ukvarjal z Zaznavanjem in Razmejevanjem posameznih borovnic na slikah z nevronskimi mrežami.
+
+SLIDE 2:
+Ta tema sodi na področje Umetne inteligence. To je Področje računalništva, ki se ukvarja z razvojem sistemov, sposobnih opravlati naloge, za katere je običajno potrebna človeška inteligenca.
+Potem spoznajmo tudi pojem, ki se danes velikokrat napačno uporablja  (ENACIMO) sinonimno z umetno inteligenco in to je Strojno učenje (machine learninig). Strojno učenje je področje umetne inteligence, ki razvija algoritme in modele, ki se učijo vzorcev iz podatkov ter na njihovi podlagi sprejemajo odločitve ali napovedujejo rezultate. Poleg strojnega učenja pod umetno inteligenco na primer sodijo še generativna umetna inteligenca, obdelava naravnega jezika (oz. po angleško NLP).
+No moja tema pa se bo ukvarjala z Nevronskimi mrežami, ki so modeli strojnega učenja, sestavljeni iz medsebojno povezanih nevronov, ki z učenjem iz podatkov lahko prepoznavajo kompleksne vzorce. Specifično se bom osredotočil na konvolucijske nevronske mreže, ki prepoznavajo prostorske značilnosti podatkov, še posebaj na slikah in videoposnetkih.
+
+SLIDE 3:
+Vem, da sem zdaj v vas vrgel kr dost novih definicij, in nisem še končal, ampak prisežem, da bodo tele malo bolj predstavljive. 
+
+Zdaj ko vemo osnovne definicije, lahko razložim naslov svoje diplomske naloge. Torej ukvarjal se bom z zaznavanjem in razmejevanjem posameznih borovnic. Zaznavanje (oz. angleško detection) pomeni prepoznavanje in določanje položaja objektov na slikah ali videoposnetkov. Moja aplikacija tega bo določanje položaja vsake borovnice na sliki.
+Potem imamo pa še pojem razmejevanja, ki pomeni razvrstitev vsake pike na sliki v svojo kategorijo za natančno določitev oblike predmetov. Poseben primer razmejevanja je razmejevanje posameznih objektov, kjer gre za določanje območja in oblike vsakega posameznega objekta na sliki z razvrščanjem posameznega objekta na sliki z razvrščanjem pik glede na pripadnost posameznemu objektu in njegovi kategoriji. Razlika med tema dvema je to, da bi prvi na tej sliki vedel le, da te pike vse pripadajo kategoriji pes, ne pa tudi, da sta različna objekta. Jaz bom slikovne pike razvrščal med: zrela, polzrela ali nezrela borovnica oziroma ozadje.
+
+SLIDE 4:
+Na hitro: moja motivacija za to temo je razlog, da se vsaj v Sloveniji pa tudi drugod po svetu manjša število kmetov in bi jim lahko koristili z avtomaticazijo. Torej da bi roboti sami obirali sadje in zelenjavo, ko precenijo, da so dovolj zrele. Borovnice postavljajo zanimive probleme, saj so plodovi majhni, se prekrivajo, se malo razlikujejo v barvi, borovnice v ozadju so zamegljene, med mojimi podatki pa je tudi kar neenakomerna porazdelitev razredov, saj je največ nezrelih in zrelih borovnic, polzrelih pa bistveno manj.
+
+SLIDE 5:
+Moj cilj naloge je poiskati metodo in model, ki sta najprimernejša za zaznavanje in razmejevanje posameznih borovnic in to tudi matematično utemeljiti. Nalogo bom razdelil na 2 tela: teoretični in aplikativni, v teoretičnem bo raziskal učenje modelov, konvolucijske nevronske mreže, metode za zaznavanje in razmejevanje posameznih objektov ter vrednotenje. V aplikativnem delu pa bom modele primerjal med sebom na množici slik borovnic.
+
+SLIDE 6:
+Do zdaj je bil najbolj uporabljen model YOLO, uporablja pa se tudi SAM2, lansko leto pa je izšel članek, ki je izboljšal starejši YOLO model specifično za razmejevanje borovnic. Eden novejših modelov je tudi GeCo2, ki je bil do zdaj kar uspešen pri zaznavanju.
+
+SLIDE 7:
+Zelo pomemben del aplikativnega dela bo vrednotenje modela. Tako pravimo postopku ocenjevanja uspešnosti modela na podlagi izbranih metrik, s katerimi ugotavljamo točnost njegovih napovedi, analiziramo napake in preverjamo sposobnost posploševanja na podatke, ki jih model med učenjem še ni videl.
+
+Pomembno je, da poskušamo doseči čimbolj pravično primerjanje med modeli, zato imamo kar nekaj metrik, ki jih bom raziskal, a se jim za zdaj še nisem posvetil.
+
+SLIDE 8:
+Torej da povzamem, moje delo bo razdeljeno na dva dela: Teoretični in aplikativni, v teoretičnem bom raziskal zaznavanje in razmejevanje posameznih objektov, medtem pa bom poskušal zagotoviti čimbolj natančno označevanje posnetih slik, za katerega predidevam, da bo najzamudnejši del, saj moraš čimveč slik sam ročno označiti, da imaš dovolj gradiva za učenje modelov. Ko bom torej modele večkrat učil, se bom posvetil še vrednotenju in primerjavi modelov na borovnicah.
+
+To bo vse z moje strani, tako da hvala za pozornost.
